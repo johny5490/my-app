@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService} from '../data.service';
-import {UserToken} from '../userToken';
+import { UserToken } from '../userToken';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +15,7 @@ export class HeaderComponent implements OnInit {
   towWayBingTxt = "666";
   userToken: UserToken;
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private router: Router) { }
 
   ngOnInit() {
     this.userToken = this.dataService.getUserToken();
@@ -27,5 +28,22 @@ export class HeaderComponent implements OnInit {
   updateHero(){
     this.dataService.updateHero();
     alert("ok");
+  }
+
+  iconClick(){
+    alert("123");
+  }
+
+  menuClick(index: string){
+    console.log(index);
+    if(index == "1"){
+        //回首頁
+        window.location.href="/";
+    }else if(index == "2-1"){
+         this.router.navigate(['/heroes']);
+    }else if(index == "2-2"){
+          
+    } 
+    
   }
 }
