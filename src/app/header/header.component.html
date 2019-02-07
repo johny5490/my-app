@@ -1,0 +1,16 @@
+<p>
+  使用者帳號：{{this.dataService.getUserToken().id}} &nbsp;&nbsp;&nbsp;姓名：{{userToken.name}}
+
+</p>
+<pre>
+#-----示範單向綁定，中括號[]綁定屬性,小括號()綁定事件
+<input type="text" [value]="txtVal">&nbsp;&nbsp;<button (click)="showValue()">顯示值</button>
+<br>
+<input type="text" value="{{txtVal}}">
+#-----------------------
+</pre>
+<br>
+示範雙向綁定<input type="text" [(ngModel)]="towWayBingTxt">{{towWayBingTxt}}
+<br>
+<br>
+<button (click)="updateHero()">測試JSON資料送server</button>
