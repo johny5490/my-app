@@ -10,12 +10,14 @@ import { HeaderComponent } from './header/header.component'; // <-- NgModel live
 
 import { ElModule } from 'element-angular';
 import { AppRoutingModule } from './app-routing.module';
+import { BodyComponent } from './body/body.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeroesComponent,
-    HeaderComponent
+    HeaderComponent,
+    BodyComponent
   ],
   imports: [
     BrowserModule,
