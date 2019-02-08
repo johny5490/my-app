@@ -40,7 +40,7 @@ export class HeaderComponent implements OnInit {
         //回首頁
         window.location.href="/";
     }else if(index == "2-1"){
-         this.router.navigate(['/heroes']);
+        this.router.navigate(['/heroes']);
     }else if(index == "2-2"){
           
     } 
