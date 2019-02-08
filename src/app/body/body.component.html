@@ -1,0 +1,27 @@
+<pre>
+#-----示範單向綁定，中括號[]綁定屬性,小括號()綁定事件
+<input type="text" [value]="txtVal">&nbsp;&nbsp;<button (click)="showValue()">顯示值</button>
+<br>
+#屬性值也可以直接用單向綁定
+<input type="text" value="{{txtVal}}">
+#-----------------------
+</pre>
+<br>
+示範雙向綁定<input type="text" [(ngModel)]="towWayBingTxt">{{towWayBingTxt}}
+<br>
+<br>
+<button (click)="updateHero()">測試JSON資料送server</button>
+<br>
+Element主要型按鈕，點擊開啟dialog:
+<el-button type="primary" (click)="iconClick()" >點擊</el-button>
+<el-dialog [title]="'挑選清單'" [(visible)]="dialogShow" >
+  <app-heroes></app-heroes>
+</el-dialog>
+<br>
+帶圖示的輸入框
+<el-input placeholder="請挑選使用者"
+  icon="search" 
+  [model]="txtVal" (icon-click)="userSelectPop()" >
+</el-input>
+
+<br>
