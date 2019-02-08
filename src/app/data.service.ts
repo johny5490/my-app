@@ -12,6 +12,7 @@ import { EmpVO } from './vo/EmpVO';
 @Injectable({
   providedIn: 'root'
 })
+
 export class DataService {
   private userToken = new UserToken();
 

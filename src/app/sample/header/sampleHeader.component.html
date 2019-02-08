@@ -1,0 +1,15 @@
+
+<el-menu [model]="0" (modelChange)="menuClick($event)" class="el-menu-demo" mode="horizontal"
+  background-color="#545c64"
+  active-text-color="#ffd04b"
+  text-color="#fff">
+  <el-menu-item index="1">首頁</el-menu-item>
+  <el-submenu index="2" title="常用作業">
+    <el-menu-item index="2-1">英雄</el-menu-item>
+    <el-menu-item index="2-2">body</el-menu-item>
+    <el-menu-item index="2-3">作業3</el-menu-item>
+  </el-submenu>
+  <el-menu-item index="3">
+    <a href="https://angular.cn" target="_blank">Angular網站</a>
+  </el-menu-item>
+</el-menu>

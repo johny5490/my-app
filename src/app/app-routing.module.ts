@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HeroesComponent } from './heroes/heroes.component';
-import { BodyComponent } from './body/body.component';
+//import { SampleBodyComponent } from './sample/body/sampleBody.component';
 
 const routes: Routes = [
   { path: 'heroes', component: HeroesComponent },
-  { path: 'body', component: BodyComponent },
+  //{ path: 'sample/body', component: SampleBodyComponent },
 ];
 
 @NgModule({
