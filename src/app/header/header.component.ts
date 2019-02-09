@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit {
           label: 'Edit',
           icon: 'pi pi-fw pi-pencil',
           items: [
-              {label: 'Delete', icon: 'pi pi-fw pi-trash'},
+              {label: 'Delete', icon: 'pi pi-fw pi-trash', routerLink:'heroes'},
               {label: 'Refresh', icon: 'pi pi-fw pi-refresh'}
           ]
       }

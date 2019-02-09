@@ -8,6 +8,8 @@ import {Observable, of} from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import { ajaxPost } from 'rxjs/internal/observable/dom/AjaxObservable';
 import { EmpVO } from './vo/EmpVO';
+import { HeroesComponent } from './heroes/heroes.component';
+import { Routes } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -41,4 +43,13 @@ export class DataService {
                      }, error => console.log("error=" + error));
   }
 
+  getInitRouts(){
+    
+    var rout:Routes =  [
+      { path: 'heroes', component: HeroesComponent },
+    ];
+    return rout;
+    
+ 
+  }
 }

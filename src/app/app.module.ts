@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule,APP_INITIALIZER } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -15,6 +15,7 @@ import { HeroesComponent } from './heroes/heroes.component';
 import {AccordionModule} from 'primeng/accordion';
 import {ButtonModule} from 'primeng/button';
 import {MenubarModule} from 'primeng/menubar';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import {MenubarModule} from 'primeng/menubar';
     MenubarModule,
     AppRoutingModule,
   ],
-  providers: [],
+  entryComponents:[HeroesComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
