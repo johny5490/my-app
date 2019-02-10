@@ -7,7 +7,7 @@ import { Hero } from '../hero';
   templateUrl: './heroes.component.html',
   styleUrls: ['./heroes.component.css']
 })
-export class HeroesComponent implements OnInit {
+export class HeroesComponent  {
   hero: Hero = {
     id: 1,
     name: 'Windstorm'
@@ -15,8 +15,5 @@ export class HeroesComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-    
-  }
 
 }

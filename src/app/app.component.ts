@@ -1,6 +1,6 @@
 import { Component, OnInit,ComponentFactoryResolver,ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { routerNgProbeToken } from '@angular/router/src/router_module';
+
 import { HeroesComponent } from './heroes/heroes.component';
 
 @Component({
@@ -38,7 +38,12 @@ export class AppComponent implements OnInit{
     */
     //this.vr.clear();
     //this.vr.createComponent(this.resolver.resolveComponentFactory(HeroesComponent));
+    //routes.push({path:'heroes', component:HeroesComponent});
+    //var heroCom = Object.create(window["HeroesComponent"].prototype);
+    var heroCom = Object.create(HeroesComponent.prototype);
+    
     routes.push({path:'heroes', component:HeroesComponent});
+    
     console.log("routes.len=" + routes.length);
     this.router.resetConfig(routes);
     
