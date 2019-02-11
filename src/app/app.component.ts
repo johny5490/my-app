@@ -1,4 +1,4 @@
-import { Component, OnInit,ComponentFactoryResolver,ViewContainerRef } from '@angular/core';
+import { Component, OnInit,ComponentFactoryResolver,ViewContainerRef,Compiler,NgModule,ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { HeroesComponent } from './heroes/heroes.component';
@@ -6,15 +6,35 @@ import { HeroesComponent } from './heroes/heroes.component';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  
 })
 export class AppComponent implements OnInit{
+  @ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef;
   title = '您好';
 
   constructor(private router: Router, 
               private resolver: ComponentFactoryResolver,
-              private vr:ViewContainerRef){
+              private vr:ViewContainerRef,
+              private compiler: Compiler){
 
+  }
+  
+  private genComponent(template: string, properties: any = {}) {
+    @Component({ template })
+    class TemplateComponent { }
+
+    @NgModule({ declarations: [TemplateComponent] })
+    class TemplateModule { }
+    
+    const mod = this.compiler.compileModuleAndAllComponentsSync(TemplateModule);
+    const factory = mod.componentFactories.find((comp) =>
+      comp.componentType === TemplateComponent
+    );
+    
+    const component = this.container.createComponent(factory);
+    //return component;
+    return Object.assign(component.instance, properties);
   }
 
   ngOnInit(){
@@ -36,13 +56,18 @@ export class AppComponent implements OnInit{
       
     }
     */
-    //this.vr.clear();
-    //this.vr.createComponent(this.resolver.resolveComponentFactory(HeroesComponent));
-    //routes.push({path:'heroes', component:HeroesComponent});
+    /*
+    this.vr.clear();
+    var heroCom=this.vr.createComponent(this.resolver.resolveComponentFactory(HeroesComponent));
+    routes.push({path:'heroes', component:heroCom});
+    */
+   routes.push({path:'heroes', component:this.genComponent('HeroesComponent')});
+
     //var heroCom = Object.create(window["HeroesComponent"].prototype);
-    var heroCom = Object.create(HeroesComponent.prototype);
     
-    routes.push({path:'heroes', component:HeroesComponent});
+    //var heroCom = Object.create(HeroesComponent.prototype);
+    
+    //routes.push({path:'heroes', component:heroCom});
     
     console.log("routes.len=" + routes.length);
     this.router.resetConfig(routes);
