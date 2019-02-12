@@ -8,13 +8,13 @@ import {DataService} from './data.service';
 
 
 //import { SampleBodyComponent } from './sample/body/sampleBody.component';
-/*
+
 const routes: Routes = [
   { path: 'heroes', component: HeroesComponent },
   //{ path: 'sample/body', component: SampleBodyComponent },
 ];
-*/
-var routes: Routes=[];
+
+//var routes: Routes=[];
 
 
 @NgModule({

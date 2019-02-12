@@ -61,16 +61,15 @@ export class AppComponent implements OnInit{
     var heroCom=this.vr.createComponent(this.resolver.resolveComponentFactory(HeroesComponent));
     routes.push({path:'heroes', component:heroCom});
     */
-   routes.push({path:'heroes', component:this.genComponent('HeroesComponent')});
-
+    //routes.push({path:'heroes', component:this.genComponent('HeroesComponent')});
+    
     //var heroCom = Object.create(window["HeroesComponent"].prototype);
     
     //var heroCom = Object.create(HeroesComponent.prototype);
     
     //routes.push({path:'heroes', component:heroCom});
-    
-    console.log("routes.len=" + routes.length);
-    this.router.resetConfig(routes);
+  
+    //this.router.resetConfig(routes);
     
   }
 }
