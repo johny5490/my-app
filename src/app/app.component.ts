@@ -76,10 +76,11 @@ export class AppComponent implements OnInit{
     //this.router.resetConfig(routes);
     this.menuItems = [
       {
-        label: '功能',
+        label: '作業總覽',
         icon: 'pi pi-pi pi-bars',
+        expanded: true,
         items: [
-            {label: '通訊錄', icon: 'pi pi-pi pi-search', routerLink: ['/heroes'] },
+            {label: '通訊錄', icon: 'pi pi-pi pi-search', routerLink: ['/emp-list'] },
             {
               label: 'New', 
               icon: 'pi pi-fw pi-plus',

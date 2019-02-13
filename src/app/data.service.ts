@@ -11,12 +11,17 @@ import { EmpVO } from './vo/EmpVO';
 import { HeroesComponent } from './heroes/heroes.component';
 import { Routes } from '@angular/router';
 
+
 @Injectable({
   providedIn: 'root'
 })
 
 export class DataService {
   private userToken = new UserToken();
+
+  private httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json;charset=utf-8'})
+  };
 
   constructor(private http: HttpClient) { 
     
@@ -32,15 +37,23 @@ export class DataService {
   updateHero () {
  
     var data = {'compId':'sdms','empNo':'u571'};
-    
-    const httpOptions = {
+    /*
+    var httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json;charset=utf-8'})
     };
-  
-    return this.http.post<EmpVO>('http://localhost/OA/Hello/createObj.do', data, httpOptions).
+  */
+    return this.http.post<EmpVO>('http://localhost/OA/Hello/createObj.do', data, this.httpOptions).
                      subscribe(empVO => {
                          console.info("empVO.chiName=" + empVO.chiName + ",empVO.empNo=" + empVO.empNo);
                      }, error => console.log("error=" + error));
+  }
+
+  qryEmpList():EmpVO[]{
+    return this.http.post<EmpVO[]>('http://localhost/OA/EmpCtrl/qryEmpList.do', null, this.httpOptions).
+                      subscribe(empVOs => {
+                         
+                         return empVOs;
+                      }, error => console.log("error=" + error));
   }
 
   getInitRouts(){

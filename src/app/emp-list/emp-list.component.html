@@ -1,4 +1,6 @@
-<table >
+
+<p-table [value]="empVOs" >
+		<ng-template pTemplate="header" >
 		<tr>
 			<td>單位</td>
 			<td>職稱</td>
@@ -8,5 +10,19 @@
 			<td>分機</td>
 			<td>直播碼</td>
 			<td>電子郵件</td>
-    </tr>
-</table>
+		</tr>
+	</ng-template>
+	<ng-template pTemplate="body" let-empVO>
+			<tr>
+				<td>{{empVO.depNo}}</td>
+				<td>{{empVO.postName}}</td>
+				<td>{{empVO.chiName}}</td>
+				<td>{{empVO.empNo}}</td>
+				<td>{{empVO.cellphone}}</td>
+				<td>{{empVO.ext}}</td>
+				<td>{{empVO.directNo}}</td>
+				<td>{{empVO.email}}</td>
+			</tr>
+		</ng-template>
+</p-table>
+
