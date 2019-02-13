@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 
 import { HeroesComponent } from './heroes/heroes.component';
 
+import {MenuItem} from 'primeng/api';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,6 +14,7 @@ import { HeroesComponent } from './heroes/heroes.component';
 export class AppComponent implements OnInit{
   @ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef;
   title = '您好';
+  menuItems: MenuItem[];
 
   constructor(private router: Router, 
               private resolver: ComponentFactoryResolver,
@@ -36,8 +39,6 @@ export class AppComponent implements OnInit{
     //return component;
     return Object.assign(component.instance, properties);
   }
-
-
 
 
   ngOnInit(){
@@ -73,6 +74,23 @@ export class AppComponent implements OnInit{
     //routes.push({path:'heroes', component:heroCom});
   
     //this.router.resetConfig(routes);
+    this.menuItems = [
+      {
+        label: '功能',
+        icon: 'pi pi-pi pi-bars',
+        items: [
+            {label: '通訊錄', icon: 'pi pi-pi pi-search', routerLink: ['/heroes'] },
+            {
+              label: 'New', 
+              icon: 'pi pi-fw pi-plus',
+              items: [
+                  {label: 'User', icon: 'pi pi-fw pi-user-plus'},
+                  {label: 'Filter', icon: 'pi pi-fw pi-filter'}
+              ]
+          },
+        ]
+    },
     
+   ];
   }
 }

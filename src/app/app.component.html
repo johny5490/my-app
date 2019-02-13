@@ -3,17 +3,17 @@
 <app-sample-header></app-sample-header>
 <router-outlet></router-outlet>
 -->
-<div class="p-grid" p-dir-col>
+
+<div class="p-grid">
     <div class="p-col" >
-                menu
+        <p-panelMenu [model]="menuItems"></p-panelMenu>
     </div>
     <div class="p-col" p-dir-col>
         <div class="p-col">
                 <app-header></app-header>
-                <router-outlet></router-outlet>
         </div>
         <div class="p-col">
-                body
+                <router-outlet></router-outlet>
         </div>
     </div>
 </div>

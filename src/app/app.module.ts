@@ -15,7 +15,9 @@ import { HeroesComponent } from './heroes/heroes.component';
 import {AccordionModule} from 'primeng/accordion';
 import {ButtonModule} from 'primeng/button';
 import {MenubarModule} from 'primeng/menubar';
-
+import {PanelMenuModule} from 'primeng/panelmenu';
+import { EmpListComponent } from './emp-list/emp-list.component';
+import {TableModule} from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import {MenubarModule} from 'primeng/menubar';
     HeroesComponent,
     HeaderComponent,
     BodyComponent,
+    EmpListComponent,
     
   ],
   imports: [
@@ -34,6 +37,8 @@ import {MenubarModule} from 'primeng/menubar';
     AccordionModule,
     ButtonModule,
     MenubarModule,
+    PanelMenuModule,
+    TableModule,
     AppRoutingModule,
   ],
   entryComponents:[HeroesComponent],
