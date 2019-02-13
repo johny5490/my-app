@@ -4,6 +4,7 @@ import { RouterModule, Routes, ROUTES } from '@angular/router';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HeroesComponent } from './heroes/heroes.component';
+import {BodyComponent} from './body/body.component';
 import {DataService} from './data.service';
 
 
@@ -11,6 +12,7 @@ import {DataService} from './data.service';
 
 const routes: Routes = [
   { path: 'heroes', component: HeroesComponent },
+  { path: '', component: BodyComponent}
   //{ path: 'sample/body', component: SampleBodyComponent },
 ];
 

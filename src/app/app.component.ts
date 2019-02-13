@@ -37,6 +37,9 @@ export class AppComponent implements OnInit{
     return Object.assign(component.instance, properties);
   }
 
+
+
+
   ngOnInit(){
     /*
     let routes = [
