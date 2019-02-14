@@ -18,13 +18,35 @@ import { Routes } from '@angular/router';
 
 export class DataService {
   private userToken = new UserToken();
-
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json;charset=utf-8'})
   };
 
   constructor(private http: HttpClient) { 
     
+  }
+
+  getUrl(){
+    /*
+    console.log("protocol=" + window.location.protocol + "," +
+                "host=" + window.location.host +","+ "" + 
+                "pathname=" + window.location.pathname);
+    */
+    var url = window.location.protocol + "//" + 
+              this.removePort(window.location.host) + 
+            this.getConetxtRoot(window.location.pathname) ;
+    //console.log("url=" + url);
+
+    return url;
+  }
+  removePort(host: string){
+    var idx: number = host.indexOf(":");
+    return idx>0 ? host.substring(0, idx) : host;    
+  }
+
+  getConetxtRoot(pathname: string){
+    var idx:number = pathname.indexOf("/", 1);
+    return idx>0 ? pathname.substring(0, idx):"/";
   }
 
   getUserToken(): UserToken{
@@ -42,14 +64,15 @@ export class DataService {
       headers: new HttpHeaders({ 'Content-Type': 'application/json;charset=utf-8'})
     };
   */
-    return this.http.post<EmpVO>('http://localhost/OA/Hello/createObj.do', data, this.httpOptions).
+    return this.http.post<EmpVO>(this.getUrl() + '/Hello/createObj.do', data, this.httpOptions).
                      subscribe(empVO => {
                          console.info("empVO.chiName=" + empVO.chiName + ",empVO.empNo=" + empVO.empNo);
                      }, error => console.log("error=" + error));
   }
 
   qryEmpList(){
-    return this.http.post<EmpVO[]>('http://localhost/OA/EmpCtrl/qryEmpList.do', null, this.httpOptions).
+    
+    return this.http.post<EmpVO[]>(this.getUrl() +'/EmpCtrl/qryEmpList.do', this.httpOptions).
                                     pipe(
                                            tap(_ => console.log('qryEmpList')),
                                             catchError(this.handleError('qryEmpList', []))

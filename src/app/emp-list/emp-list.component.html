@@ -1,4 +1,4 @@
-<p-table [value]="empVOs" >
+<p-table [value]="empVOs" autoLayout="true">
 	<ng-template pTemplate="header">
 		<tr>
 			<th>單位</th>
@@ -13,10 +13,10 @@
 	</ng-template>
 	<ng-template pTemplate="body" let-empVO>
 	 	<tr>
-			<td>{{empVO.empNo}}</td>
-			<td>{{empVO.chiName}}</td>
 			<td>{{empVO.depNo}}</td>
 			<td>{{empVO.postName}}</td>
+			<td>{{empVO.chiName}}</td>
+			<td>{{empVO.empNo}}</td>
 			<td>{{empVO.cellphone}}</td>
 			<td>{{empVO.ext}}</td>
 			<td>{{empVO.directNo}}</td>
