@@ -48,12 +48,13 @@ export class DataService {
                      }, error => console.log("error=" + error));
   }
 
-  qryEmpList():EmpVO[]{
+  qryEmpList(){
     return this.http.post<EmpVO[]>('http://localhost/OA/EmpCtrl/qryEmpList.do', null, this.httpOptions).
-                      subscribe(empVOs => {
-                         
-                         return empVOs;
-                      }, error => console.log("error=" + error));
+                                    pipe(
+                                           tap(_ => console.log('qryEmpList')),
+                                            catchError(this.handleError('qryEmpList', []))
+                                    );  
+    
   }
 
   getInitRouts(){
@@ -64,5 +65,19 @@ export class DataService {
     return rout;
     
  
+  }
+
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+   
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+   
+      // TODO: better job of transforming error for user consumption
+      console.log(`${operation} failed: ${error.message}`);
+   
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
   }
 }
