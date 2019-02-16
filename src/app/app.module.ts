@@ -18,6 +18,9 @@ import {MenubarModule} from 'primeng/menubar';
 import {PanelMenuModule} from 'primeng/panelmenu';
 import { EmpListComponent } from './emp-list/emp-list.component';
 import {TableModule} from 'primeng/table';
+import { AtrEditComponent } from './atr-edit/atr-edit.component';
+import {PanelModule} from 'primeng/panel';
+import {InputTextModule} from 'primeng/inputtext';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,7 @@ import {TableModule} from 'primeng/table';
     HeaderComponent,
     BodyComponent,
     EmpListComponent,
+    AtrEditComponent,
     
   ],
   imports: [
@@ -39,6 +43,8 @@ import {TableModule} from 'primeng/table';
     MenubarModule,
     PanelMenuModule,
     TableModule,
+    PanelModule,
+    InputTextModule,
     AppRoutingModule,
   ],
   entryComponents:[HeroesComponent],

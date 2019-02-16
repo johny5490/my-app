@@ -1,0 +1,37 @@
+<p-panel header="屬性清單" [toggleable]="true">
+<p-table [value]="atrVOs" autoLayout="true">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>屬性代碼</th>
+        <th>屬性名稱</th>
+        <th>新增人員</th>
+        <th>新增日期</th>
+        <th>修改人員</th>
+        <th>修改日期</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-atrVO >
+       <tr  (click)="copyToEdit(atrVO)" style="cursor: pointer;">
+        <td>{{atrVO.atrId}}</td>
+        <td>{{atrVO.atrName}}</td>
+        <td>{{atrVO.createUser}}</td>
+        <td>{{atrVO.createDate|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+        <td>{{atrVO.updateUser}}</td>
+        <td>{{atrVO.updateDate|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-panel>
+
+<p-panel  >
+  <p-header >
+     <button  pButton label="新增" (click)="create()"></button>&nbsp;
+     <button  pButton label="修改" (click)="update()"></button>&nbsp;
+     <button  pButton label="刪除" (click)="del()"></button>&nbsp;
+  </p-header>
+  <h4>
+      屬性代碼：<input type="text" pInputText [(ngModel)]="atrVO.atrId"/>
+      屬性名稱：<input type="text" pInputText [(ngModel)]="atrVO.atrName"/>
+  </h4>
+   
+</p-panel>

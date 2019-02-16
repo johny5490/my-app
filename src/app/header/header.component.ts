@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService} from '../data.service';
+import { DataService} from '../dataExchange/data.service';
 import { UserToken } from '../userToken';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {MenuItem} from 'primeng/api';

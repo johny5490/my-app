@@ -82,11 +82,14 @@ export class AppComponent implements OnInit{
         items: [
             {label: '通訊錄', icon: 'pi pi-pi pi-search', routerLink: ['/emp-list'] },
             {
-              label: 'New', 
-              icon: 'pi pi-fw pi-plus',
+              label: '資產管理',
+              expanded: true, 
+              //icon: 'pi pi-fw pi-plus',
               items: [
-                  {label: 'User', icon: 'pi pi-fw pi-user-plus'},
-                  {label: 'Filter', icon: 'pi pi-fw pi-filter'}
+                  {label: '屬性設定', icon: 'pi pi-fw pi-pencil', routerLink:['/atr-edit']},
+                  {label: '資產種類設定', icon: 'pi pi-fw pi-pencil'},
+                  {label: '資產設定', icon: 'pi pi-fw pi-pencil'},
+                  
               ]
           },
         ]

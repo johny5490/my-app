@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import {EmpVO} from '../vo/EmpVO';
-import { DataService } from '../data.service';
+import { DataService } from '../dataExchange/data.service';
 
 @Component({
   selector: 'app-emp-list',

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UserToken } from './userToken';
+import { UserToken } from '../userToken';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import {} from 'rxjs/add/operator/toPromise';
@@ -7,10 +7,11 @@ import {catchError, map, tap} from 'rxjs/operators';
 import {Observable, of} from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import { ajaxPost } from 'rxjs/internal/observable/dom/AjaxObservable';
-import { EmpVO } from './vo/EmpVO';
-import { HeroesComponent } from './heroes/heroes.component';
+import { EmpVO } from '../vo/EmpVO';
+import { HeroesComponent } from '../heroes/heroes.component';
 import { Routes } from '@angular/router';
-
+import { AtrVOIface } from '../vo/AtrVOIface';
+import { Carrier } from './Carrier';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,7 @@ export class DataService {
 
     return url;
   }
+
   removePort(host: string){
     var idx: number = host.indexOf(":");
     return idx>0 ? host.substring(0, idx) : host;    
@@ -102,5 +104,31 @@ export class DataService {
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
+  }
+
+  createAtr(atrVO:AtrVOIface){
+    /*
+    return this.http.post<Carrier>(this.getUrl() +'/AtrCtrl/create.do', atrVO, this.httpOptions).
+                 pipe(
+                        tap(_ => console.log('createAtr')),
+                         catchError(this.handleError('createAtr', []))
+                   );
+                   */
+
+                
+    return this.http.post<Carrier>(this.getUrl() +'/AtrCtrl/create.do', JSON.stringify(atrVO), this.httpOptions)           
+  }
+
+  queryAtrList(){
+    
+    return this.http.post<AtrVOIface[]>(this.getUrl() +'/AtrCtrl/queryAtrList.do', this.httpOptions);
+  }
+
+  deleteAtr(atrVO:AtrVOIface){
+    return this.http.post(this.getUrl() +'/AtrCtrl/delete.do',JSON.stringify(atrVO), this.httpOptions);
+  }
+
+  updateAtr(atrVO:AtrVOIface){
+    return this.http.post(this.getUrl() +'/AtrCtrl/update.do',JSON.stringify(atrVO), this.httpOptions);
   }
 }

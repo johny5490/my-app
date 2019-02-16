@@ -6,14 +6,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HeroesComponent } from './heroes/heroes.component';
 import {EmpListComponent} from './emp-list/emp-list.component';
 import {BodyComponent} from './body/body.component';
-import {DataService} from './data.service';
-
+import {DataService} from './dataExchange/data.service';
+import {AtrEditComponent} from './atr-edit/atr-edit.component';
 
 //import { SampleBodyComponent } from './sample/body/sampleBody.component';
 
 const routes: Routes = [
   { path: 'heroes', component: HeroesComponent },
   { path: 'emp-list', component: EmpListComponent },
+  { path: 'atr-edit', component: AtrEditComponent},
   //{ path: 'sample/body', component: SampleBodyComponent },
 ];
 
