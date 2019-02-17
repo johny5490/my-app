@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../dataExchange/data.service';
-import { AtrVOIface } from '../vo/AtrVOIface';
+import { AtrVOiface } from '../vo/AtrVOiface';
 
 @Component({
   selector: 'app-atr-edit',
@@ -9,9 +9,9 @@ import { AtrVOIface } from '../vo/AtrVOIface';
 })
 export class AtrEditComponent implements OnInit {
   
-  atrVOs:AtrVOIface[];
+  atrVOs:AtrVOiface[];
 
-  atrVO:AtrVOIface = {};
+  atrVO:AtrVOiface = {};
 
   constructor(private dataService: DataService) { }
 
@@ -26,7 +26,7 @@ export class AtrEditComponent implements OnInit {
 
   queryAtrList(){
     this.dataService.queryAtrList().
-          subscribe((artVOArray)=>{
+          subscribe((artVOArray:AtrVOiface[])=>{
                 this.atrVOs=artVOArray;
           },error => console.log("error=" + error));
   }
@@ -72,7 +72,7 @@ export class AtrEditComponent implements OnInit {
           },error=>console.log("error=" + error));; 
   }
 
-  copyToEdit(atrVO:AtrVOIface){      
+  copyToEdit(atrVO:AtrVOiface){      
       //clone Object
       this.atrVO = JSON.parse(JSON.stringify(atrVO));;
   }

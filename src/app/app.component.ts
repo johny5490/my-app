@@ -86,8 +86,15 @@ export class AppComponent implements OnInit{
               expanded: true, 
               //icon: 'pi pi-fw pi-plus',
               items: [
-                  {label: '屬性設定', icon: 'pi pi-fw pi-pencil', routerLink:['/atr-edit']},
-                  {label: '資產種類設定', icon: 'pi pi-fw pi-pencil'},
+                  //{label: '屬性設定', icon: 'pi pi-fw pi-pencil', routerLink:['/atr-edit']},
+                  {label: '屬性設定', icon: 'pi pi-fw pi-pencil', command:(event) => {
+                              //event.originalEvent: Browser event
+                              //event.item: menuitem metadata
+                              this.routerLinkReload('/atr-edit');
+                          }},
+                  {label: '資產種類設定', icon: 'pi pi-fw pi-pencil', command:(event) => {
+                              this.routerLinkReload('/asset-type-edit');
+                        }},
                   {label: '資產設定', icon: 'pi pi-fw pi-pencil'},
                   
               ]
@@ -96,5 +103,13 @@ export class AppComponent implements OnInit{
     },
     
    ];
+  }
+
+  //routerLink在重複點擊時不會刷新畫面，故先連結一個不存在頁面再轉來達到刷新效果，
+  //比使用onSameUrlNavigation要簡單的多
+  routerLinkReload(url:string){
+    this.router.navigateByUrl('', {skipLocationChange: true}).
+                then(()=>
+                     this.router.navigate([url]));
   }
 }

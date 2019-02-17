@@ -1,0 +1,28 @@
+export interface AssetTypeVOiface{
+    assetTypeId?:string;
+    assetTypeName?:string;
+    atrId?:string;
+    atrVal?:string;
+    atrId2?:string;
+    atrVal2?:string;
+    atrId3?:string;
+    atrVal3?:string;
+    atrId4?:string;
+    atrVal4?:string;
+    atrId5?:string;
+    atrVal5?:string;
+    atrId6?:string;
+    atrVal6?:string;
+    atrId7?:string;
+    atrVal7?:string;
+    atrId8?:string;
+    atrVal8?:string;
+    atrId9?:string;
+    atrVal9?:string;
+    atrId10?:string;
+    atrVal10?:string;
+    createUser?:string;
+    createDate?:Date;
+    updateUser?:string;
+    updateDate?:Date;
+}

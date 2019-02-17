@@ -10,7 +10,7 @@ import { ajaxPost } from 'rxjs/internal/observable/dom/AjaxObservable';
 import { EmpVO } from '../vo/EmpVO';
 import { HeroesComponent } from '../heroes/heroes.component';
 import { Routes } from '@angular/router';
-import { AtrVOIface } from '../vo/AtrVOIface';
+import { AtrVOiface } from '../vo/AtrVOiface';
 import { Carrier } from './Carrier';
 
 @Injectable({
@@ -106,7 +106,7 @@ export class DataService {
     };
   }
 
-  createAtr(atrVO:AtrVOIface){
+  createAtr(atrVO:AtrVOiface){
     /*
     return this.http.post<Carrier>(this.getUrl() +'/AtrCtrl/create.do', atrVO, this.httpOptions).
                  pipe(
@@ -119,16 +119,15 @@ export class DataService {
     return this.http.post<Carrier>(this.getUrl() +'/AtrCtrl/create.do', JSON.stringify(atrVO), this.httpOptions)           
   }
 
-  queryAtrList(){
-    
-    return this.http.post<AtrVOIface[]>(this.getUrl() +'/AtrCtrl/queryAtrList.do', this.httpOptions);
+  queryAtrList(){    
+    return this.http.post(this.getUrl() +'/AtrCtrl/queryAtrList.do', this.httpOptions);
   }
 
-  deleteAtr(atrVO:AtrVOIface){
+  deleteAtr(atrVO:AtrVOiface){
     return this.http.post(this.getUrl() +'/AtrCtrl/delete.do',JSON.stringify(atrVO), this.httpOptions);
   }
 
-  updateAtr(atrVO:AtrVOIface){
+  updateAtr(atrVO:AtrVOiface){
     return this.http.post(this.getUrl() +'/AtrCtrl/update.do',JSON.stringify(atrVO), this.httpOptions);
   }
 }
