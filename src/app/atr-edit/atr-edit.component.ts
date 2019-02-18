@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../dataExchange/data.service';
 import { AtrVOiface } from '../vo/AtrVOiface';
 import {Util} from '../util/Util';
+import {Carrier} from '../dataExchange/Carrier';
 
 @Component({
   selector: 'app-atr-edit',
@@ -38,7 +39,7 @@ export class AtrEditComponent implements OnInit {
       }
      
       this.dataService.createAtr(this.atrVO).
-          subscribe((carrier) => {
+          subscribe((carrier:Carrier) => {
             
               var msg = carrier.attributeMap["msg"];
               this.msg = msg;

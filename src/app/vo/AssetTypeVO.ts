@@ -1,5 +1,6 @@
-export interface AssetTypeVOiface{
+export interface AssetTypeVO{
     assetTypeId?:string;
+    orgAssetTypeId?:string;
     assetTypeName?:string;
     atrId?:string;
     atrVal?:string;
