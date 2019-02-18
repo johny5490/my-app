@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AssetTypeVOiface} from '../vo/AssetTypeVOiface';
 import { AtrVOiface } from '../vo/AtrVOIface';
 import { DataService } from '../dataExchange/data.service';
+import {Util} from '../util/Util';
 
 @Component({
   selector: 'app-asset-type-edit',
@@ -11,6 +12,8 @@ import { DataService } from '../dataExchange/data.service';
 export class AssetTypeEditComponent implements OnInit {
   assetTypeVO:AssetTypeVOiface={};
   atrVOs:AtrVOiface[]=[{}];
+  msg:string="歡迎";
+  ctrlUrl='/';
 
   constructor(private dataService:DataService) { }
 
@@ -20,4 +23,23 @@ export class AssetTypeEditComponent implements OnInit {
         },error => console.log("error=" + error));;
   }
 
+  create(){
+    if(!Util.showConfirmMsg("新增")){
+      return; 
+    }
+
+    //this.dataService.postJson('');
+  }
+
+  update(){
+    if(!Util.showConfirmMsg("修改")){
+      return; 
+    }
+  }
+
+  delete(){
+    if(!Util.showConfirmMsg("刪除")){
+      return; 
+    }
+  }
 }

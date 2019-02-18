@@ -124,10 +124,14 @@ export class DataService {
   }
 
   deleteAtr(atrVO:AtrVOiface){
-    return this.http.post(this.getUrl() +'/AtrCtrl/delete.do',JSON.stringify(atrVO), this.httpOptions);
+    return this.http.post<Carrier>(this.getUrl() +'/AtrCtrl/delete.do',JSON.stringify(atrVO), this.httpOptions);
   }
 
   updateAtr(atrVO:AtrVOiface){
-    return this.http.post(this.getUrl() +'/AtrCtrl/update.do',JSON.stringify(atrVO), this.httpOptions);
+    return this.http.post<Carrier>(this.getUrl() +'/AtrCtrl/update.do',JSON.stringify(atrVO), this.httpOptions);
+  }
+
+  postJson(url:string, data:any){
+    return this.http.post(this.getUrl() + url, JSON.stringify(data), this.httpOptions);
   }
 }

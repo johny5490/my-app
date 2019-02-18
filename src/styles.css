@@ -4,3 +4,12 @@
 @import "../node_modules/primeng/resources/themes/nova-light/theme.css";
 @import "../node_modules/primeng/resources/primeng.min.css";
 @import "../node_modules/primeicons/primeicons.css";
+.myBox{
+    display: inline-block;vertical-align: top;
+    padding:5px;
+}
+
+.mySelect{
+    height:30px;
+    width:auto;
+}

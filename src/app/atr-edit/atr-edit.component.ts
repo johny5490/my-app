@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../dataExchange/data.service';
 import { AtrVOiface } from '../vo/AtrVOiface';
+import {Util} from '../util/Util';
 
 @Component({
   selector: 'app-atr-edit',
@@ -13,6 +14,8 @@ export class AtrEditComponent implements OnInit {
 
   atrVO:AtrVOiface = {};
 
+  msg:string='歡迎';
+
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
@@ -20,9 +23,7 @@ export class AtrEditComponent implements OnInit {
 
   }
 
-  showConfirmMsg(act:string):boolean{
-      return window.confirm("確定要"+act+"?");
-  }
+
 
   queryAtrList(){
     this.dataService.queryAtrList().
@@ -32,7 +33,7 @@ export class AtrEditComponent implements OnInit {
   }
 
   create(){
-      if(!this.showConfirmMsg("新增")){
+      if(!Util.showConfirmMsg("新增")){
         return; 
       }
      
@@ -40,6 +41,7 @@ export class AtrEditComponent implements OnInit {
           subscribe((carrier) => {
             
               var msg = carrier.attributeMap["msg"];
+              this.msg = msg;
               console.info("carrier.msg=" + msg);
               this.cleanAndQryAtrList();
           }, error => console.log("error=" + error));    
@@ -53,21 +55,25 @@ export class AtrEditComponent implements OnInit {
   }
 
   update(){
-      if(!this.showConfirmMsg("修改")){
+      if(!Util.showConfirmMsg("修改")){
         return;
       }
       this.dataService.updateAtr(this.atrVO).
-          subscribe(()=>{
+          subscribe((carrier)=>{
+              var msg = carrier.attributeMap["msg"];
+              this.msg = msg;
               this.queryAtrList();
           },error=>console.log("error=" + error));
   }
 
   del(){
-      if(!this.showConfirmMsg("刪除")){
+      if(!Util.showConfirmMsg("刪除")){
         return;
       } 
       this.dataService.deleteAtr(this.atrVO).
-          subscribe(()=>{
+          subscribe((carrier)=>{
+            var msg = carrier.attributeMap["msg"];
+              this.msg = msg;
               this.cleanAndQryAtrList();
           },error=>console.log("error=" + error));; 
   }
