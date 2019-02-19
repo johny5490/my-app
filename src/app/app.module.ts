@@ -23,6 +23,7 @@ import {PanelModule} from 'primeng/panel';
 import {InputTextModule} from 'primeng/inputtext';
 import { AssetTypeEditComponent } from './asset-type-edit/asset-type-edit.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

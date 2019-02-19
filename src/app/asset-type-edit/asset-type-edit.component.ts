@@ -18,7 +18,7 @@ export class AssetTypeEditComponent implements OnInit {
   atrVOs:AtrVOiface[]=[{}];
   assetTypeVOs:AssetTypeVO[]=[{}];
   msg:string="歡迎";
-  ctrlUrl='/AssetTypeCtrl';
+  ctrlUrl='/api/AssetTypeCtrl';
 
   constructor(private dataService:DataService) { }
 

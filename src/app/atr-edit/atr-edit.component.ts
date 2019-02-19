@@ -37,7 +37,7 @@ export class AtrEditComponent implements OnInit {
       if(!Util.showConfirmMsg("新增")){
         return; 
       }
-     
+      
       this.dataService.createAtr(this.atrVO).
           subscribe((carrier:Carrier) => {
             

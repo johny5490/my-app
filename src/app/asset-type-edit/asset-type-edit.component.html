@@ -1,5 +1,6 @@
-<p-panel header="資產種類清單" [toggleable]="true">
-  <p-table [value]="assetTypeVOs" autoLayout="true" [scrollable]="true">
+  <div style="overflow:auto; height:300px" class="myBox" >
+ 
+  <p-table [value]="assetTypeVOs" [style]="{width:'300%'}">
       <ng-template pTemplate="header">
         <tr>
           <th>資產種類代碼</th>
@@ -61,8 +62,8 @@
         </tr>
       </ng-template>
     </p-table>
-  </p-panel>
-  
+ 
+    </div>
   <p-panel  >
     <p-header >
        <button  pButton label="新增" (click)="create()"></button>&nbsp;
