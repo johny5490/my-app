@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { UserToken } from '../userToken';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import {} from 'rxjs/add/operator/toPromise';
@@ -18,7 +17,7 @@ import { Carrier } from './Carrier';
 })
 
 export class DataService {
-  private userToken = new UserToken();
+ 
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json;charset=utf-8'})
   };
@@ -51,13 +50,6 @@ export class DataService {
     return idx>0 ? pathname.substring(0, idx):"/";
   }
 
-  getUserToken(): UserToken{
-    
-    this.userToken.setId("u123");
-    this.userToken.setName("泰坦之力");
-    return this.userToken;
-  }
-
   updateHero () {
  
     var data = {'compId':'sdms','empNo':'u571'};
@@ -74,7 +66,7 @@ export class DataService {
 
   qryEmpList(){
     
-    return this.http.post<EmpVO[]>(this.getUrl() +'/EmpCtrl/qryEmpList.do', this.httpOptions).
+    return this.http.post<EmpVO[]>(this.getUrl() +'/api/EmpCtrl/qryEmpList.do', this.httpOptions).
                                     pipe(
                                            tap(_ => console.log('qryEmpList')),
                                             catchError(this.handleError('qryEmpList', []))
@@ -106,29 +98,18 @@ export class DataService {
     };
   }
 
-  createAtr(atrVO:AtrVOiface){
-    /*
-    return this.http.post<Carrier>(this.getUrl() +'/AtrCtrl/create.do', atrVO, this.httpOptions).
-                 pipe(
-                        tap(_ => console.log('createAtr')),
-                         catchError(this.handleError('createAtr', []))
-                   );
-                   */
-
-                
-    return this.http.post(this.getUrl() +'/AtrCtrl/create.do', JSON.stringify(atrVO), this.httpOptions)           
+  createAtr(atrVO:AtrVOiface){        
+    return this.http.post(this.getUrl() +'/api/AtrCtrl/create.do', JSON.stringify(atrVO), this.httpOptions)           
   }
 
-  queryAtrList(){    
-    return this.http.post(this.getUrl() +'/AtrCtrl/queryAtrList.do', this.httpOptions);
-  }
+
 
   deleteAtr(atrVO:AtrVOiface){
-    return this.http.post<Carrier>(this.getUrl() +'/AtrCtrl/delete.do',JSON.stringify(atrVO), this.httpOptions);
+    return this.http.post<Carrier>(this.getUrl() +'/api/AtrCtrl/delete.do',JSON.stringify(atrVO), this.httpOptions);
   }
 
   updateAtr(atrVO:AtrVOiface){
-    return this.http.post<Carrier>(this.getUrl() +'/AtrCtrl/update.do',JSON.stringify(atrVO), this.httpOptions);
+    return this.http.post<Carrier>(this.getUrl() +'/api/AtrCtrl/update.do',JSON.stringify(atrVO), this.httpOptions);
   }
 
   postJson(url:string, data?:any){

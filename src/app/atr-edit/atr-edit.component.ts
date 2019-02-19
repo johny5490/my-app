@@ -10,7 +10,8 @@ import {Carrier} from '../dataExchange/Carrier';
   styleUrls: ['./atr-edit.component.css']
 })
 export class AtrEditComponent implements OnInit {
-  
+  ctrlUrl = "/api/AtrCtrl";
+
   atrVOs:AtrVOiface[];
 
   atrVO:AtrVOiface = {};
@@ -24,13 +25,12 @@ export class AtrEditComponent implements OnInit {
 
   }
 
-
-
   queryAtrList(){
-    this.dataService.queryAtrList().
+  
+    this.dataService.postJson(this.ctrlUrl +"/queryAtrList.do").
           subscribe((artVOArray:AtrVOiface[])=>{
-                this.atrVOs=artVOArray;
-          },error => console.log("error=" + error));
+                      this.atrVOs=artVOArray;
+                  },error => console.log("error=" + error));
   }
 
   create(){

@@ -22,6 +22,7 @@ import { AtrEditComponent } from './atr-edit/atr-edit.component';
 import {PanelModule} from 'primeng/panel';
 import {InputTextModule} from 'primeng/inputtext';
 import { AssetTypeEditComponent } from './asset-type-edit/asset-type-edit.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { AssetTypeEditComponent } from './asset-type-edit/asset-type-edit.compon
     EmpListComponent,
     AtrEditComponent,
     AssetTypeEditComponent,
+    LoginComponent,
     
   ],
   imports: [

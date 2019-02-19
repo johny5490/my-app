@@ -20,12 +20,15 @@ export class AssetTypeEditComponent implements OnInit {
   msg:string="歡迎";
   ctrlUrl='/api/AssetTypeCtrl';
 
-  constructor(private dataService:DataService) { }
+  constructor(private dataService:DataService) { 
+   
+  }
 
   ngOnInit() {
-    this.dataService.queryAtrList().subscribe((artVOArray:AtrVOiface[])=>{
-            this.atrVOs=artVOArray;
-        },error => console.log("error=" + error));
+    this.dataService.postJson("/api/AtrCtrl/queryAtrList.do").
+                      subscribe((artVOArray:AtrVOiface[])=>{
+                                  this.atrVOs=artVOArray;
+                              },error => console.log("error=" + error));
     this.queryAssetTypeList();
   }
 

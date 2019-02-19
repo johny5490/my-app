@@ -10,12 +10,14 @@ import {DataService} from './dataExchange/data.service';
 import {AtrEditComponent} from './atr-edit/atr-edit.component';
 import {AssetTypeEditComponent} from './asset-type-edit/asset-type-edit.component';
 //import { SampleBodyComponent } from './sample/body/sampleBody.component';
+import {LoginComponent} from './login/login.component';
 
 const routes: Routes = [
   { path: 'heroes', component: HeroesComponent },
   { path: 'emp-list', component: EmpListComponent },
   { path: 'atr-edit', component: AtrEditComponent},
   { path: 'asset-type-edit', component: AssetTypeEditComponent},
+  { path: 'login', component: LoginComponent},
   //{ path: 'sample/body', component: SampleBodyComponent },
 ];
 
