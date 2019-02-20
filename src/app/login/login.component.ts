@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../dataExchange/data.service';
 import { Carrier } from '../dataExchange/Carrier';
+import { Util } from '../util/Util';
 
 @Component({
   selector: 'app-login',
@@ -24,8 +25,13 @@ export class LoginComponent implements OnInit {
                         var msg = carr.attributeMap["msg"];
                         if(msg != ""){
                             alert(msg);
-                        }else{
-
+                        }
+                        
+                        if(carr.attributeMap["userId"] != null){
+                          //document.cookie = "sdms_userId=SD0060;path=/";
+                          //document.cookie = "sdms_userName="+ encodeURIComponent("陳炯霖") +";path=/";
+                          Util.setCookie("sdms_userId", carr.attributeMap["userId"]);
+                          Util.setCookie("sdms_userName", carr.attributeMap["userName"]);
                         }
                 },error => console.log(error)
     );
