@@ -22,8 +22,7 @@ export class Util{
     }
 
     static setCookie(name: string, value: string){
-        //document.cookie = "sdms_userId=SD0060;path=/";
-        //document.cookie = "sdms_userName="+ encodeURIComponent("陳炯霖") +";path=/";
+        
         var path = ";path=/";
         document.cookie = name+"="+ encodeURIComponent(value) + path;
     }

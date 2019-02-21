@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { HeaderComponent } from './header/header.component'; 
-import { BodyComponent } from './body/body.component';
 import { HeroesComponent } from './heroes/heroes.component';
 //import { SampleModule } from './sample/sample.module';
 
@@ -23,18 +22,18 @@ import {PanelModule} from 'primeng/panel';
 import {InputTextModule} from 'primeng/inputtext';
 import { AssetTypeEditComponent } from './asset-type-edit/asset-type-edit.component';
 import { LoginComponent } from './login/login.component';
-
+import {AuthGuard} from './AuthGuard';
 
 @NgModule({
   declarations: [
+    LoginComponent,
     AppComponent,
     HeroesComponent,
     HeaderComponent,
-    BodyComponent,
     EmpListComponent,
     AtrEditComponent,
     AssetTypeEditComponent,
-    LoginComponent,
+    
     
   ],
   imports: [
@@ -52,6 +51,7 @@ import { LoginComponent } from './login/login.component';
     InputTextModule,
     AppRoutingModule,
   ],
+  providers:[AuthGuard],
   entryComponents:[HeroesComponent],
   bootstrap: [AppComponent],
 })

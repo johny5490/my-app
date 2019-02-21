@@ -12,10 +12,11 @@ export class HeaderComponent implements OnInit {
 
   constructor(private dataService: DataService, private router: Router) {
       
-
+    /*
       if( this.getCookieUserId() ==""){
           this.router.navigate(["login"]);
       }      
+    */
   }
   ngOnInit() {
     

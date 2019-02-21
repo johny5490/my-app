@@ -1,8 +1,6 @@
 import { Component, OnInit,ComponentFactoryResolver,ViewContainerRef,Compiler,NgModule,ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { HeroesComponent } from './heroes/heroes.component';
-
 import {MenuItem} from 'primeng/api';
 
 @Component({
