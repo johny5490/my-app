@@ -24,6 +24,7 @@ import { AssetTypeEditComponent } from './asset-type-edit/asset-type-edit.compon
 import { LoginComponent } from './login/login.component';
 import {AuthGuard} from './AuthGuard';
 
+
 @NgModule({
   declarations: [
     LoginComponent,
@@ -33,7 +34,6 @@ import {AuthGuard} from './AuthGuard';
     EmpListComponent,
     AtrEditComponent,
     AssetTypeEditComponent,
-    
     
   ],
   imports: [

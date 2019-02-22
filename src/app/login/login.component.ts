@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../dataExchange/data.service';
 import { Carrier } from '../dataExchange/Carrier';
 import { Util } from '../util/Util';
+import { LoginUser } from '../vo/LoginUser';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,13 +16,14 @@ export class LoginComponent implements OnInit {
   userId = "";
   passwd = "";
 
-  constructor(private dataService:DataService) { }
+  constructor(private dataService:DataService, private router:Router) { }
 
   ngOnInit() {
   }
 
   login(){
     var data ={userId:this.userId, passwd:this.passwd};
+    /*
     this.dataService.postJson(this.ctrlUrl + "/login.do", data).
                     subscribe((carr:Carrier)=>{
                         var msg = carr.attributeMap["msg"];
@@ -36,5 +39,12 @@ export class LoginComponent implements OnInit {
                         }
                 },error => console.log(error)
     );
+    */
+    //var loginUser:LoginUser = {tokenId:"123", userId:"SD0060", userName:"陳炯霖", deptNo:"A23", deptName:"資訊"};
+    var loginUser = new LoginUser();
+    loginUser.userId="sd0060";
+    loginUser.userName="陳炯霖";
+    localStorage.setItem("loginUser", JSON.stringify(loginUser));
+    this.router.navigate(["/"]);
   }
 }

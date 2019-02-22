@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DataService} from '../dataExchange/data.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {Util} from '../util/Util';
+import { LoginUser } from '../vo/LoginUser';
+import { Console } from '@angular/core/src/console';
 
 @Component({
   selector: 'app-header',
@@ -9,14 +11,20 @@ import {Util} from '../util/Util';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  static LOGIN_USER = "loginUser";
+  loginUser:LoginUser = new LoginUser();
 
   constructor(private dataService: DataService, private router: Router) {
       
-    /*
-      if( this.getCookieUserId() ==""){
+     
+      var loinUser:LoginUser = JSON.parse(localStorage.getItem((HeaderComponent.LOGIN_USER)));
+      if(loinUser == null){
           this.router.navigate(["login"]);
-      }      
-    */
+      }else{
+        this.loginUser = loinUser;
+        
+      }
+    
   }
   ngOnInit() {
     
@@ -31,7 +39,8 @@ export class HeaderComponent implements OnInit {
   }
 
   logout(){
-    
+    this.loginUser = new LoginUser();
+    localStorage.removeItem(HeaderComponent.LOGIN_USER);
   }
 
 }
