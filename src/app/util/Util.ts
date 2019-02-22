@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+
 export class Util{
 
     static showConfirmMsg(act:string):boolean{
@@ -25,5 +27,14 @@ export class Util{
         
         var path = ";path=/";
         document.cookie = name+"="+ encodeURIComponent(value) + path;
+    }
+
+    /*routerLink在重複點擊時不會刷新畫面，故先連結一個不存在頁面再轉來達到刷新效果，
+    * 比使用onSameUrlNavigation要簡單的多
+    */
+    static routerLinkReload(router:Router, url:string){
+      router.navigateByUrl('', {skipLocationChange: true}).
+                  then(()=>
+                       router.navigate([url]));
     }
 }

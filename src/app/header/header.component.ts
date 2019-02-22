@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService} from '../dataExchange/data.service';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router } from '@angular/router';
 import {Util} from '../util/Util';
+import {LoginUtil} from '../util/LoginUtil';
+
 import { LoginUser } from '../vo/LoginUser';
-import { Console } from '@angular/core/src/console';
 
 @Component({
   selector: 'app-header',
@@ -11,36 +12,28 @@ import { Console } from '@angular/core/src/console';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  static LOGIN_USER = "loginUser";
-  loginUser:LoginUser = new LoginUser();
+  
+  loginUser:LoginUser ;
 
   constructor(private dataService: DataService, private router: Router) {
-      
-     
-      var loinUser:LoginUser = JSON.parse(localStorage.getItem((HeaderComponent.LOGIN_USER)));
-      if(loinUser == null){
-          this.router.navigate(["login"]);
-      }else{
-        this.loginUser = loinUser;
-        
-      }
     
   }
+
   ngOnInit() {
     
+    console.log("HeaderComponent");
+    this.loginUser = LoginUtil.getLoginUser();
+    if(this.loginUser.userId===""){
+      this.router.navigate(["login"]);
+    }
+    
   }
 
-  getCookieUserId(){
-    return Util.getCookieValue("sdms_userId");
-  }
-
-  getCookieUserName(){
-    return Util.getCookieValue("sdms_userName");
-  }
-
-  logout(){
+  logout (){
+    LoginUtil.removeFromStorage();
+    //清空loginUser
     this.loginUser = new LoginUser();
-    localStorage.removeItem(HeaderComponent.LOGIN_USER);
+    this.router.navigate(["login"]);
   }
 
 }

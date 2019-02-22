@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import {LoginUtil} from './util/LoginUtil';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -7,16 +8,15 @@ export class AuthGuard implements CanActivate {
     constructor(private router: Router) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        /*
-        if (localStorage.getItem('currentUser')) {
-            // logged in so return true
+        
+        if (LoginUtil.isLogin()) {
             return true;
         }
-        */
-        // not logged in so redirect to login page with the reqUrl url
+        
+        // 未登入轉導登入頁並給定reqUrl做為登入後的轉導頁
         //this.router.navigate(["/login", { outlets: { loginOutlet: null } }], { queryParams: { reqUrl: state.url } });
-        console.log("canActivate run");
-        //this.router.navigate([{ outlets: { loginOutlet: null }}]);
-        return false;
+        
+        this.router.navigate(["login"], {queryParams: { reqUrl: state.url } });
+        return true;
     }
 }

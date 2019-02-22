@@ -1,7 +1,9 @@
 import { Component, OnInit,ComponentFactoryResolver,ViewContainerRef,Compiler,NgModule,ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-
+import {Util} from './util/Util';
+import {LoginUtil} from './util/LoginUtil';
 import {MenuItem} from 'primeng/api';
+
 
 @Component({
   selector: 'app-root',
@@ -18,7 +20,10 @@ export class AppComponent implements OnInit{
               private resolver: ComponentFactoryResolver,
               private vr:ViewContainerRef,
               private compiler: Compiler){
-
+                
+       window.onunload = (e) =>{
+              alert("13");
+      }
   }
   
   private genComponent(template: string, properties: any = {}) {
@@ -40,12 +45,7 @@ export class AppComponent implements OnInit{
 
 
   ngOnInit(){
-    /*
-    let routes = [
-      { path: 'heroes', component: HeroesComponent },
-    ]; 
-    */
-   
+    
     let routes=[];
     /*
     let factories = Array.from(this.resolver['_factories'].values());
@@ -72,6 +72,8 @@ export class AppComponent implements OnInit{
     //routes.push({path:'heroes', component:heroCom});
   
     //this.router.resetConfig(routes);
+ 
+
     this.menuItems = [
       {
         label: '作業總覽',
@@ -88,10 +90,10 @@ export class AppComponent implements OnInit{
                   {label: '屬性設定', icon: 'pi pi-fw pi-pencil', command:(event) => {
                               //event.originalEvent: Browser event
                               //event.item: menuitem metadata
-                              this.routerLinkReload('/atr-edit');
+                              Util.routerLinkReload(this.router, '/atr-edit');
                           }},
                   {label: '資產種類設定', icon: 'pi pi-fw pi-pencil', command:(event) => {
-                              this.routerLinkReload('/asset-type-edit');
+                              Util.routerLinkReload(this.router, '/asset-type-edit');
                         }},
                   {label: '資產設定', icon: 'pi pi-fw pi-pencil'},
                   
@@ -103,11 +105,5 @@ export class AppComponent implements OnInit{
    ];
   }
 
-  //routerLink在重複點擊時不會刷新畫面，故先連結一個不存在頁面再轉來達到刷新效果，
-  //比使用onSameUrlNavigation要簡單的多
-  routerLinkReload(url:string){
-    this.router.navigateByUrl('', {skipLocationChange: true}).
-                then(()=>
-                     this.router.navigate([url]));
-  }
+  
 }

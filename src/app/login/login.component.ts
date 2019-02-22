@@ -3,7 +3,8 @@ import { DataService } from '../dataExchange/data.service';
 import { Carrier } from '../dataExchange/Carrier';
 import { Util } from '../util/Util';
 import { LoginUser } from '../vo/LoginUser';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
+import { LoginUtil } from '../util/LoginUtil';
 
 @Component({
   selector: 'app-login',
@@ -15,15 +16,19 @@ export class LoginComponent implements OnInit {
   ctrlUrl = "/open/LoginCtrl";
   userId = "";
   passwd = "";
-
-  constructor(private dataService:DataService, private router:Router) { }
+  reqUrl = "";
+  constructor(private dataService:DataService, private router:Router, private route:ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe((value)=>{
+        this.reqUrl = value["reqUrl"];
+        
+    });
   }
 
   login(){
     var data ={userId:this.userId, passwd:this.passwd};
-    /*
+    
     this.dataService.postJson(this.ctrlUrl + "/login.do", data).
                     subscribe((carr:Carrier)=>{
                         var msg = carr.attributeMap["msg"];
@@ -31,20 +36,16 @@ export class LoginComponent implements OnInit {
                             alert(msg);
                         }
                         
-                        if(carr.attributeMap["userId"] != null){
-                          //document.cookie = "sdms_userId=SD0060;path=/";
-                          //document.cookie = "sdms_userName="+ encodeURIComponent("陳炯霖") +";path=/";
-                          Util.setCookie("sdms_userId", carr.attributeMap["userId"]);
-                          Util.setCookie("sdms_userName", carr.attributeMap["userName"]);
+                        if(carr.attributeMap["loginUser"] != null){                                                   
+                          LoginUtil.saveToStorage(carr.attributeMap["loginUser"]);
+                          if(this.reqUrl != null && this.reqUrl!=undefined){
+                              Util.routerLinkReload(this.router, this.reqUrl);
+                          }
+                          
                         }
                 },error => console.log(error)
     );
-    */
-    //var loginUser:LoginUser = {tokenId:"123", userId:"SD0060", userName:"陳炯霖", deptNo:"A23", deptName:"資訊"};
-    var loginUser = new LoginUser();
-    loginUser.userId="sd0060";
-    loginUser.userName="陳炯霖";
-    localStorage.setItem("loginUser", JSON.stringify(loginUser));
-    this.router.navigate(["/"]);
+    
+    
   }
 }
