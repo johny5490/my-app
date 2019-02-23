@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,HostListener } from '@angular/core';
 import { DataService} from '../dataExchange/data.service';
 import { Router } from '@angular/router';
 import {Util} from '../util/Util';
@@ -16,7 +16,9 @@ export class HeaderComponent implements OnInit {
   loginUser:LoginUser ;
 
   constructor(private dataService: DataService, private router: Router) {
-    
+      window.addEventListener("storage", function (e) {
+          alert(e.newValue);
+      });
   }
 
   ngOnInit() {
@@ -36,4 +38,8 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(["login"]);
   }
 
+  @HostListener('window.storage', ['$event.target'])
+  localStorageChange() {
+	     alert("storage");
+  }
 }
