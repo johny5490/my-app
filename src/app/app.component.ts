@@ -72,7 +72,7 @@ export class AppComponent implements OnInit{
     //routes.push({path:'heroes', component:heroCom});
   
     //this.router.resetConfig(routes);
- 
+    
 
     this.menuItems = [
       {
@@ -80,7 +80,9 @@ export class AppComponent implements OnInit{
         icon: 'pi pi-pi pi-bars',
         expanded: true,
         items: [
-            {label: '通訊錄', icon: 'pi pi-pi pi-search', routerLink: ['/emp-list'] },
+            {label: '首頁', icon: 'pi pi-fw  pi-home', routerLink: [''] },
+            {label: '通訊錄', icon: 'pi pi-fw pi-users', routerLink: ['/emp-list'] },
+            {label: '轉轉星', icon: 'pi pi-fw pi-spin pi-star-o', routerLink: [''] },
             {
               label: '資產管理',
               expanded: true, 
@@ -95,7 +97,9 @@ export class AppComponent implements OnInit{
                   {label: '資產種類設定', icon: 'pi pi-fw pi-pencil', command:(event) => {
                               Util.routerLinkReload(this.router, '/asset-type-edit');
                         }},
-                  {label: '資產設定', icon: 'pi pi-fw pi-pencil'},
+                  {label: '資產設定', icon: 'pi pi-fw pi-pencil',command:(event) => {
+                              Util.routerLinkReload(this.router, '/asset-edit');
+                        }},
                   
               ]
           },
@@ -105,5 +109,5 @@ export class AppComponent implements OnInit{
    ];
   }
 
-  
+ 
 }

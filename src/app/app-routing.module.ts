@@ -8,7 +8,7 @@ import {AssetTypeEditComponent} from './asset-type-edit/asset-type-edit.componen
 //import { SampleBodyComponent } from './sample/body/sampleBody.component';
 import {LoginComponent} from './login/login.component';
 import {AuthGuard} from './AuthGuard';
-
+import {AssetEditComponent} from './asset-edit/asset-edit.component';
 
 const routes: Routes = [
   //{ path: '', component: MainComponent,canActivate: [AuthGuard]},
@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'emp-list', component: EmpListComponent,canActivate: [AuthGuard] },
   { path: 'atr-edit',  component: AtrEditComponent,canActivate: [AuthGuard]},
   { path: 'asset-type-edit', component: AssetTypeEditComponent,canActivate: [AuthGuard]},
-  
+  { path: 'asset-edit', component: AssetEditComponent,canActivate: [AuthGuard]},
   //{ path: 'sample/body', component: SampleBodyComponent },
 ];
 

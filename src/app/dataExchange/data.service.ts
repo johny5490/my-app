@@ -11,6 +11,7 @@ import { HeroesComponent } from '../heroes/heroes.component';
 import { Routes } from '@angular/router';
 import { AtrVOiface } from '../vo/AtrVOiface';
 import { Carrier } from './Carrier';
+import { LoginUtil } from '../util/LoginUtil';
 
 @Injectable({
   providedIn: 'root'
@@ -18,12 +19,25 @@ import { Carrier } from './Carrier';
 
 export class DataService {
  
-  private httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json;charset=utf-8'})
-  };
-
   constructor(private http: HttpClient) { 
     
+  }
+  
+  private genHttpOptions(){
+    var httpOptions = {headers:this.genHeaders()};
+    return httpOptions;
+  }
+
+  private genHeaders(){
+    var loginUser = LoginUtil.getLoginUser();
+    
+    return new HttpHeaders({ 'Content-Type': 'application/json;charset=utf-8', 
+                              'JNY-tokenId':loginUser.tokenId,
+                              'JNY-userId':loginUser.userId,
+                              'JNY-userName':encodeURIComponent(loginUser.userName),
+                              'JNY-deptNo':loginUser.deptNo,
+                              'JNY-deptName':encodeURIComponent(loginUser.deptName),
+                            });
   }
 
   getUrl(){
@@ -58,7 +72,7 @@ export class DataService {
       headers: new HttpHeaders({ 'Content-Type': 'application/json;charset=utf-8'})
     };
   */
-    return this.http.post<EmpVO>(this.getUrl() + '/Hello/createObj.do', data, this.httpOptions).
+    return this.http.post<EmpVO>(this.getUrl() + '/Hello/createObj.do', data, this.genHttpOptions()).
                      subscribe(empVO => {
                          console.info("empVO.chiName=" + empVO.chiName + ",empVO.empNo=" + empVO.empNo);
                      }, error => console.log("error=" + error));
@@ -66,7 +80,7 @@ export class DataService {
 
   qryEmpList(){
     
-    return this.http.post<EmpVO[]>(this.getUrl() +'/api/EmpCtrl/qryEmpList.do', this.httpOptions).
+    return this.http.post<EmpVO[]>(this.getUrl() +'/api/EmpCtrl/qryEmpList.do', this.genHttpOptions()).
                                     pipe(
                                            tap(_ => console.log('qryEmpList')),
                                             catchError(this.handleError('qryEmpList', []))
@@ -99,20 +113,20 @@ export class DataService {
   }
 
   createAtr(atrVO:AtrVOiface){        
-    return this.http.post(this.getUrl() +'/api/AtrCtrl/create.do', JSON.stringify(atrVO), this.httpOptions)           
+    return this.http.post(this.getUrl() +'/api/AtrCtrl/create.do', JSON.stringify(atrVO), this.genHttpOptions())           
   }
 
 
 
   deleteAtr(atrVO:AtrVOiface){
-    return this.http.post<Carrier>(this.getUrl() +'/api/AtrCtrl/delete.do',JSON.stringify(atrVO), this.httpOptions);
+    return this.http.post<Carrier>(this.getUrl() +'/api/AtrCtrl/delete.do',JSON.stringify(atrVO), this.genHttpOptions());
   }
 
   updateAtr(atrVO:AtrVOiface){
-    return this.http.post<Carrier>(this.getUrl() +'/api/AtrCtrl/update.do',JSON.stringify(atrVO), this.httpOptions);
+    return this.http.post<Carrier>(this.getUrl() +'/api/AtrCtrl/update.do',JSON.stringify(atrVO), this.genHttpOptions());
   }
 
   postJson(url:string, data?:any){
-    return this.http.post(this.getUrl() + url, JSON.stringify(data), this.httpOptions);
+    return this.http.post(this.getUrl() + url, JSON.stringify(data), this.genHttpOptions());
   }
 }

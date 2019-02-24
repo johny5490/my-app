@@ -23,6 +23,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import { AssetTypeEditComponent } from './asset-type-edit/asset-type-edit.component';
 import { LoginComponent } from './login/login.component';
 import {AuthGuard} from './AuthGuard';
+import { AssetEditComponent } from './asset-edit/asset-edit.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import {AuthGuard} from './AuthGuard';
     EmpListComponent,
     AtrEditComponent,
     AssetTypeEditComponent,
+    AssetEditComponent,
     
   ],
   imports: [

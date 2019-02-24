@@ -14,21 +14,23 @@ import { LoginUser } from '../vo/LoginUser';
 export class HeaderComponent implements OnInit {
   
   loginUser:LoginUser ;
-
+  
   constructor(private dataService: DataService, private router: Router) {
-      window.addEventListener("storage", function (e) {
-          alert(e.newValue);
-      });
+      
+    window.addEventListener(LoginUtil.STORAGE_CHG_EVENT, (e) => {
+        this.loginUser = LoginUtil.getLoginUser();
+    });
+      
   }
 
   ngOnInit() {
     
-    console.log("HeaderComponent");
     this.loginUser = LoginUtil.getLoginUser();
     if(this.loginUser.userId===""){
       this.router.navigate(["login"]);
     }
     
+   
   }
 
   logout (){
@@ -36,10 +38,7 @@ export class HeaderComponent implements OnInit {
     //清空loginUser
     this.loginUser = new LoginUser();
     this.router.navigate(["login"]);
+    
   }
-
-  @HostListener('window.storage', ['$event.target'])
-  localStorageChange() {
-	     alert("storage");
-  }
+  
 }

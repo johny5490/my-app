@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../dataExchange/data.service';
 import { Carrier } from '../dataExchange/Carrier';
 import { Util } from '../util/Util';
-import { LoginUser } from '../vo/LoginUser';
 import { Router,ActivatedRoute } from '@angular/router';
 import { LoginUtil } from '../util/LoginUtil';
 
