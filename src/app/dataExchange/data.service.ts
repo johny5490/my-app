@@ -29,14 +29,10 @@ export class DataService {
   }
 
   private genHeaders(){
-    var loginUser = LoginUtil.getLoginUser();
+    var loginUserVO = LoginUtil.getLoginUser();
     
     return new HttpHeaders({ 'Content-Type': 'application/json;charset=utf-8', 
-                              'JNY-tokenId':loginUser.tokenId,
-                              'JNY-userId':loginUser.userId,
-                              'JNY-userName':encodeURIComponent(loginUser.userName),
-                              'JNY-deptNo':loginUser.deptNo,
-                              'JNY-deptName':encodeURIComponent(loginUser.deptName),
+                              'JNY-loginUserVO':LoginUtil.cloneAndEncode(loginUserVO),
                             });
   }
 

@@ -5,11 +5,11 @@ export class LoginUtil{
     static STORAGE_CHG_EVENT = "JNY_StorageChgEvent";
 
     static getLoginUser():LoginUserVO{
-        var loginUser:LoginUserVO = JSON.parse(localStorage.getItem(LoginUtil.STORAGE_KEY));
-        if(loginUser == null || loginUser==undefined){
+        var loginUserVO:LoginUserVO = JSON.parse(localStorage.getItem(LoginUtil.STORAGE_KEY));
+        if(loginUserVO == null || loginUserVO==undefined){
             return new LoginUserVO();
         }else{
-            return loginUser;
+            return loginUserVO;
         }
 
     }
@@ -19,8 +19,8 @@ export class LoginUtil{
         return loginUser.userId != "";
     }
 
-    static saveToStorage(loginUser:LoginUserVO):void{
-        localStorage.setItem(LoginUtil.STORAGE_KEY, JSON.stringify(loginUser));
+    static saveToStorage(loginUserVO:LoginUserVO):void{
+        localStorage.setItem(LoginUtil.STORAGE_KEY, JSON.stringify(loginUserVO));
         LoginUtil.dispatchEvent();
     }
 
@@ -32,5 +32,13 @@ export class LoginUtil{
     private static dispatchEvent(){
         var StorageChgEvent = new Event(LoginUtil.STORAGE_CHG_EVENT);
         window.dispatchEvent(StorageChgEvent);
+    }
+
+    static cloneAndEncode(loginUserVO:LoginUserVO){
+        var clonedVO:LoginUserVO = JSON.parse(JSON.stringify(loginUserVO));
+        clonedVO.userName = encodeURIComponent(clonedVO.userName);
+        clonedVO.postName = encodeURIComponent(clonedVO.postName);
+        clonedVO.deptName=encodeURIComponent(clonedVO.deptName);
+        return JSON.stringify(clonedVO);
     }
 }
