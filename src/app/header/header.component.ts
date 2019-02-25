@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import {Util} from '../util/Util';
 import {LoginUtil} from '../util/LoginUtil';
 
-import { LoginUser } from '../vo/LoginUser';
+import { LoginUserVO } from '../vo/LoginUserVO';
 
 @Component({
   selector: 'app-header',
@@ -13,20 +13,20 @@ import { LoginUser } from '../vo/LoginUser';
 })
 export class HeaderComponent implements OnInit {
   
-  loginUser:LoginUser ;
+  loginUserVO:LoginUserVO ;
   
   constructor(private dataService: DataService, private router: Router) {
       
     window.addEventListener(LoginUtil.STORAGE_CHG_EVENT, (e) => {
-        this.loginUser = LoginUtil.getLoginUser();
+        this.loginUserVO = LoginUtil.getLoginUser();
     });
       
   }
 
   ngOnInit() {
     
-    this.loginUser = LoginUtil.getLoginUser();
-    if(this.loginUser.userId===""){
+    this.loginUserVO = LoginUtil.getLoginUser();
+    if(this.loginUserVO.userId===""){
       this.router.navigate(["login"]);
     }
     
@@ -36,7 +36,7 @@ export class HeaderComponent implements OnInit {
   logout (){
     LoginUtil.removeFromStorage();
     //清空loginUser
-    this.loginUser = new LoginUser();
+    this.loginUserVO = new LoginUserVO();
     this.router.navigate(["login"]);
     
   }

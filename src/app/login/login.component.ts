@@ -31,12 +31,12 @@ export class LoginComponent implements OnInit {
     this.dataService.postJson(this.ctrlUrl + "/login.do", data).
                     subscribe((carr:Carrier)=>{
                         var msg = carr.attributeMap["msg"];
-                        if(msg != ""){
+                        if(msg != "" && msg!=undefined){
                             alert(msg);
                         }
                         
-                        if(carr.attributeMap["loginUser"] != null){                                                   
-                          LoginUtil.saveToStorage(carr.attributeMap["loginUser"]);
+                        if(carr.attributeMap["LoginUserVO"] != null){                                                   
+                          LoginUtil.saveToStorage(carr.attributeMap["LoginUserVO"]);
                           if(this.reqUrl != null && this.reqUrl!=undefined){
                               Util.routerLinkReload(this.router, this.reqUrl);
                           }

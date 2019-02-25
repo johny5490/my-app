@@ -82,7 +82,7 @@ export class DataService {
     
     return this.http.post<EmpVO[]>(this.getUrl() +'/api/EmpCtrl/qryEmpList.do', this.genHttpOptions()).
                                     pipe(
-                                           tap(_ => console.log('qryEmpList')),
+                                           //tap(_ => console.log('qryEmpList')),
                                             catchError(this.handleError('qryEmpList', []))
                                     );  
     

@@ -1,5 +1,7 @@
  <div style="background-color:#D4DFE6">
- 使用者帳號：{{loginUser.userId}} &nbsp;&nbsp;&nbsp;
- 姓名：{{loginUser.userName}} &nbsp;&nbsp;&nbsp;
+ 使用者帳號：{{loginUserVO.userId}}&nbsp;&nbsp;&nbsp;
+ 姓名：{{loginUserVO.userName}}&nbsp;&nbsp;&nbsp;
+ 職稱：{{loginUserVO.postName}}&nbsp;&nbsp;&nbsp;
+ 部門：{{loginUserVO.deptName}}&nbsp;&nbsp;&nbsp;
  <button pButton label="登出" (click)="logout()"></button>
 </div>

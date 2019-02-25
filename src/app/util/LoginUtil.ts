@@ -1,13 +1,13 @@
-import { LoginUser } from '../vo/LoginUser';
+import { LoginUserVO } from '../vo/LoginUserVO';
 
 export class LoginUtil{
     static STORAGE_KEY:string = "JNY_loginUser";
     static STORAGE_CHG_EVENT = "JNY_StorageChgEvent";
 
-    static getLoginUser():LoginUser{
-        var loginUser:LoginUser = JSON.parse(localStorage.getItem(LoginUtil.STORAGE_KEY));
+    static getLoginUser():LoginUserVO{
+        var loginUser:LoginUserVO = JSON.parse(localStorage.getItem(LoginUtil.STORAGE_KEY));
         if(loginUser == null || loginUser==undefined){
-            return new LoginUser();
+            return new LoginUserVO();
         }else{
             return loginUser;
         }
@@ -19,7 +19,7 @@ export class LoginUtil{
         return loginUser.userId != "";
     }
 
-    static saveToStorage(loginUser:LoginUser):void{
+    static saveToStorage(loginUser:LoginUserVO):void{
         localStorage.setItem(LoginUtil.STORAGE_KEY, JSON.stringify(loginUser));
         LoginUtil.dispatchEvent();
     }
