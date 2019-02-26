@@ -29,13 +29,9 @@ export class AtrEditComponent implements OnInit {
   
     this.dataService.postJson(this.ctrlUrl +"/queryAtrList.do").
           subscribe((carr:Carrier)=>{
-                      var msg = carr.attributeMap["msg"];
                       
-                      if(msg != ""){
-                             alert(msg);
-                      }
                       this.atrVOs=carr.attributeMap["atrList"];
-                  },error => console.log("error=" + error));
+                  },error => console.log(error));
   }
 
   create(){
