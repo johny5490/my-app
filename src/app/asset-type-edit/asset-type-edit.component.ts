@@ -26,9 +26,14 @@ export class AssetTypeEditComponent implements OnInit {
 
   ngOnInit() {
     this.dataService.postJson("/api/AtrCtrl/queryAtrList.do").
-                      subscribe((artVOArray:AtrVOiface[])=>{
-                                  this.atrVOs=artVOArray;
-                              },error => console.log("error=" + error));
+                      subscribe((carr:Carrier)=>{
+                                  var msg = carr.attributeMap["msg"];
+                                  if(msg != ""){
+                                     alert(msg);
+                                  }
+                                  this.atrVOs = carr.attributeMap["atrList"];
+                                  //this.atrVOs=artVOArray;
+                              },error => console.log(error));
     this.queryAssetTypeList();
   }
 

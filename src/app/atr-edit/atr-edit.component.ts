@@ -28,8 +28,13 @@ export class AtrEditComponent implements OnInit {
   queryAtrList(){
   
     this.dataService.postJson(this.ctrlUrl +"/queryAtrList.do").
-          subscribe((artVOArray:AtrVOiface[])=>{
-                      this.atrVOs=artVOArray;
+          subscribe((carr:Carrier)=>{
+                      var msg = carr.attributeMap["msg"];
+                      
+                      if(msg != ""){
+                             alert(msg);
+                      }
+                      this.atrVOs=carr.attributeMap["atrList"];
                   },error => console.log("error=" + error));
   }
 
