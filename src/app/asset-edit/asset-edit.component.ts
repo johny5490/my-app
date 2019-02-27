@@ -11,7 +11,7 @@ import { Carrier} from '../dataExchange/Carrier';
   styleUrls: ['./asset-edit.component.css']
 })
 export class AssetEditComponent implements OnInit {
-  ctrlUrl = "/api/AseetCtrl";
+  ctrlUrl = "/api/AssetCtrl";
   msg:string='歡迎';
   assetVO:AssetVO = {};
   assetTypeVOs:AssetTypeVO[]=[{}];
