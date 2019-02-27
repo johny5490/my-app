@@ -46,7 +46,8 @@ export class AtrEditComponent implements OnInit {
               this.msg = msg;
               console.info("carrier.msg=" + msg);
               this.cleanAndQryAtrList();
-          }, error => console.log("error=" + error));    
+          }, error => console.log("error=" + error));
+      
   }
 
   private cleanAndQryAtrList(){

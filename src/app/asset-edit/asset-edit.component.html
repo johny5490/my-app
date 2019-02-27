@@ -6,8 +6,20 @@
      訊息：{{msg}}
   </p-header>
   <h4>
-      資產編號：<input type="text" pInputText [(ngModel)]="assetVO.assetId"/>
-      資產種類：<input type="text" pInputText [(ngModel)]="assetVO.assetTypeId"/>
+      <div class="myBox">
+          資產編號：<input type="text" pInputText [(ngModel)]="assetVO.assetId"  /><b style="color: red">*</b>
+          資產種類代碼：<select [(ngModel)]="assetVO.assetTypeId" class="mySelect">
+                          <option value="">請選擇</option>
+                          <option *ngFor="let assetType of assetTypeVOs" [value]="assetType.assetTypeId">{{assetType.assetTypeName}}</option>
+                      </select><b style="color: red">*</b>
+          保管人：<input type="text" pInputText [(ngModel)]="assetVO.keeper"/><b style="color: red">*</b>
+      </div>
+      <div class="myBox">
+        成本：<input type="text"  pInputText [(ngModel)]="assetVO.cost" />&nbsp;&nbsp;
+        採購案號：<input type="text" pInputText [(ngModel)]="assetVO.buyContractNo"/>
+        備註：<input type="text" pInputText [(ngModel)]="assetVO.remark"/>
+      </div>
+      
   </h4>
    
 </p-panel>

@@ -71,6 +71,7 @@
        <button  pButton label="刪除" (click)="delete()"></button>&nbsp;
        訊息：{{msg}}
     </p-header>
+    <h4>
     <div class="myBox">
         資產種類代碼：<input type="text" pInputText [(ngModel)]="assetTypeVO.assetTypeId"/>
         資產種類代碼名稱：<input type="text" pInputText [(ngModel)]="assetTypeVO.assetTypeName"/>
@@ -136,5 +137,6 @@
                 </select>
         屬性值10：<input type="text" pInputText [(ngModel)]="assetTypeVO.atrVal10"/>
     </div>
+   </h4>
   </p-panel>
   
