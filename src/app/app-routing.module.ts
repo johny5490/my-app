@@ -11,14 +11,15 @@ import {AuthGuard} from './AuthGuard';
 import {AssetEditComponent} from './asset-edit/asset-edit.component';
 
 const routes: Routes = [
-  //{ path: '', component: MainComponent,canActivate: [AuthGuard]},
   { path: 'login', component:LoginComponent },
-  { path: 'heroes',component: HeroesComponent,canActivate: [AuthGuard] },
-  { path: 'emp-list', component: EmpListComponent,canActivate: [AuthGuard] },
-  { path: 'atr-edit',  component: AtrEditComponent,canActivate: [AuthGuard]},
-  { path: 'asset-type-edit', component: AssetTypeEditComponent,canActivate: [AuthGuard]},
-  { path: 'asset-edit', component: AssetEditComponent,canActivate: [AuthGuard]},
+  //{ path: '', component: HeroesComponent, canActivate: [AuthGuard]},
+  { path: 'heroes',component: HeroesComponent, canActivate: [AuthGuard] },
+  { path: 'emp-list', component: EmpListComponent, canActivate: [AuthGuard] },
+  { path: 'atr-edit',  component: AtrEditComponent, canActivate: [AuthGuard]},
+  { path: 'asset-type-edit', component: AssetTypeEditComponent, canActivate: [AuthGuard]},
+  { path: 'asset-edit', component: AssetEditComponent, canActivate: [AuthGuard]},
   //{ path: 'sample/body', component: SampleBodyComponent },
+  //{ path: '**', redirectTo: '404'},
 ];
 
 //var routes: Routes=[];
