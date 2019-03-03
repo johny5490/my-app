@@ -16,6 +16,8 @@ export class AssetEditComponent implements OnInit {
   assetVO:AssetVO = {};
   assetTypeVOs:AssetTypeVO[]=[{}];
 
+  show=0;
+
   constructor(private dataService:DataService) { }
 
   ngOnInit() {
@@ -61,5 +63,20 @@ export class AssetEditComponent implements OnInit {
                           this.msg = carrier.attributeMap["msg"];
                           
                     },error=>console.log("error=" + error));
+  }
+
+  showUserPicker(){
+    //window.open("picker/user-picker","pickWin");
+    
+    this.show+=1;
+    if(this.show>2){
+      this.show=1;
+    }
+    //console.log("parent show=" + this.show);
+  }
+
+  onPick(user){
+    
+    console.log("user=" + user.userId + "," + user.userName);
   }
 }

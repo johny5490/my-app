@@ -24,7 +24,8 @@ import { AssetTypeEditComponent } from './asset-type-edit/asset-type-edit.compon
 import { LoginComponent } from './login/login.component';
 import {AuthGuard} from './AuthGuard';
 import { AssetEditComponent } from './asset-edit/asset-edit.component';
-
+import {SharedModule} from './module/shared-module/shared-module.module';
+import {DialogModule} from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,8 @@ import { AssetEditComponent } from './asset-edit/asset-edit.component';
     TableModule,
     PanelModule,
     InputTextModule,
+    SharedModule,
+    DialogModule,
     AppRoutingModule,
   ],
   providers:[AuthGuard],

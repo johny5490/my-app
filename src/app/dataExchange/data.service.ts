@@ -18,7 +18,9 @@ import { LoginUtil } from '../util/LoginUtil';
 })
 
 export class DataService {
- 
+
+  static API_SERVER_CONTEXT = "/OA";
+  
   constructor(private http: HttpClient) { 
     
   }
@@ -44,8 +46,9 @@ export class DataService {
     */
     var url = window.location.protocol + "//" + 
               this.removePort(window.location.host) + 
-            this.getConetxtRoot(window.location.pathname) ;
-    //console.log("url=" + url);
+              DataService.API_SERVER_CONTEXT ;
+    
+    console.log("url=" + url);
 
     return url;
   }
@@ -55,10 +58,12 @@ export class DataService {
     return idx>0 ? host.substring(0, idx) : host;    
   }
 
-  getConetxtRoot(pathname: string){
+  /*
+  getContextRoot(pathname: string){
     var idx:number = pathname.indexOf("/", 1);
     return idx>0 ? pathname.substring(0, idx):"/";
   }
+  */
 
   updateHero () {
  

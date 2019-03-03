@@ -13,11 +13,13 @@ import {AssetEditComponent} from './asset-edit/asset-edit.component';
 const routes: Routes = [
   { path: 'login', component:LoginComponent },
   //{ path: '', component: HeroesComponent, canActivate: [AuthGuard]},
-  { path: 'heroes',component: HeroesComponent, canActivate: [AuthGuard] },
+  { path: 'heroes',component: HeroesComponent, canActivate: [AuthGuard]  },
   { path: 'emp-list', component: EmpListComponent, canActivate: [AuthGuard] },
   { path: 'atr-edit',  component: AtrEditComponent, canActivate: [AuthGuard]},
   { path: 'asset-type-edit', component: AssetTypeEditComponent, canActivate: [AuthGuard]},
   { path: 'asset-edit', component: AssetEditComponent, canActivate: [AuthGuard]},
+  //{ path: 'user-picker', redirectTo:'/user-picker'},
+  { path: 'picker', loadChildren:'./module/shared-module/shared-module.module#SharedModule' },
   //{ path: 'sample/body', component: SampleBodyComponent },
   //{ path: '**', redirectTo: '404'},
 ];
@@ -27,7 +29,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],
-  //imports: [RouterModule.forChild([])],
   exports:[RouterModule],
   /*
   providers: [ 
