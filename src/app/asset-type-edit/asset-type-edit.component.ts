@@ -14,8 +14,7 @@ import {Util} from '../util/Util';
 export class AssetTypeEditComponent implements OnInit {
   //編輯區塊資料
   assetTypeVO:AssetTypeVO={};
-  //屬性下拉選單資料
-  atrVOs:AtrVOiface[]=[{}];
+  
   assetTypeVOs:AssetTypeVO[]=[{}];
   msg:string="歡迎";
   ctrlUrl='/api/AssetTypeCtrl';
@@ -25,12 +24,6 @@ export class AssetTypeEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataService.postJson("/api/AtrCtrl/queryAtrList.do").
-                      subscribe((carr:Carrier)=>{
-                                  
-                                  this.atrVOs = carr.attributeMap["atrList"];
-                                  //this.atrVOs=artVOArray;
-                              },error => console.log(error));
     this.queryAssetTypeList();
   }
 

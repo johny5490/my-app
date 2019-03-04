@@ -12,9 +12,13 @@ import { Carrier} from '../dataExchange/Carrier';
 })
 export class AssetEditComponent implements OnInit {
   ctrlUrl = "/api/AssetCtrl";
-  msg:string='歡迎';
+  msg:string="歡迎";
+  msg_qry:string="歡迎";
   assetVO:AssetVO = {};
   assetTypeVOs:AssetTypeVO[]=[{}];
+
+  assetVO_qry:AssetVO ={};
+  assetVOs:AssetVO[];
 
   show=0;
 
@@ -78,5 +82,14 @@ export class AssetEditComponent implements OnInit {
   onPick(user){
     
     console.log("user=" + user.userId + "," + user.userName);
+  }
+
+  copyToEdit(assetVO:AssetVO){      
+    //clone Object
+    this.assetVO = JSON.parse(JSON.stringify(assetVO));;
+  }
+
+  fuzzyQry(){
+    
   }
 }

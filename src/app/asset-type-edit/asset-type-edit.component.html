@@ -1,30 +1,10 @@
   <div style="overflow:auto; height:200px" class="myBox" >
  
-  <p-table [value]="assetTypeVOs" [style]="{width:'300%'}">
+  <p-table [value]="assetTypeVOs" [style]="{width:'100%'}">
       <ng-template pTemplate="header">
         <tr>
           <th>資產種類代碼</th>
           <th>資產種類名稱</th>
-          <th>屬性代碼</th>
-          <th>屬性值</th>
-          <th>屬性代碼2</th>
-          <th>屬性值2</th>
-          <th>屬性代碼3</th>
-          <th>屬性值3</th>
-          <th>屬性代碼4</th>
-          <th>屬性值4</th>
-          <th>屬性代碼5</th>
-          <th>屬性值5</th>
-          <th>屬性代碼6</th>
-          <th>屬性值6</th>
-          <th>屬性代碼7</th>
-          <th>屬性值7</th>
-          <th>屬性代碼8</th>
-          <th>屬性值8</th>
-          <th>屬性代碼9</th>
-          <th>屬性值9</th>
-          <th>屬性代碼10</th>
-          <th>屬性值10</th>
           <th>新增人員</th>
           <th>新增日期</th>
           <th>修改人員</th>
@@ -35,26 +15,6 @@
          <tr  (click)="copyToEdit(assetTypeVO)" style="cursor: pointer;">
           <td>{{assetTypeVO.assetTypeId}}</td>
           <td>{{assetTypeVO.assetTypeName}}</td>
-          <td>{{assetTypeVO.atrId}}</td>
-          <td>{{assetTypeVO.atrVal}}</td>
-          <td>{{assetTypeVO.atrId2}}</td>
-          <td>{{assetTypeVO.atrVal2}}</td>
-          <td>{{assetTypeVO.atrId3}}</td>
-          <td>{{assetTypeVO.atrVal3}}</td>
-          <td>{{assetTypeVO.atrId4}}</td>
-          <td>{{assetTypeVO.atrVal4}}</td>
-          <td>{{assetTypeVO.atrId5}}</td>
-          <td>{{assetTypeVO.atrVal5}}</td>
-          <td>{{assetTypeVO.atrId6}}</td>
-          <td>{{assetTypeVO.atrVal6}}</td>
-          <td>{{assetTypeVO.atrId7}}</td>
-          <td>{{assetTypeVO.atrVal7}}</td>
-          <td>{{assetTypeVO.atrId8}}</td>
-          <td>{{assetTypeVO.atrVal8}}</td>
-          <td>{{assetTypeVO.atrId9}}</td>
-          <td>{{assetTypeVO.atrVal9}}</td>
-          <td>{{assetTypeVO.atrId10}}</td>
-          <td>{{assetTypeVO.atrVal10}}</td>
           <td>{{assetTypeVO.createUser}}</td>
           <td>{{assetTypeVO.createDate|date:'yyyy-MM-dd HH:mm:ss'}}</td>
           <td>{{assetTypeVO.updateUser}}</td>
@@ -75,67 +35,6 @@
     <div class="myBox">
         資產種類代碼：<input type="text" pInputText [(ngModel)]="assetTypeVO.assetTypeId"/>
         資產種類代碼名稱：<input type="text" pInputText [(ngModel)]="assetTypeVO.assetTypeName"/>
-    </div>
-    <div class="myBox">  
-        屬性代碼：<select [(ngModel)]="assetTypeVO.atrId" class="mySelect">
-                    <option value="">請選擇</option>
-                    <option *ngFor="let atrVO of atrVOs" [value]="atrVO.atrId">{{atrVO.atrName}}</option>
-                </select>
-        屬性值：<input type="text" pInputText [(ngModel)]="assetTypeVO.atrVal"/>
-        屬性代碼2：<select [(ngModel)]="assetTypeVO.atrId2" class="mySelect">
-                    <option value="">請選擇</option>
-                    <option *ngFor="let atrVO of atrVOs" [value]="atrVO.atrId">{{atrVO.atrName}}</option>
-                </select>
-        屬性值2：<input type="text" pInputText [(ngModel)]="assetTypeVO.atrVal2"/>
-    </div>
-    <div class="myBox">
-        屬性代碼3：<select [(ngModel)]="assetTypeVO.atrId3" class="mySelect">
-                    <option value="">請選擇</option>
-                    <option *ngFor="let atrVO of atrVOs" [value]="atrVO.atrId">{{atrVO.atrName}}</option>
-                </select>
-        屬性值3：<input type="text" pInputText [(ngModel)]="assetTypeVO.atrVal3"/>
-        屬性代碼4：<select [(ngModel)]="assetTypeVO.atrId4" class="mySelect">
-                    <option value="">請選擇</option>
-                    <option *ngFor="let atrVO of atrVOs" [value]="atrVO.atrId">{{atrVO.atrName}}</option>
-                </select>
-        屬性值4：<input type="text" pInputText [(ngModel)]="assetTypeVO.atrVal4"/>
-    </div>
-    <div class="myBox">
-        屬性代碼5：<select [(ngModel)]="assetTypeVO.atrId5" class="mySelect">
-                    <option value="">請選擇</option>
-                    <option *ngFor="let atrVO of atrVOs" [value]="atrVO.atrId">{{atrVO.atrName}}</option>
-                </select>
-        屬性值5：<input type="text" pInputText [(ngModel)]="assetTypeVO.atrVal5"/>
-
-        屬性代碼6：<select [(ngModel)]="assetTypeVO.atrId6" class="mySelect">
-                    <option value="">請選擇</option>
-                    <option *ngFor="let atrVO of atrVOs" [value]="atrVO.atrId">{{atrVO.atrName}}</option>
-                </select>
-        屬性值6：<input type="text" pInputText [(ngModel)]="assetTypeVO.atrVal6"/>
-    </div>
-    <div class="myBox">
-        屬性代碼7：<select [(ngModel)]="assetTypeVO.atrId7" class="mySelect">
-                    <option value="">請選擇</option>
-                    <option *ngFor="let atrVO of atrVOs" [value]="atrVO.atrId">{{atrVO.atrName}}</option>
-                </select>
-        屬性值7：<input type="text" pInputText [(ngModel)]="assetTypeVO.atrVal7"/>
-        屬性代碼8：<select [(ngModel)]="assetTypeVO.atrId8" class="mySelect">
-                    <option value="">請選擇</option>
-                    <option *ngFor="let atrVO of atrVOs" [value]="atrVO.atrId">{{atrVO.atrName}}</option>
-                </select>
-        屬性值8：<input type="text" pInputText [(ngModel)]="assetTypeVO.atrVal8"/>
-    </div>
-    <div class="myBox">
-        屬性代碼9：<select [(ngModel)]="assetTypeVO.atrId9" class="mySelect">
-                    <option value="">請選擇</option>
-                    <option *ngFor="let atrVO of atrVOs" [value]="atrVO.atrId">{{atrVO.atrName}}</option>
-                </select>
-        屬性值9：<input type="text" pInputText [(ngModel)]="assetTypeVO.atrVal9"/>
-        屬性代碼10：<select [(ngModel)]="assetTypeVO.atrId10" class="mySelect">
-                    <option value="">請選擇</option>
-                    <option *ngFor="let atrVO of atrVOs" [value]="atrVO.atrId">{{atrVO.atrName}}</option>
-                </select>
-        屬性值10：<input type="text" pInputText [(ngModel)]="assetTypeVO.atrVal10"/>
     </div>
    </h4>
   </p-panel>
