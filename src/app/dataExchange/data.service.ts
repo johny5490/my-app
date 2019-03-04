@@ -48,8 +48,7 @@ export class DataService {
               this.removePort(window.location.host) + 
               DataService.API_SERVER_CONTEXT ;
     
-    console.log("url=" + url);
-
+    //console.log("url=" + url);
     return url;
   }
 

@@ -42,10 +42,8 @@ export class AtrEditComponent implements OnInit {
       this.dataService.createAtr(this.atrVO).
           subscribe((carrier:Carrier) => {
             
-              var msg = carrier.attributeMap["msg"];
-              this.msg = msg;
-              console.info("carrier.msg=" + msg);
-              this.cleanAndQryAtrList();
+            this.msg = carrier.attributeMap["msg"];
+            this.cleanAndQryAtrList();
           }, error => console.log("error=" + error));
       
   }

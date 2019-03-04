@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
-
+import {DataService} from '../../../../dataExchange/data.service';
 
 @Component({
   selector: 'app-user-picker',
@@ -19,7 +19,7 @@ export class UserPickerComponent implements OnInit {
 
   @Output() pick =new EventEmitter();
 
-  constructor() { }
+  constructor(private dataService:DataService) { }
 
   ngOnInit() {
     //setInterval(()=>{console.log("visible=" + this.visible )}, 3000);

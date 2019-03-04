@@ -90,6 +90,10 @@ export class AssetEditComponent implements OnInit {
   }
 
   fuzzyQry(){
-    
+    this.dataService.postJson(this.ctrlUrl+"/fuzzyQry.do",this.assetVO_qry).
+                    subscribe((carrier:Carrier)=>{
+                      this.msg_qry = carrier.attributeMap["msg"];   
+                      this.assetVOs = carrier.attributeMap["assetVOs"] ;       
+                    },error=>console.log("error=" + error));
   }
 }
