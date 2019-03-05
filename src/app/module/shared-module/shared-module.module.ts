@@ -4,6 +4,7 @@ import { UserPickerComponent } from './cpt/user-picker/user-picker.component';
 import {SharedModuleRouting} from './shared-module-routing.module';
 import { PickerComponent } from './cpt/picker/picker.component';
 import {DialogModule} from 'primeng/dialog';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     PickerComponent,
@@ -11,6 +12,7 @@ import {DialogModule} from 'primeng/dialog';
   imports: [
     CommonModule,
     DialogModule,
+    FormsModule,
     SharedModuleRouting
   ],
   exports:[UserPickerComponent]

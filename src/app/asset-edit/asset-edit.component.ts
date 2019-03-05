@@ -20,12 +20,13 @@ export class AssetEditComponent implements OnInit {
   assetVO_qry:AssetVO ={};
   assetVOs:AssetVO[];
 
-  show=0;
-
+  visible = false;
+ 
   constructor(private dataService:DataService) { }
 
   ngOnInit() {
     this.queryAssetTypeList();
+    
   }
 
   queryAssetTypeList(){
@@ -70,18 +71,20 @@ export class AssetEditComponent implements OnInit {
   }
 
   showUserPicker(){
-    //window.open("picker/user-picker","pickWin");
-    
-    this.show+=1;
-    if(this.show>2){
-      this.show=1;
-    }
-    //console.log("parent show=" + this.show);
+   this.visible = true;
+   /*
+   this.dataService.eventbus.emit({
+      type:3
+   });
+   */
   }
 
   onPick(user){
-    
     console.log("user=" + user.userId + "," + user.userName);
+  }
+  
+  noPick(){
+    console.log("no Pick");
   }
 
   copyToEdit(assetVO:AssetVO){      

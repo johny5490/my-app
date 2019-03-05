@@ -8,30 +8,43 @@ import {DataService} from '../../../../dataExchange/data.service';
 })
 export class UserPickerComponent implements OnInit {
   
-  _show=false;
+  @Input() visible:boolean;
+  @Output() visibleChange =new EventEmitter();
+  
+  @Output() pick = new EventEmitter();
+  @Output() noPick = new EventEmitter();
 
+  constructor(private dataService:DataService) {
+    /*
+    dataService.eventbus.subscribe(event=>{
+        if(event.type ==3){
+            console.log("接收event 3");
+            this.visible=true;
+        }
+    });
+    */
 
-  @Input()
-  set show(show){
-    //console.log("show call");
-    this._show=show==0?false:true;
-  }
-
-  @Output() pick =new EventEmitter();
-
-  constructor(private dataService:DataService) { }
+   }
 
   ngOnInit() {
-    //setInterval(()=>{console.log("visible=" + this.visible )}, 3000);
+    
   }
 
   confirmOK(){
     var pickedUser = {userId:"A123",userName:"姓名"};
     this.pick.emit(pickedUser);
-
-    this._show=false;
+    this.visible=false;
+    this.visibleChange.emit(this.visible);
   }
+
   cancel(){
-    this._show=false;
+    this.noPick.emit();
+    this.visible=false;
+    this.visibleChange.emit(this.visible)
+  }
+
+  onHide(){
+    this.noPick.emit();
+    this.visibleChange.emit(this.visible);
   }
 }

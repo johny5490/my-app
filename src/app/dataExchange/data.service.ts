@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable,EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import {} from 'rxjs/add/operator/toPromise';
@@ -18,6 +18,8 @@ import { LoginUtil } from '../util/LoginUtil';
 })
 
 export class DataService {
+  
+  public eventbus: EventEmitter<any> = new EventEmitter<any>();
 
   static API_SERVER_CONTEXT = "/OA";
   
