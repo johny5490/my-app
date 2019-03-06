@@ -31,20 +31,19 @@ export class UserPickerComponent implements OnInit {
   }
 
   confirmOK(){
-    var pickedUser = {userId:"A123",userName:"姓名"};
-    this.pick.emit(pickedUser);
     this.visible=false;
-    this.visibleChange.emit(this.visible);
   }
 
   cancel(){
-    this.noPick.emit();
     this.visible=false;
-    this.visibleChange.emit(this.visible)
   }
 
   onHide(){
+    //有選擇資料時觸發pick沒有則是noPick
+    var pickedUser = {userId:"A123",userName:"姓名"};
+    this.pick.emit(pickedUser);
     this.noPick.emit();
+    
     this.visibleChange.emit(this.visible);
   }
 }
