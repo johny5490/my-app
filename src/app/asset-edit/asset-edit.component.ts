@@ -19,8 +19,6 @@ export class AssetEditComponent implements OnInit {
 
   assetVO_qry:AssetVO ={};
   assetVOs:AssetVO[];
-
-  visible = false;
  
   constructor(private dataService:DataService) { }
 
@@ -37,6 +35,7 @@ export class AssetEditComponent implements OnInit {
   }
 
   create(){
+    
     if(!Util.showConfirmMsg("新增")){
       return; 
     }
@@ -70,22 +69,6 @@ export class AssetEditComponent implements OnInit {
                     },error=>console.log("error=" + error));
   }
 
-  showUserPicker(){
-   this.visible = true;
-   /*
-   this.dataService.eventbus.emit({
-      type:3
-   });
-   */
-  }
-
-  onPick(user){
-    console.log("user=" + user.userId + "," + user.userName);
-  }
-  
-  noPick(){
-    console.log("no Pick");
-  }
 
   copyToEdit(assetVO:AssetVO){      
     //clone Object

@@ -9,9 +9,7 @@
                         <option value="">請選擇</option>
                         <option *ngFor="let assetType of assetTypeVOs" [value]="assetType.assetTypeId">{{assetType.assetTypeName}}</option>
                     </select><b style="color: red">*</b>
-        保管人：<input type="text" pInputText [(ngModel)]="assetVO_qry.keeper"/>
-        <button pButton type="button" icon="pi pi-user" (click)="showUserPicker()"></button>
-        <b style="color: red">*</b>
+        保管人：<app-user-picker [(value)]="assetVO_qry.keeper"></app-user-picker>
       </div>
       <div class="myPaddingBottom">
       成本：<input type="text"  pInputText [(ngModel)]="assetVO_qry.cost" />&nbsp;&nbsp;
@@ -63,8 +61,9 @@
                           <option value="">請選擇</option>
                           <option *ngFor="let assetType of assetTypeVOs" [value]="assetType.assetTypeId">{{assetType.assetTypeName}}</option>
                       </select><b style="color: red">*</b>
-          保管人：<input type="text" pInputText [(ngModel)]="assetVO.keeper"/><button pButton type="button" icon="pi pi-user" (click)="showUserPicker(userPikcer)"></button><b style="color: red">*</b>
-                <app-user-picker (pick)="onPick($event)" (noPick)="noPick()" [(visible)]="visible" ></app-user-picker>
+          保管人：<!--<input type="text" pInputText [(ngModel)]="assetVO.keeper"/>-->
+                 <app-user-picker [(value)]="assetVO.keeper"></app-user-picker>
+                 <b style="color: red">*</b>
         </div>
         <div >
         成本：<input type="text"  pInputText [(ngModel)]="assetVO.cost" />&nbsp;&nbsp;

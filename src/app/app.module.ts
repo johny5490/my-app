@@ -15,15 +15,15 @@ import {AccordionModule} from 'primeng/accordion';
 import {ButtonModule} from 'primeng/button';
 import {MenubarModule} from 'primeng/menubar';
 import {PanelMenuModule} from 'primeng/panelmenu';
-import { EmpListComponent } from './emp-list/emp-list.component';
+import {EmpListComponent } from './emp-list/emp-list.component';
 import {TableModule} from 'primeng/table';
-import { AtrEditComponent } from './atr-edit/atr-edit.component';
+import {AtrEditComponent } from './atr-edit/atr-edit.component';
 import {PanelModule} from 'primeng/panel';
 import {InputTextModule} from 'primeng/inputtext';
-import { AssetTypeEditComponent } from './asset-type-edit/asset-type-edit.component';
-import { LoginComponent } from './login/login.component';
+import {AssetTypeEditComponent } from './asset-type-edit/asset-type-edit.component';
+import {LoginComponent } from './login/login.component';
 import {AuthGuard} from './AuthGuard';
-import { AssetEditComponent } from './asset-edit/asset-edit.component';
+import {AssetEditComponent } from './asset-edit/asset-edit.component';
 import {SharedModule} from './module/shared-module/shared-module.module';
 
 @NgModule({

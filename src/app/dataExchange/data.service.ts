@@ -19,7 +19,6 @@ import { LoginUtil } from '../util/LoginUtil';
 
 export class DataService {
   
-  public eventbus: EventEmitter<any> = new EventEmitter<any>();
 
   static API_SERVER_CONTEXT = "/OA";
   

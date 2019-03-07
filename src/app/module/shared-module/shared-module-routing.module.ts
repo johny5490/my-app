@@ -6,7 +6,7 @@ import {UserPickerComponent} from './cpt/user-picker/user-picker.component';
 
 const routes: Routes= [
     
-    {path: 'user-picker', component:UserPickerComponent,outlet:'popup' },
+    //{path: 'user-picker', component:UserPickerComponent,outlet:'popup' },
 ];
 
 @NgModule({

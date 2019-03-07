@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
 import {DataService} from '../../../../dataExchange/data.service';
 
+
 @Component({
   selector: 'app-user-picker',
   templateUrl: './user-picker.component.html',
@@ -8,21 +9,20 @@ import {DataService} from '../../../../dataExchange/data.service';
 })
 export class UserPickerComponent implements OnInit {
   
-  @Input() visible:boolean;
-  @Output() visibleChange =new EventEmitter();
-  
-  @Output() pick = new EventEmitter();
-  @Output() noPick = new EventEmitter();
+  //@Input() visible:boolean;
+  //@Output() visibleChange = new EventEmitter();
+
+  visible:boolean;
+
+  @Input() value:string;
+  @Output() valueChange = new EventEmitter();
+
+  //@Output() pick = new EventEmitter();
+  //@Output() noPick = new EventEmitter();
+
+  selectValue:string;
 
   constructor(private dataService:DataService) {
-    /*
-    dataService.eventbus.subscribe(event=>{
-        if(event.type ==3){
-            console.log("接收event 3");
-            this.visible=true;
-        }
-    });
-    */
 
    }
 
@@ -30,14 +30,14 @@ export class UserPickerComponent implements OnInit {
     
   }
 
-  confirmOK(){
+  pick(){
     this.visible=false;
+    this.value=this.selectValue;
+    this.valueChange.emit(this.value);
   }
 
-  cancel(){
-    this.visible=false;
-  }
 
+  /*
   onHide(){
     //有選擇資料時觸發pick沒有則是noPick
     var pickedUser = {userId:"A123",userName:"姓名"};
@@ -45,5 +45,10 @@ export class UserPickerComponent implements OnInit {
     this.noPick.emit();
     
     this.visibleChange.emit(this.visible);
+    this.valueChange.emit(this.value);
+  }
+  */
+  showUserPicker(){
+    this.visible = true;
   }
 }
