@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
 import {DataService} from '../../../../dataExchange/data.service';
-
+import {Carrier} from '../../../../dataExchange/Carrier';
+import {LoginUtil} from '../../../../util/LoginUtil';
 
 @Component({
   selector: 'app-user-picker',
@@ -8,31 +9,35 @@ import {DataService} from '../../../../dataExchange/data.service';
   styleUrls: ['./user-picker.component.css']
 })
 export class UserPickerComponent implements OnInit {
-  
-  //@Input() visible:boolean;
-  //@Output() visibleChange = new EventEmitter();
-
-  visible:boolean;
-
+  ctrlUrl = "/api/EmpCtrl";
   @Input() value:string;
   @Output() valueChange = new EventEmitter();
 
-  //@Output() pick = new EventEmitter();
-  //@Output() noPick = new EventEmitter();
-
-  selectValue:string;
+  visible:boolean;
+  selectDept:string;
+  selectEmp:string;
+  deptVOs:DeptVO[];
+  empVOs:EmpVO[];
 
   constructor(private dataService:DataService) {
 
-   }
-
-  ngOnInit() {
-    
   }
 
-  pick(){
-    this.visible=false;
-    this.value=this.selectValue;
+  ngOnInit() {
+    this.dataService.postJson(this.ctrlUrl+"/qryAllDept.do").subscribe((carrier:Carrier)=>{
+          this.deptVOs = carrier.attributeMap["deptList"];
+    });
+
+    var deptNo = LoginUtil.getLoginUser().deptNo;
+
+    this.dataService.postJson(this.ctrlUrl+"/qryEmp.do", deptNo).subscribe((carrier:Carrier)=>{
+          this.empVOs = carrier.attributeMap["empList"];
+    });
+  }
+
+  pickDept(){
+    //this.visible=false;
+    this.value=this.selectDept;
     this.valueChange.emit(this.value);
   }
 
@@ -51,4 +56,14 @@ export class UserPickerComponent implements OnInit {
   showUserPicker(){
     this.visible = true;
   }
+}
+
+export class DeptVO{
+  deptNo:string;
+  deptName:string;
+}
+
+export class EmpVO{
+  userno:string;
+  cname:string;
 }
