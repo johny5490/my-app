@@ -117,7 +117,12 @@ export class DataService {
     return this.http.post<Carrier>(this.getUrl() +'/api/AtrCtrl/update.do',JSON.stringify(atrVO), this.genHttpOptions());
   }
 
+  //純字串使用轉JASON會被加上雙引號
   postJson(url:string, data?:any){
     return this.http.post(this.getUrl() + url, JSON.stringify(data), this.genHttpOptions());
+  }
+
+  postString(url:string, data?:any){
+    return this.http.post(this.getUrl() + url, data, this.genHttpOptions());
   }
 }
