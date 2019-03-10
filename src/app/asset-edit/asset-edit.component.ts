@@ -19,7 +19,8 @@ export class AssetEditComponent implements OnInit {
 
   assetVO_qry:AssetVO ={};
   assetVOs:AssetVO[];
- 
+  
+
   constructor(private dataService:DataService) { }
 
   ngOnInit() {

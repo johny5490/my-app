@@ -61,8 +61,7 @@
                           <option value="">請選擇</option>
                           <option *ngFor="let assetType of assetTypeVOs" [value]="assetType.assetTypeId">{{assetType.assetTypeName}}</option>
                       </select><b style="color: red">*</b>
-          保管人：<!--<input type="text" pInputText [(ngModel)]="assetVO.keeper"/>-->
-                 <app-user-picker [(value)]="assetVO.keeper"></app-user-picker>
+          保管人：<app-user-picker [(value)]="assetVO.keeper"></app-user-picker>
                  <b style="color: red">*</b>
         </div>
         <div >
