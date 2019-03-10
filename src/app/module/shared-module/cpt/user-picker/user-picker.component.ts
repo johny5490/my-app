@@ -24,27 +24,11 @@ export class UserPickerComponent implements OnInit {
   empVOs:EmpVO[];
 
   constructor(private dataService:DataService) {
-    this.dataService.postJson(this.ctrlUrl+"/qryAllDept.do").subscribe((carrier:Carrier)=>{
-        this.deptVOs = carrier.attributeMap["deptList"];
-    });
+    
   }
 
   ngOnInit() {
-    var loginUserVO = LoginUtil.getLoginUser();
-   
-    if(this.value!=null && this.value!=undefined){
-        //使用者輸入欄已有值時，預設將使用者選單選到該選項
-        this.selectEmp=this.value;
-    }else{
-      this.qryEmp(loginUserVO.deptNo).subscribe((carrier:Carrier)=>{
-          this.empVOs = carrier.attributeMap["empList"];
-          //使用者輸入欄無值時，選單預設選到為登入者的部門和職鯿
-          this.selectDept=loginUserVO.deptNo;
-          this.selectEmp=loginUserVO.userId;
-      });
-        
-    }
-    
+    this.queryDeptVOs();
   }
 
   qryEmp(deptNo:string){
@@ -79,7 +63,35 @@ export class UserPickerComponent implements OnInit {
   }
   */
   showUserPicker(){
+    var loginUserVO = LoginUtil.getLoginUser();
+   
+    if(this.value!=null && this.value!=undefined){
+        //使用者輸入欄已有值時，預設將使用者選單選到該選項,部門選單則不選到任何值
+        this.selectDept="";
+        this.qryEmpBySameDept(this.value);
+    }else{
+      this.qryEmp(loginUserVO.deptNo).subscribe((carrier:Carrier)=>{
+          this.empVOs = carrier.attributeMap["empList"];
+          //使用者輸入欄無值時，選單預設選到為登入者的部門和職鯿
+          this.selectDept=loginUserVO.deptNo;
+          this.qryEmpBySameDept(loginUserVO.userId);
+      });
+    }
+
     this.visible = true;
+  }
+
+  qryEmpBySameDept(empNo:string){
+    this.dataService.postString(this.ctrlUrl+"/qryEmpBySameDept.do", empNo).subscribe((carrier:Carrier)=>{
+      this.empVOs = carrier.attributeMap["empList"];
+      this.selectEmp=empNo;      
+    });
+  }
+
+  queryDeptVOs(){
+    this.dataService.postJson(this.ctrlUrl+"/qryAllDept.do").subscribe((carrier:Carrier)=>{
+      this.deptVOs = carrier.attributeMap["deptList"];
+    });
   }
 }
 
@@ -91,4 +103,5 @@ export class DeptVO{
 export class EmpVO{
   USERNO:string;
   CNAME:string;
+  DEPNO:string;
 }

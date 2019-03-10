@@ -3,10 +3,14 @@
 <p-dialog header="使用者挑選" [(visible)]="visible"   [responsive]="true" 
         [style]="{width: '350px', minWidth: '300px'}"  [maximizable]="true" 
         [baseZIndex]="10000" >
+    <div class="myBox">    
     <select  [(ngModel)]="selectDept" size="20" >
         <option *ngFor="let deptVO of deptVOs" [value]="deptVO.deptNo" (click)="pickDept()">{{deptVO.deptNo + ' '+ deptVO.deptName}}</option>
     </select>
+    </div>
+    <div class="myBox">
     <select  [(ngModel)]="selectEmp" size="20">
         <option *ngFor="let empVO of empVOs" [value]="empVO.USERNO" (click)="pickUser(empVO.CNAME)">{{empVO.CNAME}}</option>
     </select>
+    </div>
 </p-dialog>
