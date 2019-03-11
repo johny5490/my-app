@@ -3,6 +3,7 @@ export class AssetVO{
     assetTypeId?:string;
 	keeper?:string;
 	cost? :number;
+	costE? :number;
 	buyContractNo?:string;
 	remark?:string;
 	createUser? :string;

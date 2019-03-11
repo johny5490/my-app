@@ -4,15 +4,15 @@
         訊息：{{msg_qry}}
     </p-header>
     <div class="myPaddingBottom">
-        資產編號：<input type="text" pInputText [(ngModel)]="assetVO_qry.assetId"  /><b style="color: red">*</b>
+        資產編號：<input type="text" pInputText [(ngModel)]="assetVO_qry.assetId"  />
         資產種類代碼：<select [(ngModel)]="assetVO_qry.assetTypeId" class="mySelect">
                         <option value="">請選擇</option>
                         <option *ngFor="let assetType of assetTypeVOs" [value]="assetType.assetTypeId">{{assetType.assetTypeName}}</option>
-                    </select><b style="color: red">*</b>
+                    </select>
         保管人：<app-user-picker [(value)]="assetVO_qry.keeper"></app-user-picker>
       </div>
       <div class="myPaddingBottom">
-      成本：<input type="text"  pInputText [(ngModel)]="assetVO_qry.cost" />&nbsp;&nbsp;
+      成本：<input type="text"  pInputText [(ngModel)]="assetVO_qry.cost" />~<input type="text"  pInputText [(ngModel)]="assetVO_qry.costE" />
       採購案號：<input type="text" pInputText [(ngModel)]="assetVO_qry.buyContractNo"/>
       備註：<input type="text" pInputText [(ngModel)]="assetVO_qry.remark"/>
     </div>
@@ -47,6 +47,8 @@
         </ng-template>
       </p-table>
 </p-panel>
+<p-tabView>
+  <p-tabPanel header="資產基本資料">
 <p-panel  >
   <p-header >
      <button  pButton label="新增" (click)="create()"></button>&nbsp;
@@ -72,3 +74,11 @@
       
   </h4> 
 </p-panel>
+</p-tabPanel>
+ <p-tabPanel header="資產屬性關係內容">
+    <app-asset-atr-rel></app-asset-atr-rel>
+</p-tabPanel>
+<p-tabPanel header="資產配件">
+  222
+</p-tabPanel>
+</p-tabView>
