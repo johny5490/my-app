@@ -37,4 +37,11 @@ export class Util{
                   then(()=>
                        router.navigate([url]));
     }
+
+    static hasValue(val){
+        if(val != undefined && val != null && val!=""){
+          return true;
+        }
+        return false;
+    }
 }

@@ -27,7 +27,7 @@ import {AssetEditComponent } from './asset-edit/asset-edit.component';
 import {SharedModule} from './module/shared-module/shared-module.module';
 import {TabViewModule} from 'primeng/tabview';
 import { AssetAtrRelComponent } from './asset-atr-rel/asset-atr-rel.component';
-
+import {CheckboxModule} from 'primeng/checkbox';
 @NgModule({
   declarations: [
     LoginComponent,
@@ -55,6 +55,7 @@ import { AssetAtrRelComponent } from './asset-atr-rel/asset-atr-rel.component';
     PanelModule,
     InputTextModule,
     TabViewModule,
+    CheckboxModule,
     SharedModule,
     AppRoutingModule,
   ],

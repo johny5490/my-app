@@ -6,8 +6,29 @@
      訊息：{{msg}}
   </p-header>
   <h4>
-      資產編號：<input type="text" pInputText [(ngModel)]="assetAtrRelVO.assetId"/>
-      屬性代碼：<input type="text" pInputText [(ngModel)]="assetAtrRelVO.atrId"/>
+      資產編號：{{assetId}}
   </h4>
-   
+  <p-table [(value)]="assetAtrRelVOs" autoLayout="true" >
+      <ng-template pTemplate="header">
+          <tr>
+            <th>選取</th>
+            <th>屬性代碼</th>
+            <th>屬性內容</th>
+          </tr>
+      </ng-template>
+      
+      <ng-template pTemplate="body" let-assetAtrRelVO let-rowIndex="rowIndex">
+          <tr (click)="genEmptyRow(rowIndex)">
+              <td ><p-checkbox  value="1"  [(ngModel)]="assetAtrRelVO.checked"></p-checkbox></td>
+              <td>
+                  <select [(ngModel)]="assetAtrRelVO.atrId" class="mySelect">
+                      <option value="">請選擇</option>
+                      <option *ngFor="let atrVO of atrVOs" [value]="atrVO.atrId">{{atrVO.atrName}}</option>
+                  </select>
+                
+              <td><input type="text"[(ngModel)]="assetAtrRelVO.atrVal" /></td>
+          </tr>    
+      </ng-template>
+      
+  </p-table>
 </p-panel>
