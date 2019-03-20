@@ -5,7 +5,7 @@ export class EmpVO{
     depNo: string;
     postName: string;
     cellphone:string;
-    ext: string;
+    phone: string;
     directNo:string;
     email:string;
 }
