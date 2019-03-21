@@ -47,7 +47,7 @@
         </ng-template>
       </p-table>
 </p-panel>
-<p-tabView>
+<p-tabView (onChange)="showA($event)">
   <p-tabPanel header="資產基本資料">
 <p-panel  >
   <p-header >
@@ -75,8 +75,8 @@
   </h4> 
 </p-panel>
 </p-tabPanel>
- <p-tabPanel header="資產屬性關係內容">
-    <app-asset-atr-rel></app-asset-atr-rel>
+ <p-tabPanel header="資產屬性關係內容" >
+    <app-asset-atr-rel [assetId]="assetVO.assetId"></app-asset-atr-rel>
 </p-tabPanel>
 <p-tabPanel header="資產配件">
   222

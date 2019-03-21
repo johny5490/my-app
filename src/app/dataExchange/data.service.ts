@@ -18,7 +18,6 @@ import { LoginUtil } from '../util/LoginUtil';
 })
 
 export class DataService {
-  
 
   static API_SERVER_CONTEXT = "/OA";
   

@@ -4,6 +4,7 @@ import { DataService} from '../dataExchange/data.service';
 import { Carrier} from '../dataExchange/Carrier';
 import {AssetAtrRelVO} from '../vo/AssetAtrRelVO';
 import {AtrVOiface} from '../vo/AtrVOiface';
+import { AlertPromise } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-asset-atr-rel',
@@ -15,8 +16,14 @@ export class AssetAtrRelComponent implements OnInit {
   assetAtrRelVOs:Array<AssetAtrRelVO>=[];
   msg:string="歡迎";
   
+  _assetId:string;
+
   @Input()
-  assetId:string;
+  set assetId(assetId){
+    this._assetId=assetId;
+    //尚未完成，需要查詢資產編號設定了那些屬性值，來update assetAtrRelVOs
+
+  }
 
   //屬性代碼選單
   atrVOs:Array<AtrVOiface>=[];
@@ -44,8 +51,16 @@ export class AssetAtrRelComponent implements OnInit {
   create(){
     
     if(!Util.showConfirmMsg("新增")){
+      
       return; 
     }
+    if( !Util.hasValue(this._assetId)){
+        alert("請先查詢，並點選一筆資產");
+        return ;
+    }
+
+    //尚未完成，只送有勾選的資料，server完成要重查結果，更新assetAtrRelVOs
+    
     /*
     this.dataService.postJson(this.ctrlUrl+"/create.do",this.assetAtrRelVO).
                       subscribe((carrier:Carrier)=>{

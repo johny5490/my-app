@@ -83,4 +83,9 @@ export class AssetEditComponent implements OnInit {
                       this.assetVOs = carrier.attributeMap["assetVOs"] ;       
                     },error=>console.log("error=" + error));
   }
+
+  showA(event){
+    //alert(event.index);
+    
+  }
 }
