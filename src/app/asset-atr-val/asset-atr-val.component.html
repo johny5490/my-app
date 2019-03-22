@@ -1,0 +1,34 @@
+<p-panel  >
+  <p-header >
+     <button  pButton label="新增" [disabled]="btnDisable" (click)="create()"></button>&nbsp;
+     <button  pButton label="修改" [disabled]="btnDisable" (click)="update()"></button>&nbsp;
+     <button  pButton label="刪除" [disabled]="btnDisable" (click)="delete()"></button>&nbsp;
+     訊息：{{msg}}
+  </p-header>
+  <h4>
+      資產編號：{{_assetId}}
+  </h4>
+  <p-table [(value)]="assetAtrValVOs" autoLayout="true" >
+      <ng-template pTemplate="header">
+          <tr>
+            <th>選取</th>
+            <th>屬性代碼<b style="color: red">*</b></th>
+            <th>屬性內容<b style="color: red">*</b></th>
+          </tr>
+      </ng-template>
+      
+      <ng-template pTemplate="body" let-assetAtrValVO let-rowIndex="rowIndex">
+          <tr (click)="genEmptyRow(rowIndex)">
+              <td ><p-checkbox  value="1"  [(ngModel)]="assetAtrValVO.checked"></p-checkbox></td>
+              <td>
+                  <select [(ngModel)]="assetAtrValVO.atrId" class="mySelect">
+                     <!-- <option value="">請選擇</option>-->
+                      <option *ngFor="let atrVO of atrVOs" [value]="atrVO.atrId">{{atrVO.atrName}}</option>
+                  </select>
+                
+              <td><input type="text"[(ngModel)]="assetAtrValVO.atrVal" /></td>
+          </tr>    
+      </ng-template>
+      
+  </p-table>
+</p-panel>

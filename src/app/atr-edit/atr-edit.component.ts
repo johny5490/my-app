@@ -21,13 +21,13 @@ export class AtrEditComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    this.queryAtrList();
+    this.qryAllAtrList();
 
   }
 
-  queryAtrList(){
+  qryAllAtrList(){
   
-    this.dataService.postJson(this.ctrlUrl +"/queryAtrList.do").
+    this.dataService.postJson(this.ctrlUrl +"/qryAllAtrList.do").
           subscribe((carr:Carrier)=>{
                       
                       this.atrVOs=carr.attributeMap["atrList"];
@@ -52,7 +52,7 @@ export class AtrEditComponent implements OnInit {
       //清空內容
       this.atrVO={};
       //重查清單內容
-      this.queryAtrList();
+      this.qryAllAtrList();
   }
 
   update(){
@@ -63,7 +63,7 @@ export class AtrEditComponent implements OnInit {
           subscribe((carrier)=>{
               var msg = carrier.attributeMap["msg"];
               this.msg = msg;
-              this.queryAtrList();
+              this.qryAllAtrList();
           },error=>console.log("error=" + error));
   }
 
