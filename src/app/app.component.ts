@@ -81,10 +81,14 @@ export class AppComponent implements OnInit{
         expanded: true,
         items: [
             {label: '首頁', icon: 'pi pi-fw  pi-home', routerLink: [''] },
-            {label: '通訊錄', icon: 'pi pi-fw pi-users', routerLink: ['/emp-list'] },
-            {label: '轉轉星', icon: 'pi pi-fw pi-spin pi-star-o', routerLink: [''] },
-            {
-              label: '資產管理',
+            {label: '通訊錄管理',expanded: true,  
+             items: [
+                  {label: '通訊錄維護', icon: 'pi pi-fw pi-pencil', command:(event) => {    
+                      Util.routerLinkReload(this.router, '/contact-edit');
+                     } }, 
+                  {label: '通訊錄清單', icon: 'pi pi-fw pi-users', routerLink: ['/emp-list'] }, 
+             ]},
+            {label: '資產管理',
               expanded: true, 
               //icon: 'pi pi-fw pi-plus',
               items: [
@@ -102,7 +106,8 @@ export class AppComponent implements OnInit{
                         }},
                   
               ]
-          },
+            },
+            {label: '功能建置中', icon: 'pi pi-fw pi-spin pi-star-o', routerLink: [''] },
         ]
     },
     

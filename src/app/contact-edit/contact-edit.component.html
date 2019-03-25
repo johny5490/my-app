@@ -1,0 +1,35 @@
+<p-panel  >
+  <p-header >
+      <h4>
+      職工編號：<app-user-picker [(value)]="empNo_qry"></app-user-picker><button  pButton label="查詢" (click)="query()"></button>
+      </h4>
+      <button  pButton label="新增" (click)="create()" [disabled]="createBtnDisable"></button>&nbsp;
+      <button  pButton label="修改" (click)="update()" [disabled]="updateBtnDisable"></button>&nbsp;
+      <button  pButton label="刪除" (click)="delete()" [disabled]="deleteBtnDisable"></button>&nbsp;
+     訊息：{{msg}}
+  </p-header>
+    <h4>
+    <div class="myBox">
+      職工編號：<app-user-picker [(value)]="contactVO.empNo"></app-user-picker>
+      分機：<input type="text" pInputText [(ngModel)]="contactVO.phone"/>
+      手機：<input type="text" pInputText [(ngModel)]="contactVO.cellPhone"/>
+      直播碼：<input type="text" pInputText [(ngModel)]="contactVO.directNo"/>
+    </div>
+    <div class="myBox">
+      Email：<input type="text" pInputText [(ngModel)]="contactVO.contactEmail"/>
+      備用Email：<input type="text" pInputText [(ngModel)]="contactVO.contactEmail2"/>
+      Line：<input type="text" pInputText [(ngModel)]="contactVO.line"/>
+      Skype：<input type="text" pInputText [(ngModel)]="contactVO.skype"/>
+    </div>
+    <div class="myBox">
+      臉書：<input type="text" pInputText [(ngModel)]="contactVO.facebook"/>
+      位置：<input type="text" pInputText [(ngModel)]="contactVO.location"/>
+    </div>
+    <div class="myBox">
+      新增人員：{{contactVO.createUser}}
+      新增日期：{{contactVO.createDate|date:'yyyy-MM-dd HH:mm:ss'}}
+      修改人員：{{contactVO.updateUser}}
+      修改日期：{{contactVO.updateDate|date:'yyyy-MM-dd HH:mm:ss'}}
+    </div>
+  </h4>
+</p-panel>

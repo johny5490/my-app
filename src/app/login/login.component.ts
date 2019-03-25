@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   ctrlUrl = "/open/LoginCtrl";
   userId = "";
   passwd = "";
+  //使用者要轉導的網址
   reqUrl = "";
   constructor(private dataService:DataService, private router:Router, private route:ActivatedRoute) { }
 
@@ -40,7 +41,7 @@ export class LoginComponent implements OnInit {
                           if(this.reqUrl != null && this.reqUrl!=undefined){
                               Util.routerLinkReload(this.router, this.reqUrl);
                           }
-                          
+                          //else可以轉到首頁，但目前沒有首頁
                         }
                 },error => console.log(error)
     );

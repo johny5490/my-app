@@ -27,10 +27,9 @@ export class AssetAtrValComponent implements OnInit {
     if(Util.hasValue(assetId)){
         this._assetId=assetId;
         this.btnDisable=false;
-        //查詢屬性代碼清單
-        this.qryAtrVOs();
-        //查詢資產屬性關係內容
-        this.qryAssetAtrValVOs();
+        
+        this.qryAtrVOsAndAssetAtrValVOs();
+        
     }
     
   }
@@ -54,7 +53,8 @@ export class AssetAtrValComponent implements OnInit {
     
   }
 
-  qryAtrVOs(){
+  qryAtrVOsAndAssetAtrValVOs(){
+    //查詢屬性代碼清單
     this.dataService.postString("/api/AtrCtrl/queryAtrList.do", this._assetId).
     subscribe((carrier:Carrier)=>{
         
@@ -62,6 +62,8 @@ export class AssetAtrValComponent implements OnInit {
             this.msg = carrier.attributeMap["msg"];
         }
         this.atrVOs = carrier.attributeMap["atrList"];
+        //查詢資產屬性關係內容
+        this.qryAssetAtrValVOs();
     },error=>console.log( error));
   }
 

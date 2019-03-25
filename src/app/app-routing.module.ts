@@ -9,6 +9,7 @@ import {AssetTypeEditComponent} from './asset-type-edit/asset-type-edit.componen
 import {LoginComponent} from './login/login.component';
 import {AuthGuard} from './AuthGuard';
 import {AssetEditComponent} from './asset-edit/asset-edit.component';
+import {ContactEditComponent} from './contact-edit/contact-edit.component';
 
 const routes: Routes = [
   { path: 'login', component:LoginComponent },
@@ -18,7 +19,7 @@ const routes: Routes = [
   { path: 'atr-edit',  component: AtrEditComponent, canActivate: [AuthGuard]},
   { path: 'asset-type-edit', component: AssetTypeEditComponent, canActivate: [AuthGuard]},
   { path: 'asset-edit', component: AssetEditComponent, canActivate: [AuthGuard]},
-  //{ path: 'user-picker', redirectTo:'/user-picker'},
+  { path: 'contact-edit', component:ContactEditComponent, canActivate: [AuthGuard]},
   { path: 'picker', loadChildren:'./module/shared-module/shared-module.module#SharedModule' },
   //{ path: 'sample/body', component: SampleBodyComponent },
   //{ path: '**', redirectTo: '404'},
