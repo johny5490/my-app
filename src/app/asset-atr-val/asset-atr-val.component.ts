@@ -25,9 +25,9 @@ export class AssetAtrValComponent implements OnInit {
   @Input()
   set assetId(assetId){
     if(Util.hasValue(assetId)){
+        this.msg="歡迎";
         this._assetId=assetId;
         this.btnDisable=false;
-        
         this.qryAtrVOsAndAssetAtrValVOs();
         
     }

@@ -3,8 +3,8 @@ import { DataService} from '../dataExchange/data.service';
 import { Router } from '@angular/router';
 import {Util} from '../util/Util';
 import {LoginUtil} from '../util/LoginUtil';
-
 import { LoginUserVO } from '../vo/LoginUserVO';
+import {Carrier} from '../dataExchange/Carrier';
 
 @Component({
   selector: 'app-header',
@@ -14,13 +14,43 @@ import { LoginUserVO } from '../vo/LoginUserVO';
 export class HeaderComponent implements OnInit {
   
   loginUserVO:LoginUserVO ;
+  sysTime:Date;
   
+  timeInterval;
+  //每隔1分鐘更新系統時間
+  refreshTime=60000;
+
   constructor(private dataService: DataService, private router: Router) {
-      
+    
     window.addEventListener(LoginUtil.STORAGE_CHG_EVENT, (e) => {
         this.loginUserVO = LoginUtil.getLoginUser();
+        this.refreshSysTime();
     });
-      
+
+    this.refreshSysTime();
+  }
+
+  refreshSysTime(){
+    if(LoginUtil.isLogin()){
+      this.keepGetSysTime();
+    }else{
+      this.sysTime=null;
+      clearInterval(this.timeInterval);
+    }  
+  }
+
+  getSysTime(){
+    this.dataService.postJson("/open/LoginCtrl/getSysTime.do").subscribe((carr:Carrier)=>{
+          this.sysTime = carr.attributeMap["sysTime"];
+    },error => console.log(error));
+  }
+
+  keepGetSysTime(){
+    this.getSysTime();
+    clearInterval(this.timeInterval);
+    this.timeInterval = setInterval(()=>{
+        this.getSysTime();
+    },this.refreshTime);  
   }
 
   ngOnInit() {

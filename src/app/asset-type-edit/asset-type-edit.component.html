@@ -1,4 +1,4 @@
-  <div style="overflow:auto; height:200px" class="myBox" >
+<div style="overflow:auto; height:200px" class="myBox" >
  
   <p-table [value]="assetTypeVOs" [style]="{width:'100%'}">
       <ng-template pTemplate="header">
@@ -22,20 +22,25 @@
         </tr>
       </ng-template>
     </p-table>
- 
-    </div>
-  <p-panel  >
-    <p-header >
-       <button  pButton label="新增" (click)="create()"></button>&nbsp;
-       <button  pButton label="修改" (click)="update()"></button>&nbsp;
-       <button  pButton label="刪除" (click)="delete()"></button>&nbsp;
-       訊息：{{msg}}
-    </p-header>
-    <h4>
-    <div class="myBox">
-        資產種類代碼：<input type="text" pInputText [(ngModel)]="assetTypeVO.assetTypeId"/>
-        資產種類代碼名稱：<input type="text" pInputText [(ngModel)]="assetTypeVO.assetTypeName"/>
-    </div>
-   </h4>
-  </p-panel>
-  
+</div>
+<p-tabView (onChange)="showA($event)">
+  <p-tabPanel header="資產種類基本資料">
+    <p-panel  >
+        <p-header >
+            <button  pButton label="新增" (click)="create()"></button>&nbsp;
+            <button  pButton label="修改" (click)="update()"></button>&nbsp;
+            <button  pButton label="刪除" (click)="delete()"></button>&nbsp;
+            訊息：{{msg}}
+        </p-header>
+        <h4>
+        <div class="myBox">
+          資產種類代碼：<input type="text" pInputText [(ngModel)]="assetTypeVO.assetTypeId"/>
+          資產種類代碼名稱：<input type="text" pInputText [(ngModel)]="assetTypeVO.assetTypeName"/>
+        </div>
+        </h4>
+    </p-panel>
+  </p-tabPanel>
+  <p-tabPanel header="資產種類屬性關係">
+      <app-asset-type-atr-rel-edit></app-asset-type-atr-rel-edit>
+  </p-tabPanel>
+</p-tabView>

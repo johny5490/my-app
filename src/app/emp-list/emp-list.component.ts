@@ -14,7 +14,7 @@ export class EmpListComponent implements OnInit {
   ctrlUrl = "/api/EmpCtrl";
 
   empVOs:EmpVO[];
-
+  msg:string="歡迎";
   constructor(private dataService:DataService) { }
 
   ngOnInit() {
@@ -31,4 +31,15 @@ export class EmpListComponent implements OnInit {
             },error=>console.log( error));
   }
 
+  export(){
+    /*
+    this.dataService.postJson(this.ctrlUrl + "/export.do", this.empVOs).toPromise().then(
+      res => {
+          let file = new File([res.json()], "mm.xls", { type: "application/vnd.ms-excel" });
+          var objUrl = URL.createObjectURL(file);
+          window.open(objUrl);
+          URL.revokeObjectURL(objUrl)
+      });
+      */
+  }
 }
