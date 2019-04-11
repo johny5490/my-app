@@ -16,3 +16,6 @@
 .myPaddingBottom{
     padding-Bottom: 5px
 }
+.myTr:nth-child(odd){
+    background-color: #f7f7f7;
+}

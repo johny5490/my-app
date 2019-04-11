@@ -10,6 +10,7 @@ import {LoginUtil} from '../../../../util/LoginUtil';
 })
 export class UserPickerComponent implements OnInit {
   ctrlUrl = "/api/EmpCtrl";
+  //由外部傳入用於預設員工編號的預設選項
   @Input() value:string;
   @Output() valueChange = new EventEmitter();
 
@@ -34,19 +35,23 @@ export class UserPickerComponent implements OnInit {
   }
 
   //挑選部門
-  pickDept(){
+  pickDept(){    
     this.qryEmp(this.selectDept).subscribe((carrier:Carrier)=>{
           this.empVOs = carrier.attributeMap["empList"];
     },error=>console.log( error));
   }
+  
 
-  pickUser(empName){
+  pickUser(event){
     this.value=this.selectEmp;
-    this.selectEmpName=empName;
+    //this.selectEmpName=empName;
+    var selectObj = event.srcElement;
+    this.selectEmpName=selectObj.options[selectObj.selectedIndex].innerText;
     this.visible=false;
     this.valueChange.emit(this.value);
   }
 
+  
   //開啟使用者挑選清單
   showUserPicker(){
     var loginUserVO = LoginUtil.getLoginUser();

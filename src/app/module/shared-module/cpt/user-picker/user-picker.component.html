@@ -1,17 +1,18 @@
 <input type="text" pInputText [ngModel]="value" (ngModelChange)="valueChg($event)"/>
 <button pButton type="button" icon="pi pi-user" (click)="showUserPicker()"></button>{{selectEmpName}}
 <p-dialog header="使用者挑選" [(visible)]="visible"   [responsive]="true" 
-        [style]="{width: '300px', minWidth: '300px'}"  [maximizable]="true" 
+        [style]="{width: '400px', minWidth: '400px'}"  [maximizable]="true" 
         [baseZIndex]="10000" >
     <div style="text-align: center">    
-    <div class="myBox">    
-    <select  [(ngModel)]="selectDept" size="20" >
-        <option *ngFor="let deptVO of deptVOs" [value]="deptVO.deptNo" (click)="pickDept()">{{deptVO.deptNo + ' '+ deptVO.deptName}}</option>
+    <div class="myBox">
+    <!--因IE下拉選單option沒有click事件，故寫在select中-->    
+    <select  [(ngModel)]="selectDept" size="20" (click)="pickDept()">
+        <option *ngFor="let deptVO of deptVOs" [value]="deptVO.deptNo" >{{deptVO.deptNo + ' '+ deptVO.deptName}}</option>
     </select>
     </div>
     <div class="myBox">
-    <select  [(ngModel)]="selectEmp" size="20">
-        <option *ngFor="let empVO of empVOs" [value]="empVO.USERNO" (click)="pickUser(empVO.CNAME)">{{empVO.CNAME}}</option>
+    <select  [(ngModel)]="selectEmp" size="20" (click)="pickUser($event)">
+        <option *ngFor="let empVO of empVOs" [value]="empVO.USERNO" >{{empVO.CNAME}}</option>
     </select>
     </div>
     </div>

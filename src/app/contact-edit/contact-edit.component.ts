@@ -74,7 +74,7 @@ export class ContactEditComponent implements OnInit {
                      }
                     },error=>console.log("error=" + error));
   }
-
+   
   delete(){
     if(!Util.showConfirmMsg("刪除")){
       return; 

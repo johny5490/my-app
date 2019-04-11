@@ -16,36 +16,32 @@
       採購案號：<input type="text" pInputText [(ngModel)]="assetVO_qry.buyContractNo"/>
       備註：<input type="text" pInputText [(ngModel)]="assetVO_qry.remark"/>
     </div>
-    <p-table [value]="assetVOs" autoLayout="true">
-        <ng-template pTemplate="header">
-          <tr>
-            <th>資產編號</th>
-            <th>資產種類代碼</th>
-            <th>保管人</th>
-            <th>成本</th>
-            <th>採購案號</th>
-            <th>備註</th>
-            <th>新增人員</th>
-            <th>新增日期</th>
-            <th>修改人員</th>
-            <th>修改日期</th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-assetVO >
-           <tr  (click)="copyToEdit(assetVO)" style="cursor: pointer;">
-            <td>{{assetVO.assetId}}</td>
-            <td>{{assetVO.assetTypeId}}</td>
-            <td>{{assetVO.keeper}}</td>
-            <td>{{assetVO.cost}}</td>
-            <td>{{assetVO.buyContractNo}}</td>
-            <td>{{assetVO.remark}}</td>
-            <td>{{assetVO.createUser}}</td>
-            <td>{{assetVO.createDate|date:'yyyy-MM-dd HH:mm:ss'}}</td>
-            <td>{{assetVO.updateUser}}</td>
-            <td>{{assetVO.updateDate|date:'yyyy-MM-dd HH:mm:ss'}}</td>
-          </tr>
-        </ng-template>
-      </p-table>
+    <table border="1" style="border-collapse: collapse; width: 100%" cellpadding="10" >
+      <tr class="myTr" style="position:sticky;top:0">
+        <th>資產編號</th>
+        <th>資產種類代碼</th>
+        <th>保管人</th>
+        <th>成本</th>
+        <th>採購案號</th>
+        <th>備註</th>
+        <th>新增人員</th>
+        <th>新增日期</th>
+        <th>修改人員</th>
+        <th>修改日期</th>
+      </tr>
+      <tr  *ngFor="let assetVO of assetVOs" (click)="copyToEdit(assetVO)" style="cursor: pointer;" class="myTr">
+        <td>{{assetVO.assetId}}</td>
+        <td>{{assetVO.assetTypeId}}</td>
+        <td>{{assetVO.keeper}}</td>
+        <td>{{assetVO.cost}}</td>
+        <td>{{assetVO.buyContractNo}}</td>
+        <td>{{assetVO.remark}}</td>
+        <td>{{assetVO.createUser}}</td>
+        <td>{{assetVO.createDate|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+        <td>{{assetVO.updateUser}}</td>
+        <td>{{assetVO.updateDate|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+      </tr>
+    </table>
 </p-panel>
 <p-tabView (onChange)="showA($event)">
   <p-tabPanel header="資產基本資料">

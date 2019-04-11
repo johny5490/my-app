@@ -1,4 +1,4 @@
-<p-panel  >
+<p-panel>
     <p-header >
         <button  pButton label="查詢" (click)="query()"></button>
         訊息：{{msg_qry}}
@@ -22,34 +22,35 @@
         位置：<input type="text" pInputText [(ngModel)]="contactVO_qry.location"/>
         </div>
     </h4>
-    <div style="overflow:auto; height:200px">
-    <p-table [value]="contactVOs" [autoLayout]="true" >
-        <ng-template pTemplate="header">
-          <tr>
-            <th>職工編號</th>
-            <th> 分機</th>
-            <th>手機</th>
-            <th>直播碼</th>
-            <th>Email</th>
-            <th>備用Email</th>
-            <th>Line</th>
-            <th>Skype</th>
-            <th>臉書</th>
-            <th>位置</th>
-            <th>新增人員</th>
-            <th>新增日期</th>
-            <th>修改人員</th>
-            <th>修改日期</th>
-          </tr>
-        </ng-template>
-        
-        <ng-template pTemplate="body" let-contactVO >
-           <tr  (click)="copyToEdit(contactVO)" style="cursor: pointer;">
+    
+      <table border="1" style="border-collapse: collapse; width: 100%" cellpadding="10" >
+        <thead style="display:block;">
+        <tr class="myTr" >
+          <th>職工編號</th>
+          <th>姓名</th>
+          <th>分機</th>
+          <th>手機</th>
+          <th>直播碼</th>
+          <th>Email</th>
+          <th>備用Email</th>
+          <th>Line</th>
+          <th>Skype</th>
+          <th>臉書</th>
+          <th>位置</th>
+          <th>新增人員</th>
+          <th>新增日期</th>
+          <th>修改人員</th>
+          <th>修改日期</th>
+        </tr>
+        </thead>
+        <tbody style="height:200px;overflow:auto;display:block">
+        <tr *ngFor="let contactVO of contactVOs" (click)="copyToEdit(contactVO)" style="cursor: pointer;" class="myTr">
             <td>{{contactVO.empNo}}</td>
-            <td >{{contactVO.phone}}</td>
+            <td>{{contactVO.empName}}</td>
+            <td>{{contactVO.phone}}</td>
             <td>{{contactVO.cellPhone}}</td>
             <td>{{contactVO.directNo}}</td>
-            <td >{{contactVO.contactEmail}}</td>
+            <td>{{contactVO.contactEmail}}</td>
             <td>{{contactVO.contactEmail2}}</td>
             <td>{{contactVO.line}}</td>
             <td>{{contactVO.skype}}</td>
@@ -59,14 +60,12 @@
             <td>{{contactVO.createDate|date:'yyyy-MM-dd HH:mm:ss'}}</td>
             <td>{{contactVO.updateUser}}</td>
             <td>{{contactVO.updateDate|date:'yyyy-MM-dd HH:mm:ss'}}</td>
-          </tr>
-          
-        </ng-template>
-      
-      </p-table>
-    </div>
+        </tr>
+      </tbody>
+      </table>
+    
 </p-panel>
-<p-panel  >
+<p-panel >
   <p-header >
       <button  pButton label="新增" (click)="create()" [disabled]="createBtnDisable"></button>&nbsp;
       <button  pButton label="修改" (click)="update()" [disabled]="updateBtnDisable"></button>&nbsp;

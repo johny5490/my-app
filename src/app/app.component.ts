@@ -21,9 +21,6 @@ export class AppComponent implements OnInit{
               private vr:ViewContainerRef,
               private compiler: Compiler){
                 
-       window.onunload = (e) =>{
-              alert("13");
-      }
   }
   
   private genComponent(template: string, properties: any = {}) {

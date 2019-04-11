@@ -30,8 +30,14 @@ export class LoginUtil{
     }
     
     private static dispatchEvent(){
-        var StorageChgEvent = new Event(LoginUtil.STORAGE_CHG_EVENT);
+        //IE不支援Event建構子
+        //var StorageChgEvent = new Event(LoginUtil.STORAGE_CHG_EVENT);
+        
+        var StorageChgEvent = document.createEvent('Event');
+        // 設定事件名稱
+        StorageChgEvent.initEvent(LoginUtil.STORAGE_CHG_EVENT, true, true);
         window.dispatchEvent(StorageChgEvent);
+        
     }
 
     static cloneAndEncode(loginUserVO:LoginUserVO){

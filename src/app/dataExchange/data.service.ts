@@ -125,4 +125,10 @@ export class DataService {
   postString(url:string, data?:any){
     return this.http.post(this.getUrl() + url, data, this.genHttpOptions());
   }
+
+  postJsonRespBlob(url:string, data?:any){
+    var httpOptions = { headers:this.genHeaders() };
+    httpOptions["responseType"]="blob";
+    return this.http.post(this.getUrl() + url, JSON.stringify(data), httpOptions);
+  }
 }

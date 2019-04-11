@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import {EmpVO} from '../vo/EmpVO';
 import { DataService } from '../dataExchange/data.service';
 import {Carrier } from '../dataExchange/Carrier';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {LoginUtil} from '../util/LoginUtil';
 
 @Component({
   selector: 'app-emp-list',
@@ -15,7 +17,7 @@ export class EmpListComponent implements OnInit {
 
   empVOs:EmpVO[];
   msg:string="歡迎";
-  constructor(private dataService:DataService) { }
+  constructor(private dataService:DataService, private http: HttpClient) { }
 
   ngOnInit() {
    
@@ -32,14 +34,29 @@ export class EmpListComponent implements OnInit {
   }
 
   export(){
-    /*
-    this.dataService.postJson(this.ctrlUrl + "/export.do", this.empVOs).toPromise().then(
-      res => {
-          let file = new File([res.json()], "mm.xls", { type: "application/vnd.ms-excel" });
-          var objUrl = URL.createObjectURL(file);
+    
+    this.dataService.postJsonRespBlob(this.ctrlUrl + "/export.do", this.empVOs).subscribe((results:any) => {
+
+     var objContent = new Blob([results], { 'type': "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+      
+      //var objContent = new File([results], "mm.xlsx", { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+      
+      if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+          //IE
+          window.navigator.msSaveOrOpenBlob(objContent, "通訊錄.xlsx");
+      }else{
+          var objUrl = URL.createObjectURL(objContent);
           window.open(objUrl);
-          URL.revokeObjectURL(objUrl)
-      });
+          URL.revokeObjectURL(objUrl);
+      }
+      
+      /*
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(objContent);
+      link.download = "mm.xlsx";
+      link.click();
       */
+    });
+    
   }
 }
