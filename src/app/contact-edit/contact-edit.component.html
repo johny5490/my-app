@@ -21,6 +21,7 @@
         臉書：<input type="text" pInputText [(ngModel)]="contactVO_qry.facebook"/>
         位置：<input type="text" pInputText [(ngModel)]="contactVO_qry.location"/>
         </div>
+        <p-paginator [rows]="rows" [totalRecords]="totalRecords"   (onPageChange)="paginate($event)"></p-paginator>
     </h4>
       <table style="border-collapse: collapse; width: 100%;border:1px solid black" cellpadding="5" >
         <tr class="myTr" >

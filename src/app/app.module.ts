@@ -30,6 +30,8 @@ import { AssetAtrValComponent } from './asset-atr-val/asset-atr-val.component';
 import {CheckboxModule} from 'primeng/checkbox';
 import { ContactEditComponent } from './contact-edit/contact-edit.component';
 import { AssetTypeAtrRelEditComponent } from './asset-type-atr-rel-edit/asset-type-atr-rel-edit.component';
+import {PaginatorModule} from 'primeng/paginator';
+
 @NgModule({
   declarations: [
     LoginComponent,
@@ -43,7 +45,7 @@ import { AssetTypeAtrRelEditComponent } from './asset-type-atr-rel-edit/asset-ty
     AssetAtrValComponent,
     ContactEditComponent,
     AssetTypeAtrRelEditComponent,
-    
+   
   ],
   imports: [
     BrowserModule,
@@ -61,6 +63,7 @@ import { AssetTypeAtrRelEditComponent } from './asset-type-atr-rel-edit/asset-ty
     TabViewModule,
     CheckboxModule,
     SharedModule,
+    PaginatorModule,
     AppRoutingModule,
   ],
   providers:[AuthGuard],

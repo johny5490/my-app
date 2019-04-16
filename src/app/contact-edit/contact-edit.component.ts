@@ -24,6 +24,14 @@ export class ContactEditComponent implements OnInit {
   updateBtnDisable=true;
   deleteBtnDisable=true;
 
+  
+  //總筆數
+  totalRecords:number=0;
+  //每頁幾筆，暫時固定不提供可變更
+  rows:number=10;
+  //目前頁，從0開始
+  pageIndex:number;
+
   constructor(private dataService:DataService) { 
     //暫時寫死管理者
     this.isAdmin= "SD0060"==LoginUtil.getLoginUser().userId?true:false;
@@ -35,6 +43,7 @@ export class ContactEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    
   }
 
   query(){
@@ -46,6 +55,11 @@ export class ContactEditComponent implements OnInit {
                           }
                           
                       },error=>console.log( error));
+  }
+
+  paginate(event){
+    console.log("event.page=" + event.page);
+    
   }
 
   create(){
