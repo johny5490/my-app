@@ -76,7 +76,7 @@ export class AssetAtrValComponent implements OnInit {
         return;
     }
     
-    this.dataService.postJson(this.ctrlUrl+"/createAssetAtrValList.do",this.getCheckedVOList()).
+    this.dataService.postJsonDefaultParam(this.ctrlUrl+"/createAssetAtrValList.do",this.getCheckedVOList()).
                       subscribe((carrier:Carrier)=>{
                           this.msg = carrier.attributeMap["msg"];
                           this.assetAtrValVOs = carrier.attributeMap["assetAtrValVOList"];
@@ -120,7 +120,7 @@ export class AssetAtrValComponent implements OnInit {
     if(!this.hasChecked()){
       return;
     }
-    this.dataService.postJson(this.ctrlUrl+"/updateAssetAtrValList.do",this.getCheckedVOList()).
+    this.dataService.postJsonDefaultParam(this.ctrlUrl+"/updateAssetAtrValList.do",this.getCheckedVOList()).
                       subscribe((carrier:Carrier)=>{
                           this.msg = carrier.attributeMap["msg"];
                           this.assetAtrValVOs = carrier.attributeMap["assetAtrValVOList"];
@@ -134,7 +134,7 @@ export class AssetAtrValComponent implements OnInit {
     if(!this.hasChecked()){
       return;
     }
-    this.dataService.postJson(this.ctrlUrl+"/deleteAssetAtrValList.do",this.getCheckedVOList()).
+    this.dataService.postJsonDefaultParam(this.ctrlUrl+"/deleteAssetAtrValList.do",this.getCheckedVOList()).
                       subscribe((carrier:Carrier)=>{
                           this.msg = carrier.attributeMap["msg"];
                           this.assetAtrValVOs = carrier.attributeMap["assetAtrValVOList"];

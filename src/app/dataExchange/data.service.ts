@@ -1,13 +1,12 @@
 import { Injectable,EventEmitter } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders,HttpParams } from '@angular/common/http';
 
 import {} from 'rxjs/add/operator/toPromise';
-import {catchError, map, tap} from 'rxjs/operators';
+import {catchError, map, tap, filter} from 'rxjs/operators';
 import {Observable, of} from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import { ajaxPost } from 'rxjs/internal/observable/dom/AjaxObservable';
 import { EmpVO } from '../vo/EmpVO';
-import { HeroesComponent } from '../heroes/heroes.component';
 import { Routes } from '@angular/router';
 import { AtrVOiface } from '../vo/AtrVOiface';
 import { Carrier } from './Carrier';
@@ -19,7 +18,7 @@ import { LoginUtil } from '../util/LoginUtil';
 
 export class DataService {
 
-  static API_SERVER_CONTEXT = "/OA";
+  static API_SERVLET_URL = "/erp/os/api/";
   
   constructor(private http: HttpClient) { 
     
@@ -46,7 +45,7 @@ export class DataService {
     */
     var url = window.location.protocol + "//" + 
               this.removePort(window.location.host) + 
-              DataService.API_SERVER_CONTEXT ;
+              DataService.API_SERVLET_URL ;
     
     //console.log("url=" + url);
     return url;
@@ -77,7 +76,7 @@ export class DataService {
                          console.info("empVO.chiName=" + empVO.chiName + ",empVO.empNo=" + empVO.empNo);
                      }, error => console.log("error=" + error));
   }
-
+  /*
   getInitRouts(){
     
     var rout:Routes =  [
@@ -85,9 +84,8 @@ export class DataService {
     ];
     return rout;
     
- 
   }
-
+  */
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
    
@@ -115,10 +113,117 @@ export class DataService {
   updateAtr(atrVO:AtrVOiface){
     return this.http.post<Carrier>(this.getUrl() +'/api/AtrCtrl/update.do',JSON.stringify(atrVO), this.genHttpOptions());
   }
+  /*
+  postJsonRespBlob(url:string, data?:any){
+    var httpOptions = { headers:this.genHeaders() };
+    httpOptions["responseType"]="blob";
+    return this.http.post(this.getUrl() + url, JSON.stringify(data), httpOptions);
+  }
+  */
+  //測試用，資料放在data欄位
+  postFormJsonStr(url:string, data?:any){
+    // set不能拆開寫但可以一直接續,有一說因HttpParams是immutable
+    
+    var body = new HttpParams().set('data', JSON.stringify(data));
+    
+    return this.http.post(this.getUrl() + url, body,{
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+     });
+  
+  }
 
+  postNoHeader(url:string, data?:any){
+    //上傳檔案不能指定header
+    return this.http.post(this.getUrl() + url, data);
+  }
+
+  
   //傳物件，但純字串若使用轉JASON會被加上雙引號
-  postJson(url:string, data?:any){
-    return this.http.post(this.getUrl() + url, JSON.stringify(data), this.genHttpOptions());
+  postJsonDefaultParam(url:string, data?:any){
+    //return this.http.post(this.getUrl() + url, JSON.stringify(data), this.genHttpOptions());
+     // set不能拆開寫但可以一直接續,有一說因HttpParams是immutable
+    var body = new HttpParams().set('data', JSON.stringify(data));
+
+    return this.http.post(this.getUrl() + url, body,{
+          headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
+          observe: 'response',
+          withCredentials:true,
+          
+     }).pipe(
+        filter( resp=>{
+          var loginUserJson = resp.headers.get('JNY-loginUserVO');
+          if(loginUserJson==null || loginUserJson==undefined || loginUserJson==''){
+              // 沒有認證資訊轉中冠重新登入頁
+              LoginUtil.relogin(this);
+              return false;
+          }
+          LoginUtil.saveToStorage(JSON.parse(decodeURIComponent(loginUserJson)));
+          return true;
+        }),
+        map( resp =>{
+            return resp.body;
+        })
+     );    
+  }
+  
+  //將paramAndData中的key做為http參數的key值
+  postJsonSeperateParam(url:string,paramAndData?:any){
+    
+     var params={};
+    
+     Object.entries(paramAndData).forEach(([key, value]) => {
+        //console.log(key + ' - ' + value); 
+        params[key] = JSON.stringify(value);
+      });
+
+     var body = new HttpParams({fromObject:params});
+
+    return this.http.post(this.getUrl() + url, body,{
+          headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
+          observe: 'response',
+          withCredentials:true,
+          
+     }).pipe(
+        filter( resp=>{
+          var loginUserJson = resp.headers.get('JNY-loginUserVO');
+          if(loginUserJson==null || loginUserJson==undefined || loginUserJson==''){
+              // 沒有認證資訊轉中冠重新登入頁
+              LoginUtil.relogin(this);
+              return false;
+          }
+          LoginUtil.saveToStorage(JSON.parse(decodeURIComponent(loginUserJson)));
+          return true;
+        }),
+        map( resp =>{
+            return resp.body;
+        })
+     );    
+  }
+
+  postJsonRespBlob(url:string, data?:any){
+     // set不能拆開寫但可以一直接續,有一說因HttpParams是immutable
+    var body = new HttpParams().set('data', JSON.stringify(data));
+
+    return this.http.post(this.getUrl() + url, body,{
+          headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
+          observe: 'response',
+          withCredentials:true,
+          responseType:'blob'
+     }).pipe(
+        filter( resp=>{
+          var loginUserJson = resp.headers.get('JNY-loginUserVO');
+          if(loginUserJson==null || loginUserJson==undefined || loginUserJson==''){
+              // 沒有認證資訊轉中冠重新登入頁
+              LoginUtil.relogin(this);
+              return false;
+          }
+          LoginUtil.saveToStorage(JSON.parse(decodeURIComponent(loginUserJson)));
+          return true;
+        }),
+        map( resp =>{
+            return resp.body;
+        })
+     );    
   }
 
   //純字串使用
@@ -126,9 +231,49 @@ export class DataService {
     return this.http.post(this.getUrl() + url, data, this.genHttpOptions());
   }
 
-  postJsonRespBlob(url:string, data?:any){
-    var httpOptions = { headers:this.genHeaders() };
-    httpOptions["responseType"]="blob";
-    return this.http.post(this.getUrl() + url, JSON.stringify(data), httpOptions);
+  postRtnResponse(url:string, data?:any){
+    // set不能拆開寫但可以一直接續,有一說因HttpParams是immutable
+    var body = new HttpParams().set('data', JSON.stringify(data));
+    /*
+    return this.http.post(this.getUrl() + url, body,{
+          headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
+          observe: 'response',
+          withCredentials:true
+     }).pipe(
+        tap(resp=>{
+          console.log("resp.headers Content-Type=" + resp.headers.get('Content-Type'));
+          var loginUser = resp.headers.get('JNY-loginUserVO');
+          console.log("resp.headers JNY-loginUserVO=" + decodeURIComponent(loginUser));          
+          console.log("resp.body=" + resp.body);
+        })
+        
+     );
+          */
+    return this.http.post(this.getUrl() + url, body,{
+          headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
+          observe: 'response',
+          withCredentials:true
+     }).pipe(
+        filter( resp=>{
+          /*
+          console.log("resp.headers Content-Type=" + resp.headers.get('Content-Type'));
+          console.log("resp.headers JNY-loginUserVO=" + decodeURIComponent(loginUserJson));          
+          console.log("resp.body=" + resp.body);
+          */
+          var loginUserJson = resp.headers.get('JNY-loginUserVO');
+          if(loginUserJson==null || loginUserJson==undefined || loginUserJson==''){
+              // 沒有認證資訊轉中冠重新登入頁
+              LoginUtil.relogin(this);
+              return false;
+          }
+          LoginUtil.saveToStorage(JSON.parse(decodeURIComponent(loginUserJson)));
+          return true;
+        }),
+        map( resp =>{
+            return resp.body;
+        })
+     );     
   }
+
+
 }

@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   login(){
     var data ={userId:this.userId, passwd:this.passwd};
     
-    this.dataService.postJson(this.ctrlUrl + "/login.do", data).
+    this.dataService.postJsonDefaultParam(this.ctrlUrl + "/login.do", data).
                     subscribe((carr:Carrier)=>{
                         var msg = carr.attributeMap["msg"];
                         if(msg != "" && msg!=undefined){

@@ -27,7 +27,7 @@ export class AtrEditComponent implements OnInit {
 
   qryAllAtrList(){
   
-    this.dataService.postJson(this.ctrlUrl +"/qryAllAtrList.do").
+    this.dataService.postJsonDefaultParam(this.ctrlUrl +"/qryAllAtrList.do").
           subscribe((carr:Carrier)=>{
                       
                       this.atrVOs=carr.attributeMap["atrList"];

@@ -15,7 +15,7 @@ import {AccordionModule} from 'primeng/accordion';
 import {ButtonModule} from 'primeng/button';
 import {MenubarModule} from 'primeng/menubar';
 import {PanelMenuModule} from 'primeng/panelmenu';
-import {EmpListComponent } from './emp-list/emp-list.component';
+import {ContactListComponent } from './contact-list/contact-list.component';
 import {TableModule} from 'primeng/table';
 import {AtrEditComponent } from './atr-edit/atr-edit.component';
 import {PanelModule} from 'primeng/panel';
@@ -31,6 +31,7 @@ import {CheckboxModule} from 'primeng/checkbox';
 import { ContactEditComponent } from './contact-edit/contact-edit.component';
 import { AssetTypeAtrRelEditComponent } from './asset-type-atr-rel-edit/asset-type-atr-rel-edit.component';
 import {PaginatorModule} from 'primeng/paginator';
+import {HashLocationStrategy,PathLocationStrategy,LocationStrategy} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import {PaginatorModule} from 'primeng/paginator';
     AppComponent,
     HeroesComponent,
     HeaderComponent,
-    EmpListComponent,
+    ContactListComponent,
     AtrEditComponent,
     AssetTypeEditComponent,
     AssetEditComponent,
@@ -66,8 +67,13 @@ import {PaginatorModule} from 'primeng/paginator';
     PaginatorModule,
     AppRoutingModule,
   ],
-  providers:[AuthGuard],
-  entryComponents:[HeroesComponent],
+  providers:[AuthGuard,
+              { provide:LocationStrategy,
+                useClass:HashLocationStrategy,
+                //useClass:PathLocationStrategy
+              }
+    ],
+  entryComponents:[],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

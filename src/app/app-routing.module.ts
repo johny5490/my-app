@@ -2,7 +2,7 @@ import { NgModule,APP_INITIALIZER,ANALYZE_FOR_ENTRY_COMPONENTS } from '@angular/
 import { RouterModule, Routes, ROUTES } from '@angular/router';
  
 import { HeroesComponent } from './heroes/heroes.component';
-import {EmpListComponent} from './emp-list/emp-list.component';
+import {ContactListComponent} from './contact-list/contact-list.component';
 import {AtrEditComponent} from './atr-edit/atr-edit.component';
 import {AssetTypeEditComponent} from './asset-type-edit/asset-type-edit.component';
 //import { SampleBodyComponent } from './sample/body/sampleBody.component';
@@ -12,10 +12,10 @@ import {AssetEditComponent} from './asset-edit/asset-edit.component';
 import {ContactEditComponent} from './contact-edit/contact-edit.component';
 
 const routes: Routes = [
-  { path: 'login', component:LoginComponent },
+  //{ path: 'login', component:LoginComponent },
   //{ path: '', component: HeroesComponent, canActivate: [AuthGuard]},
-  { path: 'heroes',component: HeroesComponent, canActivate: [AuthGuard]  },
-  { path: 'emp-list', component: EmpListComponent, canActivate: [AuthGuard] },
+  { path: 'heroes',component: HeroesComponent },
+  { path: 'contact-list', component: ContactListComponent, canActivate: [AuthGuard] },
   { path: 'atr-edit',  component: AtrEditComponent, canActivate: [AuthGuard]},
   { path: 'asset-type-edit', component: AssetTypeEditComponent, canActivate: [AuthGuard]},
   { path: 'asset-edit', component: AssetEditComponent, canActivate: [AuthGuard]},

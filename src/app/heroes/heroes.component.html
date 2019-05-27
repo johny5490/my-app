@@ -6,3 +6,11 @@
     <input [(ngModel)]="hero.name" placeholder="name">
   </label>
 </div>
+<input type="button" (click)="callServlet()" value="測試呼叫Servlet">
+<br><br>
+<input type="file" multiple (change)="servletUploadFile($event)"  value="多檔上傳檔案">
+<input type="button" value="轉重登" (click)="relogin()">
+<br><br>
+<input type="button" value="測試呼叫Servlet接reponse" (click)="callServletGetResp()">
+<br><br>
+<input type="button" value="test" (click)="test()">

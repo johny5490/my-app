@@ -9,7 +9,7 @@ import {LoginUtil} from '../../../../util/LoginUtil';
   styleUrls: ['./user-picker.component.css']
 })
 export class UserPickerComponent implements OnInit {
-  ctrlUrl = "/api/EmpCtrl";
+  ctrlUrl = "osjcEmpCtrl/";
   //由外部傳入用於預設員工編號的預設選項
   @Input() value:string;
   @Output() valueChange = new EventEmitter();
@@ -19,8 +19,8 @@ export class UserPickerComponent implements OnInit {
   selectEmp:string;
   selectEmpName:string;
 
-  deptVOs:DeptVO[];
-  empVOs:EmpVO[];
+  deptVOs:Array<DeptVO>;
+  empVOs:Array<EmpVO>;
 
   constructor(private dataService:DataService) {
     
@@ -31,13 +31,15 @@ export class UserPickerComponent implements OnInit {
   }
 
   qryEmp(deptNo:string){
-    return this.dataService.postString(this.ctrlUrl+"/qryEmp.do", deptNo);
+    //return this.dataService.postString(this.ctrlUrl+"qryEmp", deptNo);
+    return this.dataService.postJsonDefaultParam(this.ctrlUrl+"qryEmp", deptNo);
   }
 
   //挑選部門
   pickDept(){    
     this.qryEmp(this.selectDept).subscribe((carrier:Carrier)=>{
-          this.empVOs = carrier.attributeMap["empList"];
+          //this.empVOs = carrier.attributeMap["empList"];
+          this.setEmpVos(carrier);
     },error=>console.log( error));
   }
   
@@ -46,6 +48,7 @@ export class UserPickerComponent implements OnInit {
     this.value=this.selectEmp;
     //this.selectEmpName=empName;
     var selectObj = event.srcElement;
+    //此段在Chrome會錯誤
     this.selectEmpName=selectObj.options[selectObj.selectedIndex].innerText;
     this.visible=false;
     this.valueChange.emit(this.value);
@@ -70,15 +73,42 @@ export class UserPickerComponent implements OnInit {
   }
 
   qryEmpBySameDept(empNo:string){
-    this.dataService.postString(this.ctrlUrl+"/qryEmpBySameDept.do", empNo).subscribe((carrier:Carrier)=>{
-      this.empVOs = carrier.attributeMap["empList"];
+    this.dataService.postJsonDefaultParam(this.ctrlUrl+"qryEmpBySameDept", empNo).subscribe((carrier:Carrier)=>{
+      //this.empVOs = carrier.attributeMap["empList"];
+      this.setEmpVos(carrier);
       this.selectEmp=empNo;      
     }, error=>{console.error(error)});
   }
 
+  setEmpVos(carrier:Carrier){
+    var mapArray = carrier.attributeMap["empList"];
+    this.empVOs = new Array();
+    for(var i=0;i<mapArray.length ;i++){
+        var map = mapArray[i];
+        var empVO = new EmpVO();
+        empVO.userNo = map["USERNO"];
+        empVO.cname = map["CNAME"];
+        empVO.deptNo = map["DEPTNO"];
+        this.empVOs.push(empVO);
+    }
+  }
+
   queryDeptVOs(){
-    this.dataService.postJson(this.ctrlUrl+"/qryAllDept.do").subscribe((carrier:Carrier)=>{
-      this.deptVOs = carrier.attributeMap["deptList"];
+    this.dataService.postJsonDefaultParam(this.ctrlUrl+"qryAllDept").subscribe((carrier:Carrier)=>{
+      
+        //this.deptVOs = carrier.attributeMap["deptList"];
+        var mapArray = carrier.attributeMap["deptList"];
+        this.deptVOs = new Array();
+        
+        for(var i=0;i<mapArray.length ;i++){
+          var map = mapArray[i];
+          var deptVO = new DeptVO();
+          deptVO.deptNo = map["DEPTNO"];
+          deptVO.deptName = map["DEPTNAME"];
+          this.deptVOs.push(deptVO);
+          //console.log("DEPTNO=" + map["DEPTNO"]);
+        }
+        
     },error=>console.log( error));
   }
 
@@ -94,7 +124,7 @@ export class DeptVO{
 }
 
 export class EmpVO{
-  USERNO:string;
-  CNAME:string;
-  DEPNO:string;
+  userNo:string;
+  cname:string;
+  deptNo:string;
 }

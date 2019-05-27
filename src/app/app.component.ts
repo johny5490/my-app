@@ -83,7 +83,7 @@ export class AppComponent implements OnInit{
                   {label: '通訊錄維護', icon: 'pi pi-fw pi-pencil', command:(event) => {    
                       Util.routerLinkReload(this.router, '/contact-edit');
                      } }, 
-                  {label: '通訊錄清單', icon: 'pi pi-fw pi-users', routerLink: ['/emp-list'] }, 
+                  {label: '通訊錄清單', icon: 'pi pi-fw pi-users', routerLink: ['/contact-list'] }, 
              ]},
             {label: '資產管理',
               expanded: true, 

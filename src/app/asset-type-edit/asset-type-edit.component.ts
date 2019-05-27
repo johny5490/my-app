@@ -28,7 +28,7 @@ export class AssetTypeEditComponent implements OnInit {
   }
 
   queryAssetTypeList(){
-    this.dataService.postJson(this.ctrlUrl+"/queryAssetTypeList.do").
+    this.dataService.postJsonDefaultParam(this.ctrlUrl+"/queryAssetTypeList.do").
     subscribe((assetTypeVOs:AssetTypeVO[])=>{
           this.assetTypeVOs = assetTypeVOs;
     },error=>console.log(error));
@@ -44,7 +44,7 @@ export class AssetTypeEditComponent implements OnInit {
       return; 
     }
 
-    this.dataService.postJson(this.ctrlUrl+"/createAssetType.do",this.assetTypeVO).
+    this.dataService.postJsonDefaultParam(this.ctrlUrl+"/createAssetType.do",this.assetTypeVO).
                       subscribe((carrier:Carrier)=>{
                           this.msg = carrier.attributeMap["msg"];
                           
@@ -56,7 +56,7 @@ export class AssetTypeEditComponent implements OnInit {
     if(!Util.showConfirmMsg("修改")){
       return; 
     }
-    this.dataService.postJson(this.ctrlUrl+"/updateAssetType.do",this.assetTypeVO).
+    this.dataService.postJsonDefaultParam(this.ctrlUrl+"/updateAssetType.do",this.assetTypeVO).
                     subscribe((carrier:Carrier)=>{
                       this.msg = carrier.attributeMap["msg"];
                       //修改只重查清單不清空編輯區塊
@@ -68,7 +68,7 @@ export class AssetTypeEditComponent implements OnInit {
     if(!Util.showConfirmMsg("刪除")){
       return; 
     }
-    this.dataService.postJson(this.ctrlUrl+"/deleteAssetType.do",this.assetTypeVO).
+    this.dataService.postJsonDefaultParam(this.ctrlUrl+"/deleteAssetType.do",this.assetTypeVO).
                     subscribe((carrier:Carrier)=>{
                           this.msg = carrier.attributeMap["msg"];
                           this.cleanAndQryAtrList();

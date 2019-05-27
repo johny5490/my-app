@@ -4,6 +4,8 @@ import { Carrier} from '../dataExchange/Carrier';
 import {Util} from '../util/Util';
 import { ContactVO } from '../vo/ContactVO';
 import { LoginUtil } from '../util/LoginUtil';
+import { ViewChild } from '@angular/core'
+import { Paginator } from 'primeng/paginator';
 
 @Component({
   selector: 'app-contact-edit',
@@ -17,20 +19,25 @@ export class ContactEditComponent implements OnInit {
 
   msg:string="歡迎";
   msg_qry:string="歡迎";
-  ctrlUrl='/api/ContactCtrl';
+  ctrlUrl='oajcContactCtrl/';
   isAdmin:boolean;
 
   createBtnDisable=true;
   updateBtnDisable=true;
   deleteBtnDisable=true;
 
-  
+
+  //查詢SQL
+  querySQL:string;
+
   //總筆數
   totalRecords:number=0;
   //每頁幾筆，暫時固定不提供可變更
-  rows:number=10;
-  //目前頁，從0開始
-  pageIndex:number;
+  rowsPerPage:number=10;
+  //目前頁，從0開始(算法同UI元件)
+  firstRowIndex:number;
+
+  @ViewChild('paginator') paginator: Paginator;
 
   constructor(private dataService:DataService) { 
     //暫時寫死管理者
@@ -46,20 +53,43 @@ export class ContactEditComponent implements OnInit {
     
   }
 
-  query(){
-    this.dataService.postString(this.ctrlUrl+"/query.do",this.contactVO_qry).
+  handleError(error){
+    this.msg_qry = "系統發生異常";
+    console.log( error);
+  }
+
+  query(pageIndex){
+    
+    var data = {"contactVO_qry":this.contactVO_qry, "rowsPerPage":this.rowsPerPage, "pageIndex":pageIndex};
+    this.dataService.postJsonSeperateParam(this.ctrlUrl+"query", data).
                       subscribe((carrier:Carrier)=>{
+                          
                           this.msg_qry = carrier.attributeMap["msg"];
+                          /*
                           if(carrier.attributeMap["contactVOList"] != undefined && carrier.attributeMap["contactVOList"] != null){
                              this.contactVOs = carrier.attributeMap["contactVOList"];
                           }
+                          */
                           
-                      },error=>console.log( error));
+                          this.contactVOs = carrier.attributeMap["contactVOList"];
+                          
+                          this.totalRecords=carrier.attributeMap["totalRecords"];
+                          
+                          this.changePage(pageIndex)
+                      },error=>this.handleError(error));
   }
 
-  paginate(event){
-    console.log("event.page=" + event.page);
+  //變更頁碼但不發出事件，此function參考paginator changePage的souce code
+  changePage(p :number) {
+    this.firstRowIndex = this.paginator.rows * p;
+    this.paginator.updatePageLinks();
+    this.paginator.updatePaginatorState();
     
+  }
+
+  queryByPage(event){
+    console.log("queryByPage");
+    this.query(event.page);
   }
 
   create(){
@@ -67,20 +97,20 @@ export class ContactEditComponent implements OnInit {
       return; 
     }
 
-    this.dataService.postJson(this.ctrlUrl+"/create.do",this.contactVO).
+    this.dataService.postJsonDefaultParam(this.ctrlUrl+"create",this.contactVO).
                       subscribe((carrier:Carrier)=>{
                           this.msg = carrier.attributeMap["msg"];
                           if(carrier.attributeMap["contactVO"] != undefined && carrier.attributeMap["contactVO"]!=null){
                             this.contactVO = carrier.attributeMap["contactVO"];
                          }
-                      },error=>console.log( error));
+                      },error=>this.handleError(error));
   }
 
   update(){
     if(!Util.showConfirmMsg("修改")){
       return; 
     }
-    this.dataService.postJson(this.ctrlUrl+"/update.do",this.contactVO).
+    this.dataService.postJsonDefaultParam(this.ctrlUrl+"update",this.contactVO).
                     subscribe((carrier:Carrier)=>{
                       this.msg = carrier.attributeMap["msg"];
                       if(carrier.attributeMap["contactVO"] != undefined && carrier.attributeMap["contactVO"]!=null){
@@ -93,7 +123,7 @@ export class ContactEditComponent implements OnInit {
     if(!Util.showConfirmMsg("刪除")){
       return; 
     }
-    this.dataService.postJson(this.ctrlUrl+"/delete.do",this.contactVO).
+    this.dataService.postJsonDefaultParam(this.ctrlUrl+"delete",this.contactVO).
                     subscribe((carrier:Carrier)=>{
                           this.msg = carrier.attributeMap["msg"];
                           if(carrier.attributeMap["contactVO"] != undefined && carrier.attributeMap["contactVO"]!=null){

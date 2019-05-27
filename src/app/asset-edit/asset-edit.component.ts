@@ -29,7 +29,7 @@ export class AssetEditComponent implements OnInit {
   }
 
   queryAssetTypeList(){
-    this.dataService.postJson("/api/AssetTypeCtrl/queryAssetTypeList.do").
+    this.dataService.postJsonDefaultParam("/api/AssetTypeCtrl/queryAssetTypeList.do").
     subscribe((assetTypeVOs:AssetTypeVO[])=>{
           this.assetTypeVOs = assetTypeVOs;
     },error=>console.log(error));
@@ -41,7 +41,7 @@ export class AssetEditComponent implements OnInit {
       return; 
     }
 
-    this.dataService.postJson(this.ctrlUrl+"/createAsset.do",this.assetVO).
+    this.dataService.postJsonDefaultParam(this.ctrlUrl+"/createAsset.do",this.assetVO).
                       subscribe((carrier:Carrier)=>{
                           this.msg = carrier.attributeMap["msg"];
                           
@@ -52,7 +52,7 @@ export class AssetEditComponent implements OnInit {
     if(!Util.showConfirmMsg("修改")){
       return; 
     }
-    this.dataService.postJson(this.ctrlUrl+"/updateAsset.do",this.assetVO).
+    this.dataService.postJsonDefaultParam(this.ctrlUrl+"/updateAsset.do",this.assetVO).
                     subscribe((carrier:Carrier)=>{
                       this.msg = carrier.attributeMap["msg"];
                       
@@ -63,7 +63,7 @@ export class AssetEditComponent implements OnInit {
     if(!Util.showConfirmMsg("刪除")){
       return; 
     }
-    this.dataService.postJson(this.ctrlUrl+"/deleteAsset.do",this.assetVO).
+    this.dataService.postJsonDefaultParam(this.ctrlUrl+"/deleteAsset.do",this.assetVO).
                     subscribe((carrier:Carrier)=>{
                           this.msg = carrier.attributeMap["msg"];
                           
@@ -77,7 +77,7 @@ export class AssetEditComponent implements OnInit {
   }
 
   fuzzyQry(){
-    this.dataService.postJson(this.ctrlUrl+"/fuzzyQry.do",this.assetVO_qry).
+    this.dataService.postJsonDefaultParam(this.ctrlUrl+"/fuzzyQry.do",this.assetVO_qry).
                     subscribe((carrier:Carrier)=>{
                       this.msg_qry = carrier.attributeMap["msg"];   
                       this.assetVOs = carrier.attributeMap["assetVOs"] ;       

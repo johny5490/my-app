@@ -20,16 +20,20 @@ export class HeaderComponent implements OnInit {
   //每隔1分鐘更新系統時間
   refreshTime=60000;
 
+  ctrlUrl = "osjcLoginCtrl/";
+
   constructor(private dataService: DataService, private router: Router) {
     
     window.addEventListener(LoginUtil.STORAGE_CHG_EVENT, (e) => {
         this.loginUserVO = LoginUtil.getLoginUser();
-        this.refreshSysTime();
+        //this.refreshSysTime();
     });
-
-    this.refreshSysTime();
+    
+    //this.refreshSysTime();
+    
   }
 
+  /*定時更新系統時間
   refreshSysTime(){
     if(LoginUtil.isLogin()){
       this.keepGetSysTime();
@@ -38,9 +42,10 @@ export class HeaderComponent implements OnInit {
       clearInterval(this.timeInterval);
     }  
   }
+  */
 
   getSysTime(){
-    this.dataService.postJson("/open/LoginCtrl/getSysTime.do").subscribe((carr:Carrier)=>{
+    this.dataService.postJsonDefaultParam("/open/LoginCtrl/getSysTime.do").subscribe((carr:Carrier)=>{
           this.sysTime = carr.attributeMap["sysTime"];
     },error => console.log(error));
   }
@@ -57,7 +62,8 @@ export class HeaderComponent implements OnInit {
     
     this.loginUserVO = LoginUtil.getLoginUser();
     if(this.loginUserVO.userId===""){
-      this.router.navigate(["login"]);
+      //this.router.navigate(["login"]);
+      LoginUtil.relogin(this.dataService);
     }
     
    
@@ -66,9 +72,9 @@ export class HeaderComponent implements OnInit {
   logout (){
     LoginUtil.removeFromStorage();
     //清空loginUser
-    this.loginUserVO = new LoginUserVO();
-    this.router.navigate(["login"]);
-    
+    //this.loginUserVO = new LoginUserVO();
+    //this.router.navigate(["login"]);
+    this.dataService.postJsonDefaultParam(this.ctrlUrl+"logOut").subscribe(()=>{},error=>{console.log(error)});
   }
   
 }
