@@ -1,47 +1,65 @@
 <p-panel>
     <p-header >
-        <button  pButton label="查詢" (click)="query(0)"></button>
-        訊息：{{msg_qry}}
-    </p-header>
-    <h4>
-        <div class="myBox">
-        職工編號：<app-user-picker [(value)]="contactVO_qry.empNo" ></app-user-picker>
-        分機：<input type="text" pInputText [(ngModel)]="contactVO_qry.phone" />
-        手機：<input type="text" pInputText [(ngModel)]="contactVO_qry.cellPhone"/>
-        直播碼：<input type="text" pInputText [(ngModel)]="contactVO_qry.directNo"/>
-        </div>
-        <div class="myBox" >
-            
-        Email：<input type="text" pInputText [(ngModel)]="contactVO_qry.contactEmail" />
-        備用Email：<input type="text" pInputText [(ngModel)]="contactVO_qry.contactEmail2" />
-        </div>
-        <div class="myBox">
-        Line：<input type="text" pInputText [(ngModel)]="contactVO_qry.line"/>
-        Skype：<input type="text" pInputText [(ngModel)]="contactVO_qry.skype"/>
-        臉書：<input type="text" pInputText [(ngModel)]="contactVO_qry.facebook"/>
-        位置：<input type="text" pInputText [(ngModel)]="contactVO_qry.location"/>
-        </div>
-        <p-paginator #paginator [rows]="rowsPerPage" [(first)]="firstRowIndex" [totalRecords]="totalRecords" (onPageChange)="queryByPage($event)"></p-paginator>
-    </h4>
-      <table style="border-collapse: collapse; width: 100%;border:1px solid black" cellpadding="5" >
-        <tr class="myTr" >
-          <th >職工編號</th>
-          <th >姓名</th>
-          <th>分機</th>
-          <th >手機</th>
-          <th >直播碼</th>
-          <th >Email</th>
-          <th >備用Email</th>
-          <th >Line</th>
-          <th >Skype</th>
-          <th >臉書</th>
-          <th >位置</th>
-          <th >新增人員</th>
-          <th >新增日期</th>
-          <th >修改人員</th>
-          <th >修改日期</th>
+      <table width="100%"  cellpadding="1" cellspacing="1">
+        <tr>
+            <td><button  pButton label="查詢" (click)="query(0)"></button></td>
+            <td class="myLabel" width="10%">訊息</td>
+            <td width="40%"><font style="color: red">{{msg_qry}}</font></td>
         </tr>
-        <tr *ngFor="let contactVO of contactVOs" (click)="copyToEdit(contactVO)" style="cursor: pointer;" class="myTr">
+      </table>
+    </p-header>
+    
+        <table width="100%"  cellpadding="1" cellspacing="1">
+          <tr>
+            <td class="myLabel">職工編號</td>
+            <td><app-user-picker [(value)]="contactVO_qry.empNo" ></app-user-picker></td>
+            <td class="myLabel">分機</td>
+            <td><input type="text" pInputText [(ngModel)]="contactVO_qry.phone" /></td>
+            <td class="myLabel">手機</td>
+            <td><input type="text" pInputText [(ngModel)]="contactVO_qry.cellPhone"/></td>
+          </tr>
+          <tr>
+            <td class="myLabel">直播碼</td>
+            <td><input type="text" pInputText [(ngModel)]="contactVO_qry.directNo"/></td>
+            <td class="myLabel">Email</td>
+            <td><input type="text" pInputText [(ngModel)]="contactVO_qry.contactEmail" /></td>
+            <td class="myLabel">備用Email</td>
+            <td><input type="text" pInputText [(ngModel)]="contactVO_qry.contactEmail2" /></td>
+          </tr>
+          <tr>
+              <td class="myLabel"> Line</td>
+              <td><input type="text" pInputText [(ngModel)]="contactVO_qry.line"/></td>
+              <td class="myLabel">Skype</td>
+              <td><input type="text" pInputText [(ngModel)]="contactVO_qry.skype"/></td>
+              <td class="myLabel"> 臉書</td>
+              <td><input type="text" pInputText [(ngModel)]="contactVO_qry.facebook"/></td>
+            </tr>
+            <tr>
+              <td class="myLabel">位置</td>
+               <td><input type="text" pInputText [(ngModel)]="contactVO_qry.location"/></td>
+            </tr>                                    
+        </table>
+        <p-paginator #paginator [rows]="rowsPerPage" [(first)]="firstRowIndex" [totalRecords]="totalRecords" (onPageChange)="queryByPage($event)"></p-paginator>
+    
+      <table width="100%"  cellpadding="5" cellspacing="1">
+        <tr  style="background-color: #f7f7f7">
+          <th class="myLabel">職工編號</th>
+          <th class="myLabel">姓名</th>
+          <th class="myLabel">分機</th>
+          <th class="myLabel">手機</th>
+          <th class="myLabel">直播碼</th>
+          <th class="myLabel">Email</th>
+          <th class="myLabel">備用Email</th>
+          <th class="myLabel">Line</th>
+          <th class="myLabel">Skype</th>
+          <th class="myLabel">臉書</th>
+          <th class="myLabel">位置</th>
+          <th class="myLabel">新增人員</th>
+          <th class="myLabel">新增日期</th>
+          <th class="myLabel">修改人員</th>
+          <th class="myLabel">修改日期</th>
+        </tr>
+        <tr *ngFor="let contactVO of contactVOs" (click)="copyToEdit($event, contactVO)" style="cursor: pointer;" class="myTr" >
             <td >{{contactVO.empNo}}</td>
             <td >{{contactVO.empName}}</td>
             <td >{{contactVO.phone}}</td>
@@ -53,9 +71,9 @@
             <td >{{contactVO.skype}}</td>
             <td >{{contactVO.facebook}}</td>
             <td >{{contactVO.location}}</td>
-            <td >{{contactVO.createUser}}</td>
+            <td >{{contactVO.createUserName}}</td>
             <td >{{contactVO.createDate}}</td>
-            <td >{{contactVO.updateUser}}</td>
+            <td >{{contactVO.updateUserName}}</td>
             <td >{{contactVO.updateDate}}</td>
         </tr>
       </table>
@@ -63,33 +81,58 @@
 </p-panel>
 <p-panel >
   <p-header >
-      <button  pButton label="新增" (click)="create()" [disabled]="createBtnDisable"></button>&nbsp;
-      <button  pButton label="修改" (click)="update()" [disabled]="updateBtnDisable"></button>&nbsp;
-      <button  pButton label="刪除" (click)="delete()" [disabled]="deleteBtnDisable"></button>&nbsp;
-     訊息：{{msg}}
+     <table width="100%"  cellpadding="1" cellspacing="1">
+        <tr>
+            <td>
+              <button  pButton label="新增" (click)="create()" ></button>&nbsp;
+              <button  pButton label="修改" (click)="update()" ></button>&nbsp;
+              <button  pButton label="刪除" (click)="delete()" ></button>&nbsp;
+            </td>
+            <td class="myLabel" width="10%"><font style="color: white">訊息</font></td>
+            <td width="40%"><font style="color: red">{{msg}}</font></td>
+        </tr>
+      </table>
   </p-header>
-    <h4>
-    <div class="myBox">
-      職工編號：<app-user-picker [(value)]="contactVO.empNo"></app-user-picker>
-      分機：<input type="text" pInputText [(ngModel)]="contactVO.phone"/>
-      手機：<input type="text" pInputText [(ngModel)]="contactVO.cellPhone"/>
-      直播碼：<input type="text" pInputText [(ngModel)]="contactVO.directNo"/>
-    </div>
-    <div class="myBox">
-      Email：<input type="text" pInputText [(ngModel)]="contactVO.contactEmail" style="width:30%"/>
-      備用Email：<input type="text" pInputText [(ngModel)]="contactVO.contactEmail2" style="width:30%"/>
-    </div>
-    <div class="myBox">
-      Line：<input type="text" pInputText [(ngModel)]="contactVO.line"/>
-      Skype：<input type="text" pInputText [(ngModel)]="contactVO.skype"/>
-      臉書：<input type="text" pInputText [(ngModel)]="contactVO.facebook"/>
-      位置：<input type="text" pInputText [(ngModel)]="contactVO.location"/>
-    </div>
-    <div class="myBox">
-      新增人員：{{contactVO.createUser}}
-      新增日期：{{contactVO.createDate}}
-      修改人員：{{contactVO.updateUser}}
-      修改日期：{{contactVO.updateDate}}
-    </div>
-  </h4>
+      <table width="100%"  cellpadding="1" cellspacing="1">
+        <tr>
+          <td class="myLabel">職工編號：</td>
+          <td ><app-user-picker [(value)]="contactVO.empNo"></app-user-picker><font color="red">*</font></td>
+          <td class="myLabel">分機：</td>
+          <td><input type="text" pInputText [(ngModel)]="contactVO.phone"/></td>
+          <td class="myLabel"> 手機：</td>
+          <td><input type="text" pInputText [(ngModel)]="contactVO.cellPhone"/></td>
+        </tr>
+        <tr>
+          <td  class="myLabel">直播碼：</td>
+          <td><input type="text" pInputText [(ngModel)]="contactVO.directNo"/></td>
+          <td  class="myLabel">Email：</td>
+          <td><input type="text" pInputText [(ngModel)]="contactVO.contactEmail" /></td>
+          <td  class="myLabel">備用Email：</td>
+          <td><input type="text" pInputText [(ngModel)]="contactVO.contactEmail2" /></td>          
+        </tr>
+        <tr>
+            <td  class="myLabel"> Line：</td>
+            <td><input type="text" pInputText [(ngModel)]="contactVO.line"/></td>
+            <td  class="myLabel">Skype：</td>
+            <td><input type="text" pInputText [(ngModel)]="contactVO.skype"/></td>
+            <td  class="myLabel">臉書：</td>
+            <td><input type="text" pInputText [(ngModel)]="contactVO.facebook"/></td>            
+        </tr>
+        <tr>
+            <td  class="myLabel">位置：</td>
+            <td><input type="text" pInputText [(ngModel)]="contactVO.location"/></td>
+        </tr>
+        <tr>
+            <td  class="myLabel">新增人員：</td>
+            <td >{{contactVO.createUserName}}</td>
+            <td  class="myLabel">新增日期：</td>
+            <td >{{contactVO.createDate}}</td>
+        </tr>
+        <tr>
+            <td  class="myLabel">修改人員：</td>
+            <td >{{contactVO.updateUserName}}</td>
+            <td  class="myLabel">修改日期：</td>
+            <td >{{contactVO.updateDate}}</td>           
+        </tr>                      
+      </table>
 </p-panel>

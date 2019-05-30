@@ -11,7 +11,7 @@
     </select>
     </div>
     <div class="myBox">
-    <select  [(ngModel)]="selectEmp" size="20" (click)="pickUser($event)">
+    <select  [(ngModel)]="selectEmp" size="20" (click)="pickUser($event)" id="pickUserSelect">
         <option *ngFor="let empVO of empVOs" [value]="empVO.userNo" >{{empVO.cname}}</option>
     </select>
     </div>

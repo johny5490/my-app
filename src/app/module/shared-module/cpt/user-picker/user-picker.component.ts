@@ -47,8 +47,10 @@ export class UserPickerComponent implements OnInit {
   pickUser(event){
     this.value=this.selectEmp;
     //this.selectEmpName=empName;
-    var selectObj = event.srcElement;
-    //此段在Chrome會錯誤
+    //此段在Chrome使用srcElement，沒有selectedIndex
+    //var selectObj = event.srcElement;
+    
+    var selectObj:any =  document.getElementById("pickUserSelect");
     this.selectEmpName=selectObj.options[selectObj.selectedIndex].innerText;
     this.visible=false;
     this.valueChange.emit(this.value);

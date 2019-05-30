@@ -22,10 +22,6 @@ export class ContactEditComponent implements OnInit {
   ctrlUrl='oajcContactCtrl/';
   isAdmin:boolean;
 
-  createBtnDisable=true;
-  updateBtnDisable=true;
-  deleteBtnDisable=true;
-
 
   //查詢SQL
   querySQL:string;
@@ -40,13 +36,7 @@ export class ContactEditComponent implements OnInit {
   @ViewChild('paginator') paginator: Paginator;
 
   constructor(private dataService:DataService) { 
-    //暫時寫死管理者
-    this.isAdmin= "SD0060"==LoginUtil.getLoginUser().userId?true:false;
-    if(this.isAdmin){
-        this.createBtnDisable=false;
-        this.updateBtnDisable=false;
-        this.deleteBtnDisable=false;
-    }
+    
   }
 
   ngOnInit() {
@@ -132,16 +122,19 @@ export class ContactEditComponent implements OnInit {
                     },error=>console.log("error=" + error));
   }
 
-  copyToEdit(contactVO:ContactVO){
-
-      this.contactVO = JSON.parse(JSON.stringify(contactVO));
+  copyToEdit(evnet, contactVO:ContactVO){      
+      //this.changeColor(event);
+      //this.contactVO = JSON.parse(JSON.stringify(contactVO));
+      this.contactVO = contactVO;
       this.msg="查詢成功";
-      var loginUserVO = LoginUtil.getLoginUser();
-      if(loginUserVO.userId==contactVO.empNo){
-          //自己的通訊資料可以修改
-          this.updateBtnDisable=false;
-      }else if(!this.isAdmin){
-          this.updateBtnDisable=true;
-      }
+      //var loginUserVO = LoginUtil.getLoginUser();
+      
+  }
+
+  changeColor(evnet){
+    //tr
+    var parentNode = event.srcElement["parentNode"];
+    parentNode["style"]["background-color"]="#ffd0ff";
+
   }
 }

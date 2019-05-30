@@ -1,5 +1,5 @@
 import { Injectable,EventEmitter } from '@angular/core';
-import { HttpClient, HttpHeaders,HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders,HttpParams, HttpResponse } from '@angular/common/http';
 
 import {} from 'rxjs/add/operator/toPromise';
 import {catchError, map, tap, filter} from 'rxjs/operators';
@@ -11,12 +11,15 @@ import { Routes } from '@angular/router';
 import { AtrVOiface } from '../vo/AtrVOiface';
 import { Carrier } from './Carrier';
 import { LoginUtil } from '../util/LoginUtil';
+import { Util } from '../util/Util';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class DataService {
+
+  public eventBus: EventEmitter<any> = new EventEmitter<any>();
 
   static API_SERVLET_URL = "/erp/os/api/";
   
@@ -38,23 +41,10 @@ export class DataService {
   }
 
   getUrl(){
-    /*
-    console.log("protocol=" + window.location.protocol + "," +
-                "host=" + window.location.host +","+ "" + 
-                "pathname=" + window.location.pathname);
-    */
-    var url = window.location.protocol + "//" + 
-              this.removePort(window.location.host) + 
-              DataService.API_SERVLET_URL ;
-    
-    //console.log("url=" + url);
-    return url;
+    return Util.getUrlNoPort() + DataService.API_SERVLET_URL;
   }
 
-  removePort(host: string){
-    var idx: number = host.indexOf(":");
-    return idx>0 ? host.substring(0, idx) : host;    
-  }
+
 
   /*
   getContextRoot(pathname: string){
@@ -151,14 +141,7 @@ export class DataService {
           
      }).pipe(
         filter( resp=>{
-          var loginUserJson = resp.headers.get('JNY-loginUserVO');
-          if(loginUserJson==null || loginUserJson==undefined || loginUserJson==''){
-              // 沒有認證資訊轉中冠重新登入頁
-              LoginUtil.relogin(this);
-              return false;
-          }
-          LoginUtil.saveToStorage(JSON.parse(decodeURIComponent(loginUserJson)));
-          return true;
+          return this.verifyLogin(resp);
         }),
         map( resp =>{
             return resp.body;
@@ -166,6 +149,25 @@ export class DataService {
      );    
   }
   
+  verifyLogin(resp){
+    var loginUserJson = resp.headers.get('JNY-loginUserVO');
+    //console.log("loginUserJson=" + loginUserJson);
+    if(loginUserJson==null || loginUserJson==undefined || loginUserJson==''){
+        // 沒有認證資訊轉中冠重新登入頁
+        LoginUtil.relogin(this);
+        return false;
+    }
+    LoginUtil.saveToStorage(JSON.parse(decodeURIComponent(loginUserJson)));
+
+    //server系統時間
+    var systime = resp.headers.get('JNY-systime');
+    if(systime!=null && systime!=undefined && systime!=''){
+      var event={name:"systime", value:systime};  
+      this.eventBus.emit(event);
+    }
+    return true;
+  }
+
   //將paramAndData中的key做為http參數的key值
   postJsonSeperateParam(url:string,paramAndData?:any){
     
@@ -185,14 +187,7 @@ export class DataService {
           
      }).pipe(
         filter( resp=>{
-          var loginUserJson = resp.headers.get('JNY-loginUserVO');
-          if(loginUserJson==null || loginUserJson==undefined || loginUserJson==''){
-              // 沒有認證資訊轉中冠重新登入頁
-              LoginUtil.relogin(this);
-              return false;
-          }
-          LoginUtil.saveToStorage(JSON.parse(decodeURIComponent(loginUserJson)));
-          return true;
+          return this.verifyLogin(resp);
         }),
         map( resp =>{
             return resp.body;

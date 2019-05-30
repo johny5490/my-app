@@ -29,7 +29,7 @@ export class Util{
         document.cookie = name+"="+ encodeURIComponent(value) + path;
     }
 
-    /*routerLink在重複點擊時不會刷新畫面，故先連結一個不存在頁面再轉來達到刷新效果，
+    /*routerLink在重複點擊時不會刷新畫面，故先連結一個不存在頁面再轉，來達到刷新效果，
     * 比使用onSameUrlNavigation要簡單的多
     */
     static routerLinkReload(router:Router, url:string){
@@ -44,4 +44,24 @@ export class Util{
         }
         return false;
     }
+
+    /*
+    * 取得目前url不指定port
+    */
+   static getUrlNoPort(){
+    /*
+    console.log("protocol=" + window.location.protocol + "," +
+                "host=" + window.location.host +","+ "" + 
+                "pathname=" + window.location.pathname);
+    */
+    var url = window.location.protocol + "//" + 
+              Util.removePort(window.location.host) ;
+    //console.log("url=" + url);
+    return url;
+  }
+
+   private static removePort(host: string){
+    var idx: number = host.indexOf(":");
+    return idx>0 ? host.substring(0, idx) : host;    
+  }
 }

@@ -69,7 +69,32 @@ export class AppComponent implements OnInit{
     //routes.push({path:'heroes', component:heroCom});
   
     //this.router.resetConfig(routes);
-    
+    var properyManage = {
+      label: '資產管理',
+      expanded: true,
+      //icon: 'pi pi-fw pi-plus',
+      items: [
+        //{label: '屬性設定', icon: 'pi pi-fw pi-pencil', routerLink:['/atr-edit']},
+        {
+          label: '屬性設定', icon: 'pi pi-fw pi-pencil', command: (event) => {
+            //event.originalEvent: Browser event
+            //event.item: menuitem metadata
+            Util.routerLinkReload(this.router, '/atr-edit');
+          }
+        },
+        {
+          label: '資產種類設定', icon: 'pi pi-fw pi-pencil', command: (event) => {
+            Util.routerLinkReload(this.router, '/asset-type-edit');
+          }
+        },
+        {
+          label: '資產設定', icon: 'pi pi-fw pi-pencil', command: (event) => {
+            Util.routerLinkReload(this.router, '/asset-edit');
+          }
+        },
+
+      ]
+    };
 
     this.menuItems = [
       {
@@ -77,7 +102,9 @@ export class AppComponent implements OnInit{
         icon: 'pi pi-pi pi-bars',
         expanded: true,
         items: [
-            {label: '首頁', icon: 'pi pi-fw  pi-home', routerLink: [''] },
+            {label: '首頁', icon: 'pi pi-fw  pi-home', command:(event) =>{
+                window.location.href = Util.getUrlNoPort() + "/erp/ds/dsjsp00";
+            } },
             {label: '通訊錄管理',expanded: true,  
              items: [
                   {label: '通訊錄維護', icon: 'pi pi-fw pi-pencil', command:(event) => {    
@@ -85,29 +112,10 @@ export class AppComponent implements OnInit{
                      } }, 
                   {label: '通訊錄清單', icon: 'pi pi-fw pi-users', routerLink: ['/contact-list'] }, 
              ]},
-            {label: '資產管理',
-              expanded: true, 
-              //icon: 'pi pi-fw pi-plus',
-              items: [
-                  //{label: '屬性設定', icon: 'pi pi-fw pi-pencil', routerLink:['/atr-edit']},
-                  {label: '屬性設定', icon: 'pi pi-fw pi-pencil', command:(event) => {
-                              //event.originalEvent: Browser event
-                              //event.item: menuitem metadata
-                              Util.routerLinkReload(this.router, '/atr-edit');
-                          }},
-                  {label: '資產種類設定', icon: 'pi pi-fw pi-pencil', command:(event) => {
-                              Util.routerLinkReload(this.router, '/asset-type-edit');
-                        }},
-                  {label: '資產設定', icon: 'pi pi-fw pi-pencil',command:(event) => {
-                              Util.routerLinkReload(this.router, '/asset-edit');
-                        }},
-                  
-              ]
-            },
-            {label: '功能建置中', icon: 'pi pi-fw pi-spin pi-star-o', routerLink: [''] },
+            
+            {label: '功能建置中', icon: 'pi pi-fw pi-spin pi-star-o',items:[properyManage]},
         ]
     },
-    
    ];
   }
 

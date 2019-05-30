@@ -50,7 +50,6 @@ export class LoginUtil{
     }
 
     static relogin(dataService:DataService){
-        console.log("relogin");
         var x = screen.availWidth / 3;
         var y = screen.availHeight / 3;
         var para = "top=" + y + ", left=" + x + ", height=200, width=380";
@@ -63,8 +62,7 @@ export class LoginUtil{
         var loop = setInterval(function() {   
             if(cancelLoging==false && loginWin.closed) {
                 cancelLoging=true;
-                clearInterval(loop);  
-                console.log('closed');  
+                clearInterval(loop);
                 dataService.postJsonDefaultParam("osjcLoginCtrl/doNothing").subscribe(()=>{},error=>console.log(error));
             }  
         }, 1000);

@@ -14,11 +14,14 @@ import {Carrier} from '../dataExchange/Carrier';
 export class HeaderComponent implements OnInit {
   
   loginUserVO:LoginUserVO ;
-  sysTime:Date;
-  
-  timeInterval;
+  //sysTime:Date;
+
+  //server系統時間
+  systime:string;
+
+  //timeInterval;
   //每隔1分鐘更新系統時間
-  refreshTime=60000;
+  //refreshTime=60000;
 
   ctrlUrl = "osjcLoginCtrl/";
 
@@ -29,10 +32,19 @@ export class HeaderComponent implements OnInit {
         //this.refreshSysTime();
     });
     
+    dataService.eventBus.subscribe(event=>{
+        if(event.name="systime"){
+           this.systime = event.value.substring(0,4) + "/" +  
+           event.value.substring(4,6) + "/" +
+           event.value.substring(6,8) + " " + 
+           event.value.substring(9 , 11) + ":" + 
+           event.value.substring(11 , 13) + ":" + 
+           event.value.substring(13);
+        }
+    });
     //this.refreshSysTime();
     
   }
-
   /*定時更新系統時間
   refreshSysTime(){
     if(LoginUtil.isLogin()){
@@ -42,7 +54,7 @@ export class HeaderComponent implements OnInit {
       clearInterval(this.timeInterval);
     }  
   }
-  */
+  
 
   getSysTime(){
     this.dataService.postJsonDefaultParam("/open/LoginCtrl/getSysTime.do").subscribe((carr:Carrier)=>{
@@ -57,7 +69,7 @@ export class HeaderComponent implements OnInit {
         this.getSysTime();
     },this.refreshTime);  
   }
-
+  */
   ngOnInit() {
     
     this.loginUserVO = LoginUtil.getLoginUser();
