@@ -15,4 +15,6 @@ export class ContactVO{
     createDate?:Date;
     updateUser?:string;
     updateDate?:Date;
+    createUserName?:string;
+    updateUserName?:string;
 }

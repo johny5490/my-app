@@ -1,7 +1,14 @@
 <p-panel>
 	<p-header >
-		<button  pButton label="匯出" (click)="export()" ></button>&nbsp;
-		訊息：{{msg}}
+		<table width="100%"  cellpadding="1" cellspacing="1">
+				<tr>
+					<td>
+						<button  pButton label="匯出" (click)="export()" ></button>&nbsp;
+					</td>
+					<td class="myLabel" width="10%">訊息</td>
+					<td width="40%"><font style="color: red">{{msg}}</font></td>
+				</tr>
+		</table>
 	</p-header>
 <p-table [value]="empVOs" autoLayout="true">
 	<ng-template pTemplate="header">
