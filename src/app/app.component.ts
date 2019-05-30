@@ -113,7 +113,7 @@ export class AppComponent implements OnInit{
                   {label: '通訊錄清單', icon: 'pi pi-fw pi-users', routerLink: ['/contact-list'] }, 
              ]},
             
-            {label: '功能建置中', icon: 'pi pi-fw pi-spin pi-star-o',items:[properyManage]},
+            //{label: '功能建置中', icon: 'pi pi-fw pi-spin pi-star-o',items:[properyManage]},
         ]
     },
    ];
