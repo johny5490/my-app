@@ -10,6 +10,26 @@
 				</tr>
 		</table>
 	</p-header>
+	<table width="100%"  cellpadding="1" cellspacing="1">
+		<tr >
+			<td width="15%">全公司在職人數：{{companyWorking}}人</td>
+		</tr>
+	</table>
+	<table width="100%"  cellpadding="1" cellspacing="1">
+		<tr ><td  class="myLabel" [attr.rowspan]="oneLevelWorkingArray.length+2" width="15%">一級單位在職人數</td><td></td></tr>
+		<tr><td class="myLabel">部門</td><td class="myLabel">人數</td></tr>
+		<tr *ngFor="let oneLevelWorking of oneLevelWorkingArray" class="myTr" style="text-align: center">
+			<td>{{oneLevelWorking.DEPNO}}</td><td>{{oneLevelWorking.WORKNUM}}</td>
+		</tr>
+	</table>
+	<table width="100%"  cellpadding="1" cellspacing="1">
+			<tr ><td class="myLabel" [attr.rowspan]="twoLevelWorkingArray.length+2" width="15%" >二級單位在職人數</td><td></td></tr>
+			<tr><td class="myLabel">部門</td><td class="myLabel">人數</td></tr>
+			<tr *ngFor="let twoLevelWorking of twoLevelWorkingArray" class="myTr" style="text-align: center">
+				<td>{{twoLevelWorking.DEPNO}}</td><td>{{twoLevelWorking.WORKNUM}}</td>
+			</tr>
+	</table>
+	<br>
 <p-table [value]="empVOs" autoLayout="true">
 	<ng-template pTemplate="header">
 		<tr>

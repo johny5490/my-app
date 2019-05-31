@@ -12,11 +12,17 @@ import {LoginUtil} from '../util/LoginUtil';
   styleUrls: ['./contact-list.component.css']
 })
 export class ContactListComponent implements OnInit {
-  
+  msg:string="歡迎";
   ctrlUrl = "oajcContactListCtrl/";
 
   empVOs:Array<EmpVO>=new Array();
-  msg:string="歡迎";
+  //一級單位在職人員,每個map為<部門,人數>
+  oneLevelWorkingArray = new Array();
+  //二級單位在職人員
+  twoLevelWorkingArray = new Array();
+  //全公司在職人員人數
+  companyWorking:string;
+
   constructor(private dataService:DataService, private http: HttpClient) { }
 
   ngOnInit() {
@@ -31,6 +37,9 @@ export class ContactListComponent implements OnInit {
               
               //this.empVOs = carrier.attributeMap["empList"];
               this.setEmpVOs(carrier);
+              this.oneLevelWorkingArray = carrier.attributeMap["oneLevelWorkingArray"];
+              this.twoLevelWorkingArray = carrier.attributeMap["twoLevelWorkingArray"];
+              this.companyWorking = carrier.attributeMap["companyWorking"];
             },error=>console.log( error));
   }
 
