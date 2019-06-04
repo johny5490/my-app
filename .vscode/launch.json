@@ -4,6 +4,7 @@
 {
     "version": "2.0.0",
     "configurations": [
+
         {
             "name": "Launch Chrome my-app on Angular CLI Server",
             "type": "chrome",
@@ -12,7 +13,7 @@
             "webRoot": "${workspaceFolder}"
         },
         {
-            "name": "Launch Chrome my-app on Angular CLI Server¡]1 ª½±µ¦s¨ú¡^",
+            "name": "Launch Chrome my-app on Angular CLI Serverï¿½]1 ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½^",
             "type": "chrome",
             "request": "launch",
             "url": "http://localhost:4200/#",
