@@ -1,57 +1,65 @@
-<p-panel>
-	<p-header >
-		<table width="100%"  cellpadding="1" cellspacing="1">
-				<tr>
-					<td>
-						<button  pButton label="匯出" (click)="export()" ></button>&nbsp;
-					</td>
-					<td class="myLabel" width="10%">訊息</td>
-					<td width="40%"><font style="color: red">{{msg}}</font></td>
-				</tr>
-		</table>
-	</p-header>
-	<table width="100%"  cellpadding="1" cellspacing="1">
-		<tr >
-			<td width="15%">全公司在職人數：{{companyWorking}}人</td>
-		</tr>
-	</table>
-	<table width="100%"  cellpadding="1" cellspacing="1">
-		<tr ><td  class="myLabel" [attr.rowspan]="oneLevelWorkingArray.length+2" width="15%">一級單位在職人數</td><td></td></tr>
-		<tr><td class="myLabel">部門</td><td class="myLabel">人數</td></tr>
-		<tr *ngFor="let oneLevelWorking of oneLevelWorkingArray" class="myTr" style="text-align: center">
-			<td>{{oneLevelWorking.DEPNO}}</td><td>{{oneLevelWorking.WORKNUM}}</td>
-		</tr>
-	</table>
-	<table width="100%"  cellpadding="1" cellspacing="1">
-			<tr ><td class="myLabel" [attr.rowspan]="twoLevelWorkingArray.length+2" width="15%" >二級單位在職人數</td><td></td></tr>
-			<tr><td class="myLabel">部門</td><td class="myLabel">人數</td></tr>
-			<tr *ngFor="let twoLevelWorking of twoLevelWorkingArray" class="myTr" style="text-align: center">
-				<td>{{twoLevelWorking.DEPNO}}</td><td>{{twoLevelWorking.WORKNUM}}</td>
-			</tr>
-	</table>
-	<br>
-<p-table [value]="empVOs" autoLayout="true">
-	<ng-template pTemplate="header">
-		<tr>
-			<th>單位</th>
-			<th>職稱</th>
-			<th>姓名</th>
-			<th>職工編號</th>
-			<th>分機</th>
-			<th>直播碼</th>
-			<th>電子郵件</th>
-		</tr>
-	</ng-template>
-	<ng-template pTemplate="body" let-empVO>
-	 	<tr>
-			<td>{{empVO.depNo}}</td>
-			<td>{{empVO.postName}}</td>
-			<td>{{empVO.chiName}}</td>
-			<td>{{empVO.empNo}}</td>
-			<td>{{empVO.phone}}</td>
-			<td>{{empVO.directNo}}</td>
-			<td>{{empVO.email}}</td>
-		</tr>
-	</ng-template>
-</p-table>
-</p-panel>
+<p-tabView >
+		<p-tabPanel header="通訊錄清單">
+				<p-panel>
+					<p-header >
+						<table width="100%"  cellpadding="1" cellspacing="1">
+							 	<tr>
+									<td>
+										<button  pButton label="匯出" (click)="export()" ></button>&nbsp;
+									</td>
+									<td class="myLabel" width="10%">訊息</td>
+									<td width="40%"><font style="color: red">{{msg}}</font></td>
+								</tr>
+						</table>
+					</p-header>
+				<p-table [value]="empVOs" autoLayout="true">
+						<ng-template pTemplate="header">
+							<tr>
+								<th>單位</th>
+								<th>職稱</th>
+								<th>姓名</th>
+								<th>職工編號</th>
+								<th>分機</th>
+								<th>手機直撥碼</th>
+								<th>電子郵件</th>
+							</tr>
+						</ng-template>
+						<ng-template pTemplate="body" let-empVO>
+							 <tr>
+								<td>{{empVO.depNo}}</td>
+								<td>{{empVO.postName}}</td>
+								<td>{{empVO.chiName}}</td>
+								<td>{{empVO.empNo}}</td>
+								<td>{{empVO.phone}}</td>
+								<td>{{empVO.directNo}}</td>
+								<td>{{empVO.email}}</td>
+							</tr>
+						</ng-template>
+					</p-table>
+					</p-panel>	
+		</p-tabPanel>
+		<p-tabPanel header="在職人員統計">
+			
+	
+						<table width="100%"  cellpadding="1" cellspacing="1">
+							<tr >
+								<td width="15%">全公司在職人數：{{companyWorking}}人</td>
+							</tr>
+						</table>
+						<table width="100%"  cellpadding="1" cellspacing="1">
+							<tr ><td  class="myLabel" [attr.rowspan]="oneLevelWorkingArray.length+2" width="15%">一級單位在職人數</td><td></td></tr>
+							<tr><td class="myLabel">部門</td><td class="myLabel">人數</td></tr>
+							<tr *ngFor="let oneLevelWorking of oneLevelWorkingArray" class="myTr" style="text-align: center">
+								<td>{{oneLevelWorking.DEPNO}}</td><td>{{oneLevelWorking.WORKNUM}}</td>
+							</tr>
+						</table>
+						<table width="100%"  cellpadding="1" cellspacing="1">
+								<tr ><td class="myLabel" [attr.rowspan]="twoLevelWorkingArray.length+2" width="15%" >二級單位在職人數</td><td></td></tr>
+								<tr><td class="myLabel">部門</td><td class="myLabel">人數</td></tr>
+								<tr *ngFor="let twoLevelWorking of twoLevelWorkingArray" class="myTr" style="text-align: center">
+									<td>{{twoLevelWorking.DEPNO}}</td><td>{{twoLevelWorking.WORKNUM}}</td>
+								</tr>
+						</table>
+				
+		</p-tabPanel>
+</p-tabView>
