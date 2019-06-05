@@ -71,14 +71,15 @@ export class HeaderComponent implements OnInit {
   }
   */
   ngOnInit() {
-    
+    /*
     this.loginUserVO = LoginUtil.getLoginUser();
+    
     if(this.loginUserVO.userId===""){
       //this.router.navigate(["login"]);
       LoginUtil.relogin(this.dataService);
     }
-    
-   
+    */
+    //this.dataService.postJsonDefaultParam(this.ctrlUrl+"doNothing").subscribe(()=>{},error=>{console.log(error)});
   }
 
   logout (){

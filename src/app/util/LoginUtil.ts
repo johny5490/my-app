@@ -54,22 +54,23 @@ export class LoginUtil{
         var y = screen.availHeight / 3;
         var para = "top=" + y + ", left=" + x + ", height=200, width=380";
         //此段邏輯參考中冠程式dejtmf.jss relogin function
-        var loginWin = window.open('http://' + window.location.hostname + '/erp/ds/jsp/dsjjsn2.jsp', 'LOGINWIN', para);
+
+        var samllPara = "top=" + y + ", left=" + x + ", height=1, width=1";
+        var tempWin = window.open('', 'OATemp', samllPara);
+        var loginWin = tempWin.open('http://' + window.location.hostname + '/erp/ds/jsp/dsjjsn2.jsp', 'LOGINWIN', para);
         //在Chrome且雙螢幕時會發生錯誤
         //loginWin.moveTo(screen.availWidth / 3, screen.availHeight / 3);
         
-        var cancelLoging = false;
-        var loop = setInterval(function() {   
-            if(cancelLoging==false && loginWin.closed) {
-                cancelLoging=true;
+        
+        var loop = setInterval(function() {
+            
+            if(loginWin.closed) {                
                 clearInterval(loop);
+                tempWin.close();
                 dataService.postJsonDefaultParam("osjcLoginCtrl/doNothing").subscribe(()=>{},error=>console.log(error));
             }  
         }, 1000);
         
-       
-        //loginWin.addEventListener("close", function(){console.log("close")});
-
     }
 
     
