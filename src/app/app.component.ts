@@ -112,12 +112,23 @@ export class AppComponent implements OnInit{
                      } }, 
                   {label: '通訊錄清單', icon: 'pi pi-fw pi-users', routerLink: ['/contact-list'] }, 
              ]},
-            
-            //{label: '功能建置中', icon: 'pi pi-fw pi-spin pi-star-o',items:[properyManage]},
+             this.genMealNode(),
+            {label: '功能建置中', icon: 'pi pi-fw pi-spin pi-star-o',items:[properyManage]},
         ]
     },
    ];
   }
 
- 
+  genMealNode(){
+    var mealNode ={label: '便當管理',expanded: true,  
+      items: [
+         {label: '廠商和餐點基本資料維護', icon: 'pi pi-fw pi-pencil', command:(event) => {    
+             Util.routerLinkReload(this.router, '/vendor-meal-edit');
+            } }, 
+         {label: '廠商安排作業', icon: 'pi pi-fw pi-pencil', routerLink: ['/contact-list'] }, 
+         {label: '訂餐作業', icon: 'pi pi-fw pi-pencil', routerLink: ['/contact-list'] }, 
+         {label: '報表', icon: 'pi pi-fw pi-search', routerLink: ['/contact-list'] },
+      ]};
+    return mealNode;
+  }
 }

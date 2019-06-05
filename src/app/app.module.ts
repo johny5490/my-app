@@ -32,6 +32,8 @@ import { ContactEditComponent } from './contact-edit/contact-edit.component';
 import { AssetTypeAtrRelEditComponent } from './asset-type-atr-rel-edit/asset-type-atr-rel-edit.component';
 import {PaginatorModule} from 'primeng/paginator';
 import {HashLocationStrategy,PathLocationStrategy,LocationStrategy} from '@angular/common';
+import { VendorMealEditComponent } from './vendor-meal-edit/vendor-meal-edit.component';
+import { VendorEditComponent } from './vendor-edit/vendor-edit.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import {HashLocationStrategy,PathLocationStrategy,LocationStrategy} from '@angul
     AssetAtrValComponent,
     ContactEditComponent,
     AssetTypeAtrRelEditComponent,
+    VendorMealEditComponent,
+    VendorEditComponent,
    
   ],
   imports: [

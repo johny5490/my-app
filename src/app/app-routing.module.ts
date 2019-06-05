@@ -10,6 +10,7 @@ import {LoginComponent} from './login/login.component';
 import {AuthGuard} from './AuthGuard';
 import {AssetEditComponent} from './asset-edit/asset-edit.component';
 import {ContactEditComponent} from './contact-edit/contact-edit.component';
+import {VendorMealEditComponent} from './vendor-meal-edit/vendor-meal-edit.component';
 
 const routes: Routes = [
   //{ path: 'login', component:LoginComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'asset-edit', component: AssetEditComponent, canActivate: [AuthGuard]},
   { path: 'contact-edit', component:ContactEditComponent, canActivate: [AuthGuard]},
   { path: 'picker', loadChildren:'./module/shared-module/shared-module.module#SharedModule' },
+  { path: 'vendor-meal-edit', component:VendorMealEditComponent, canActivate: [AuthGuard]},
   //{ path: 'sample/body', component: SampleBodyComponent },
   //{ path: '**', redirectTo: '404'},
 ];
