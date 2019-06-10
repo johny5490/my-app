@@ -13,7 +13,7 @@ import {Carrier} from '../dataExchange/Carrier';
 })
 export class HeaderComponent implements OnInit {
   
-  loginUserVO:LoginUserVO ;
+  loginUserVO:LoginUserVO = new LoginUserVO() ;
   //sysTime:Date;
 
   //server系統時間

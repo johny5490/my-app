@@ -13,36 +13,40 @@
           <tr>
             <td class="myLabel">職工編號</td>
             <td><app-user-picker [(value)]="contactVO_qry.empNo" ></app-user-picker></td>
+            <td class="myLabel">部門代碼</td>
+            <td><input type="text" pInputText [(ngModel)]="contactVO_qry.deptNo"/></td>
             <td class="myLabel">分機</td>
             <td><input type="text" pInputText [(ngModel)]="contactVO_qry.phone" /></td>
-            <td class="myLabel">手機</td>
-            <td><input type="text" pInputText [(ngModel)]="contactVO_qry.cellPhone"/></td>
           </tr>
           <tr>
+            <td class="myLabel">手機</td>
+            <td><input type="text" pInputText [(ngModel)]="contactVO_qry.cellPhone"/></td>
             <td class="myLabel">手機直撥碼</td>
             <td><input type="text" pInputText [(ngModel)]="contactVO_qry.directNo"/></td>
             <td class="myLabel">Email</td>
             <td><input type="text" pInputText [(ngModel)]="contactVO_qry.contactEmail" /></td>
-            <td class="myLabel">備用Email</td>
-            <td><input type="text" pInputText [(ngModel)]="contactVO_qry.contactEmail2" /></td>
           </tr>
           <tr>
+              <td class="myLabel">備用Email</td>
+              <td><input type="text" pInputText [(ngModel)]="contactVO_qry.contactEmail2" /></td>
               <td class="myLabel">Line ID</td>
               <td><input type="text" pInputText [(ngModel)]="contactVO_qry.line"/></td>
               <td class="myLabel">Skype</td>
               <td><input type="text" pInputText [(ngModel)]="contactVO_qry.skype"/></td>
-              <td class="myLabel"> 臉書</td>
-              <td><input type="text" pInputText [(ngModel)]="contactVO_qry.facebook"/></td>
             </tr>
             <tr>
+              <td class="myLabel"> 臉書</td>
+              <td><input type="text" pInputText [(ngModel)]="contactVO_qry.facebook"/></td>
               <td class="myLabel">辦公室位置</td>
-               <td><input type="text" pInputText [(ngModel)]="contactVO_qry.location"/></td>
+              <td><input type="text" pInputText [(ngModel)]="contactVO_qry.location"/></td>
+               
             </tr>                                    
         </table>
         <p-paginator #paginator [rows]="rowsPerPage" [(first)]="firstRowIndex" [totalRecords]="totalRecords" (onPageChange)="queryByPage($event)"></p-paginator>
     
       <table width="100%"  cellpadding="5" cellspacing="1">
         <tr  style="background-color: #f7f7f7">
+          <th class="myLabel">部門代碼</th>
           <th class="myLabel">職工編號</th>
           <th class="myLabel">姓名</th>
           <th class="myLabel">分機</th>
@@ -60,6 +64,7 @@
           <th class="myLabel">修改日期</th>
         </tr>
         <tr *ngFor="let contactVO of contactVOs" (click)="copyToEdit($event, contactVO)" style="cursor: pointer;" class="myTr" >
+            <td >{{contactVO.deptNo}}</td>
             <td >{{contactVO.empNo}}</td>
             <td >{{contactVO.empName}}</td>
             <td >{{contactVO.phone}}</td>
