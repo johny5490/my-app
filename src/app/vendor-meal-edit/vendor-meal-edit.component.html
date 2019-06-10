@@ -1,8 +1,21 @@
-<p-tabView >
-  <p-tabPanel header="廠商基本資料">
-      <app-vendor-edit></app-vendor-edit>
-  </p-tabPanel>
- <p-tabPanel header="餐點基本資料" >
-    
-</p-tabPanel>
-</p-tabView>
+<p-panel>
+  <p-header >
+    <table width="100%"  cellpadding="1" cellspacing="1">
+      <tr>
+        <td class="myLabel" width="15%"> 廠商代碼</td>
+        <td >
+          <input type="text" pInputText [(ngModel)]="vendorId_qry" >
+          <button pButton type="button" (click)="query()">查詢</button>
+          <button pButton type="button" (click)="advanceQuery()" >進階查詢</button>
+        </td>
+      </tr>
+    </table>
+  </p-header>
+  <p-tabView >
+      <p-tabPanel header="廠商基本資料">
+          <app-vendor-edit></app-vendor-edit>
+      </p-tabPanel>
+      <p-tabPanel header="餐點基本資料" >
+      </p-tabPanel>
+  </p-tabView>
+</p-panel>

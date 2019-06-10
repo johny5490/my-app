@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VendorMealEditComponent implements OnInit {
 
+  vendorId_qry:string;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  query(){
+
+  }
+
+  advanceQuery(){
+    
+  }
 }
