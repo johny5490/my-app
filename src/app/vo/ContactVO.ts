@@ -11,6 +11,7 @@ export class ContactVO{
     skype?:string;
     facebook?:string;
     location?:string;
+    deptNo?:string;
     createUser?:string;
     createDate?:Date;
     updateUser?:string;
