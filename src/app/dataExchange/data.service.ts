@@ -163,7 +163,7 @@ export class DataService {
     var systime = resp.headers.get('JNY-systime');
 
     //console.log("systime=" + systime);
-
+    
     if(systime!=null && systime!=undefined && systime!=''){
       var event={name:"systime", value:systime};  
       this.eventBus.emit(event);
