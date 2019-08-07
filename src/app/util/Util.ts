@@ -64,4 +64,29 @@ export class Util{
     var idx: number = host.indexOf(":");
     return idx>0 ? host.substring(0, idx) : host;    
   }
+
+  static getCalendarLocale(){
+    //gitHub上有Bug 回報，dataFormat官網文件有寫到但卻沒有用
+    return {
+      firstDayOfWeek: 0,
+      dayNames: ["週日", "周一", "周二", "周三", "周四", "周五", "周六"],
+      dayNamesShort: ["週日", "周一", "周二", "周三", "周四", "周五", "周六"],
+      dayNamesMin: ["週日", "周一", "周二", "周三", "周四", "周五", "周六"],
+      monthNames: [ "一月", "二月", "三月", "四月", "五月", "六月","七月", "八月", "九月", "十月", "十一月", "十二月" ],
+      monthNamesShort: [ "一月", "二月", "三月", "四月", "五月", "六月","七月", "八月", "九月", "十月", "十一月", "十二月" ],
+      today: '今天',
+      clear: '清除',
+      //dateFormat: 'yy/mm/dd',
+      weekHeader: 'Wk'
+    };
+    
+  }
+
+  //yyyymmdd轉成yyyy/mm/dd
+  static toSlashDate(date:string){
+    if(date==null || date==undefined || date==""){
+        return "";
+    }
+    return date.substring(0,4) + "/" + date.substring(4,6)+"/"+date.substring(6);
+  }
 }

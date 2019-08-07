@@ -1,21 +1,28 @@
 <p-panel>
   <p-header >
-    <table width="100%"  cellpadding="1" cellspacing="1">
-      <tr>
-        <td class="myLabel" width="15%"> 廠商代碼</td>
-        <td >
-          <input type="text" pInputText [(ngModel)]="vendorId_qry" >
-          <button pButton type="button" (click)="query()">查詢</button>&nbsp;
-          <button pButton type="button" (click)="advanceQuery()" >進階查詢</button>
-        </td>
-      </tr>
-    </table>
+      <table width="100%"  cellpadding="1" cellspacing="1">
+          <tr>
+            <td class="myLabel" width="15%"> 廠商代碼</td>
+            <td >
+              <input type="text" pInputText [(ngModel)]="vendorId_qry" >
+              <button pButton type="button" (click)="query()">查詢</button>&nbsp;
+              <button pButton type="button" (click)="advanceQuery()" >進階查詢</button>
+              <p-dialog header="廠商進階查詢" [(visible)]="visible"   [responsive]="true" 
+                        [style]="{width: '800px', minWidth: '600px'}"  [maximizable]="true" 
+                        [baseZIndex]="10000" [contentStyle]="{'overflow':'visible'}" >
+                        <app-vendor-advance-query [(visible)]="visible"></app-vendor-advance-query>
+              </p-dialog>
+            </td>
+          </tr>
+        </table>
   </p-header>
-  <p-tabView >
-      <p-tabPanel header="廠商基本資料">
-          <app-vendor-edit></app-vendor-edit>
+  <p-tabView [(activeIndex)]="activeTabIndex" (onChange)="handleTabChange($event)">
+      <p-tabPanel header="廠商基本資料"  >
+          
+            <app-vendor-edit #vendorEdit></app-vendor-edit>
       </p-tabPanel>
-      <p-tabPanel header="餐點基本資料" >
+      <p-tabPanel header="餐點基本資料"  >
+        <app-meal-edit #mealEdit ></app-meal-edit>
       </p-tabPanel>
   </p-tabView>
 </p-panel>

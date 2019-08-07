@@ -1,0 +1,67 @@
+<table width="100%">
+  <tr>
+    <td style="vertical-align: top" width="25%">
+        <table width="100%"  cellpadding="1" cellspacing="1">
+          <tr>
+              <th colspan="2">
+                <app-paginator #paginator [dataSource]="dataSource" 
+                              (onAfterQuery)="onAfterQuery($event)">
+                </app-paginator>
+              </th>
+          </tr>
+          <tr><td class="myLabel">餐點代碼</td><td class="myLabel">餐點名稱</td></tr>
+          <tr *ngFor="let mealMap of mealMapArray" (click)="query(mealMap)" style="cursor: pointer;" class="myTr" >
+              <td>{{mealMap["MEALID"]}}</td>
+              <td>{{mealMap["MEALNAME"]}}</td>
+          </tr>
+        </table>
+        
+    </td>
+    <td style="vertical-align: top">
+        <p-panel>
+            <p-header >
+               <table width="100%" cellpadding="1" cellspacing="1">
+                  <tr>
+                      <td>
+                        <button  pButton label="新增" (click)="create()" ></button>&nbsp;
+                        <button  pButton label="修改" (click)="update()" ></button>&nbsp;
+                        <button  pButton label="刪除" (click)="delete()" ></button>&nbsp;
+                      </td>
+                      <td class="myLabel" width="10%"><font style="color: white">訊息</font></td>
+                      <td width="40%"><font style="color: red">{{msg}}</font></td>
+                  </tr>
+                </table>
+            </p-header>
+                <table width="100%" cellpadding="1" cellspacing="1">
+                  <tr>
+                    <td class="myLabel">廠商代碼：</td>
+                    <td width="25%"><p-dropdown [options]="vendorVOs" [(ngModel)]="mealVO.vendorId" ></p-dropdown><font color="red">*</font></td>
+                    <td class="myLabel">餐點代碼：</td>
+                    <td ><input type="text" pInputText [(ngModel)]="mealVO.mealId"/><font color="red">*</font></td>
+                    <td class="myLabel">餐點名稱：</td>
+                    <td><input type="text" pInputText [(ngModel)]="mealVO.mealName"/></td>
+                  </tr>
+                  <tr>
+                      <td class="myLabel">餐點金額：</td>
+                      <td ><input type="text" pInputText [(ngModel)]="mealVO.cost"/><font color="red">*</font></td>
+                      <td class="myLabel">備註：</td>
+                      <td ><input type="text" pInputText [(ngModel)]="mealVO.remark"/></td>              
+                    </tr>
+                  <tr>
+                      <td  class="myLabel">新增人員：</td>
+                      <td >{{mealVO.createUserName}}</td>
+                      <td  class="myLabel">新增日期：</td>
+                      <td >{{mealVO.createDate}}</td>
+                  </tr>
+                  <tr>
+                      <td  class="myLabel">修改人員：</td>
+                      <td >{{mealVO.updateUserName}}</td>
+                      <td  class="myLabel">修改日期：</td>
+                      <td >{{mealVO.updateDate}}</td>           
+                  </tr>                      
+                </table>
+          </p-panel>   
+    </td>
+  </tr>
+</table>
+

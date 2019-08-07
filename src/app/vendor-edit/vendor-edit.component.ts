@@ -3,6 +3,7 @@ import {DataService} from '../dataExchange/data.service';
 import { VendorVO } from '../vo/VendorVO';
 import {Carrier} from '../dataExchange/Carrier';
 import {Util} from '../util/Util';
+
 @Component({
   selector: 'app-vendor-edit',
   templateUrl: './vendor-edit.component.html',
@@ -13,8 +14,6 @@ export class VendorEditComponent implements OnInit {
   ctrlUrl = "oajcVendorCtrl/";
   vendorVO:VendorVO = new VendorVO();
   msg:string ="歡迎";
-
-
 
   constructor(private dataService:DataService) { }
 

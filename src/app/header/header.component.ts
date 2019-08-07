@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
     });
     
     dataService.eventBus.subscribe(event=>{
-        if(event.name="systime"){
+        if(event.name=="systime"){
            this.systime = event.value.substring(0,4) + "/" +  
            event.value.substring(4,6) + "/" +
            event.value.substring(6,8) + " " + 

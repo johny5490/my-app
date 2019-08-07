@@ -1,0 +1,45 @@
+<p-panel>
+  <p-header >
+     <table width="100%" cellpadding="1" cellspacing="1">
+        <tr>
+          <td class="myLabel" width="15%">訂購日期 </td>
+          <td><p-calendar [(ngModel)]="orderDateS_qry"  [locale]="twLocale" showIcon="true" dateFormat="yy/mm/dd"  selectOtherMonths="true" dataType="string"></p-calendar>~<p-calendar [(ngModel)]="orderDateE_qry" showIcon="true"  [locale]="twLocale" dateFormat="yy/mm/dd" selectOtherMonths="true" dataType="string"></p-calendar>&nbsp;&nbsp;
+          <button  pButton label="查詢" (click)="query()" ></button>
+          </td>
+        </tr>
+     </table>   
+     <table width="100%" cellpadding="1" cellspacing="1">
+        <tr>
+            <td>
+              <button  pButton label="新增" (click)="create()" ></button>&nbsp;
+              <button  pButton label="修改" (click)="update()" ></button>&nbsp;
+              <button  pButton label="刪除" (click)="delete()" ></button>&nbsp;
+              <button  pButton label="增一列" (click)="addNewRow()" ></button>&nbsp;
+            </td>
+            <td class="myLabel" width="10%"><font style="color: white">訊息</font></td>
+            <td width="40%"><font style="color: red">{{msg}}</font></td>
+        </tr>
+      </table>
+  </p-header>
+      <table width="100%" cellpadding="1" cellspacing="1">
+        <tr>
+            <td class="myLabel"><p-checkbox value="1" (onChange)="checkAll()" [(ngModel)]="checkAllValue"></p-checkbox></td>
+            <td class="myLabel" >訂購日期<font style="color: red">*</font></td>
+            <td class="myLabel">時段<font style="color: red">*</font></td>
+            <td class="myLabel">廠商<font style="color: red">*</font></td>
+            <td class="myLabel">截止時間</td>
+        </tr>
+        <tr *ngFor="let vendorScheduleVO of VendorScheduleVOs"  class="myTr">
+          <td style="text-align: center"><p-checkbox value="1" [(ngModel)]="vendorScheduleVO.checkBox" ></p-checkbox></td>
+          <td ><p-calendar [(ngModel)]="vendorScheduleVO.orderDate_t"  [locale]="twLocale" showIcon="true" dateFormat="yy/mm/dd" selectOtherMonths="true" dataType="string" ></p-calendar></td>
+          <td><p-dropdown [options]="orderIntervalOptions" [(ngModel)]="vendorScheduleVO.orderInterval" [style]="{'width':'100%'}" (onChange)="setDeadLine(vendorScheduleVO)" ></p-dropdown></td>
+          <td><p-dropdown [options]="vendorVOs" [(ngModel)]="vendorScheduleVO.vendorId" [style]="{'width':'100%'}" ></p-dropdown></td>
+          <td>
+              {{vendorScheduleVO.deadline_t}}
+              <!--
+              <p-calendar [(ngModel)]="vendorScheduleVO.deadline_t" [timeOnly]="true" dataType="string" [disabled]="true"></p-calendar>
+              -->
+          </td>
+        </tr>               
+      </table>
+</p-panel>   

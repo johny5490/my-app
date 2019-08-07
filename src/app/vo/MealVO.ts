@@ -1,9 +1,9 @@
-export class VendorVO{
+export class MealVO{
+    mealId?:string;
+    mealName?:string;
     vendorId?:string;
-    vendorName?:string;
-    phone?:string;
-    address?:string;
-    remark?:string;
+    cost?:number;
+    remark:string;
     createUser?:string;
     createUserName?:string;
     createDate?:string;
