@@ -32,6 +32,16 @@ import { ContactEditComponent } from './contact-edit/contact-edit.component';
 import { AssetTypeAtrRelEditComponent } from './asset-type-atr-rel-edit/asset-type-atr-rel-edit.component';
 import {PaginatorModule} from 'primeng/paginator';
 import {HashLocationStrategy,PathLocationStrategy,LocationStrategy} from '@angular/common';
+import { VendorMealEditComponent } from './vendor-meal-edit/vendor-meal-edit.component';
+import { VendorEditComponent } from './vendor-edit/vendor-edit.component';
+import { MealEditComponent } from './meal-edit/meal-edit.component';
+import { VendorAdvanceQueryComponent } from './vendor-advance-query/vendor-advance-query.component';
+import {DialogModule} from 'primeng/dialog';
+import { VendorScheduleComponent } from './vendor-schedule/vendor-schedule.component';
+import {CalendarModule} from 'primeng/calendar';
+import { MealOrderComponent } from './meal-order/meal-order.component';
+import {DatePipe} from "@angular/common";
+import { MealOrderReportComponent } from './meal-order-report/meal-order-report.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +56,13 @@ import {HashLocationStrategy,PathLocationStrategy,LocationStrategy} from '@angul
     AssetAtrValComponent,
     ContactEditComponent,
     AssetTypeAtrRelEditComponent,
+    VendorMealEditComponent,
+    VendorEditComponent,
+    MealEditComponent,
+    VendorAdvanceQueryComponent,
+    VendorScheduleComponent,
+    MealOrderComponent,
+    MealOrderReportComponent,
    
   ],
   imports: [
@@ -65,13 +82,16 @@ import {HashLocationStrategy,PathLocationStrategy,LocationStrategy} from '@angul
     CheckboxModule,
     SharedModule,
     PaginatorModule,
+    DialogModule,
+    CalendarModule,
     AppRoutingModule,
   ],
   providers:[AuthGuard,
               { provide:LocationStrategy,
                 useClass:HashLocationStrategy,
                 //useClass:PathLocationStrategy
-              }
+              },
+              DatePipe
     ],
   entryComponents:[],
   bootstrap: [AppComponent],

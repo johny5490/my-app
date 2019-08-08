@@ -1,0 +1,51 @@
+<p-panel >
+  <p-header >
+     <table width="100%"  cellpadding="1" cellspacing="1">
+        <tr>
+            <td class="myLabel" width="15%">訂購日期 </td>
+            <td width="15%"><p-calendar [(ngModel)]="orderDate_qry"  [locale]="twLocale" showIcon="true" dateFormat="yy/mm/dd"  selectOtherMonths="true" dataType="string"></p-calendar></td>
+            <td>
+                &nbsp;&nbsp;<button  pButton label="查詢" (click)="query()" ></button>&nbsp;
+                <button  pButton label="查詢上周" (click)="queryLastWeek()" ></button>&nbsp;
+                <button  pButton label="查詢下周" (click)="queryNextWeek()" ></button>&nbsp;
+            </td>
+        </tr>
+        <tr>
+          <td >
+            <button  pButton label="確認訂購" (click)="confirmOrder()" ></button>&nbsp;          
+          </td>
+          <td class="myLabel"><font style="color: white">訊息</font></td>
+          <td ><font style="color: red">{{msg}}</font></td>
+        </tr>
+      </table>
+  </p-header>
+      <table width="100%"  cellpadding="1" cellspacing="1">
+        <tr >
+          <td class="myLabel">時段</td>
+          <td class="myLabel" *ngFor="let orderDate of orderDateArray">
+              {{orderDate.date}}<br>
+               ({{orderDate.dayOfWeek}})
+          </td>
+        </tr>
+        <tr *ngFor="let orderInterval of orderIntervalArray;let trIdx = index"  class="myTr">
+            <td class="myLabel">{{orderInterval.name}}</td>
+            <td *ngFor="let mealOrderVO of getMealOrderArray(orderInterval);let tdIdx = index">
+                選擇廠商：<select [(ngModel)]="mealOrderVO.vendorId"  class="mySelect"  id="vendorId{{trIdx}}{{tdIdx}}" [disabled]="mealOrderVO.disabled"  style="overflow: hidden">
+                                      <option value="">請選擇</option>
+                                      <option *ngFor="let vendorScheduleVO of getVendorSchedules(mealOrderVO.orderDate, orderInterval.id)" [value]="vendorScheduleVO.vendorId">{{vendorScheduleVO.vendorName}}</option>
+                        </select>
+                <br><br>
+                選擇便當：
+                        <select [(ngModel)]="mealOrderVO.mealId" class="mySelect" id="mealId{{trIdx}}{{tdIdx}}" (change)="changeOrderCost(trIdx,tdIdx, mealOrderVO)" [disabled]="mealOrderVO.disabled">
+                                  <option value="">取消訂購</option>
+                                  <option *ngFor="let mealVO of getMealVO(mealOrderVO.vendorId)" [value]="mealVO.mealId">{{mealVO.mealName}}({{mealVO.cost}}元)</option>                                  
+                        </select>
+                <br><br>
+                訂購數量：<input type="text" pInputText [(ngModel)]="mealOrderVO.orderAmount" style="width: 15%" maxlength="2" (blur)="calculateCost(trIdx, tdIdx, mealOrderVO)" [disabled]="mealOrderVO.disabled">
+                <br><br>
+                訂購金額：{{mealOrderVO.orderCost}}元
+            </td>
+        </tr>
+                              
+      </table>
+</p-panel>

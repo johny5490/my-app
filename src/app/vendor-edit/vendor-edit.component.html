@@ -1,0 +1,43 @@
+<p-panel >
+    <p-header >
+       <table width="100%"  cellpadding="1" cellspacing="1">
+          <tr>
+              <td>
+                <button  pButton label="新增" (click)="create()" ></button>&nbsp;
+                <button  pButton label="修改" (click)="update()" ></button>&nbsp;
+                <button  pButton label="刪除" (click)="delete()" ></button>&nbsp;
+              </td>
+              <td class="myLabel" width="10%"><font style="color: white">訊息</font></td>
+              <td width="40%"><font style="color: red">{{msg}}</font></td>
+          </tr>
+        </table>
+    </p-header>
+        <table width="100%"  cellpadding="1" cellspacing="1">
+          <tr>
+            <td class="myLabel">廠商代碼：</td>
+            <td ><input type="text" pInputText [(ngModel)]="vendorVO.vendorId"/><font color="red">*</font></td>
+            <td class="myLabel">廠商名稱：</td>
+            <td><input type="text" pInputText [(ngModel)]="vendorVO.vendorName"/></td>
+            <td class="myLabel"> 電話：</td>
+            <td><input type="text" pInputText [(ngModel)]="vendorVO.phone"/></td>            
+          </tr>
+          <tr>
+              <td class="myLabel"> 住址：</td>
+              <td><input type="text" pInputText [(ngModel)]="vendorVO.address"/></td>
+              <td class="myLabel"> 備註：</td>
+              <td><input type="text" pInputText [(ngModel)]="vendorVO.remark"/></td>
+          </tr>
+          <tr>
+              <td  class="myLabel">新增人員：</td>
+              <td >{{vendorVO.createUserName}}</td>
+              <td  class="myLabel">新增日期：</td>
+              <td >{{vendorVO.createDate}}</td>
+          </tr>
+          <tr>
+              <td  class="myLabel">修改人員：</td>
+              <td >{{vendorVO.updateUserName}}</td>
+              <td  class="myLabel">修改日期：</td>
+              <td >{{vendorVO.updateDate}}</td>           
+          </tr>                      
+        </table>
+  </p-panel>
