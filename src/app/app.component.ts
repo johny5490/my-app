@@ -112,8 +112,11 @@ export class AppComponent implements OnInit{
                      } }, 
                   {label: '通訊錄清單', icon: 'pi pi-fw pi-users', routerLink: ['/contact-list'] }, 
              ]},
+             //便當系統
              this.genMealNode(),
-            {label: '功能建置中', icon: 'pi pi-fw pi-spin pi-star-o',items:[properyManage]},
+             //資產管理
+            //{label: '功能建置中', icon: 'pi pi-fw pi-spin pi-star-o',items:[properyManage]},
+            
         ]
     },
    ];

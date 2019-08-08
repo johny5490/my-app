@@ -5,7 +5,6 @@
               <td class="myLabel" width="15%">訂購日期 </td>
               <td><p-calendar [(ngModel)]="orderDateS_qry"  [locale]="twLocale" showIcon="true" dateFormat="yy/mm/dd"  selectOtherMonths="true" dataType="string"></p-calendar>~<p-calendar [(ngModel)]="orderDateE_qry" showIcon="true"  [locale]="twLocale" dateFormat="yy/mm/dd" selectOtherMonths="true" dataType="string"></p-calendar>&nbsp;&nbsp;
                   <button  pButton label="產生便當訂購明細報表" (click)="orderDetailReport()" ></button>&nbsp;
-                  <button  pButton label="產生便當扣款明細報表" (click)="deductionDetailReport()" ></button>&nbsp;
             </td>
             <td class="myLabel" width="10%">訊息</td>
             <td ><font style="color: red">{{msg}}</font></td>
