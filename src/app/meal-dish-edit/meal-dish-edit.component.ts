@@ -103,8 +103,23 @@ export class MealDishEditComponent implements OnInit {
     console.log( error);
   }
 
+  doSeparatePost(actionName:string,ctrlMethod:string, respVOkey:string, data:any){
+    if(!Util.showConfirmMsg(actionName)){
+      return; 
+    }
+
+    this.dataService.postJsonSeperateParam(this.ctrlUrl + ctrlMethod, data).subscribe((carrier:Carrier)=>{
+      this.msg = carrier.attributeMap["msg"];
+      if(carrier.attributeMap[respVOkey] != undefined && carrier.attributeMap[respVOkey]!=null){
+        this.mealDishVOs = carrier.attributeMap[respVOkey];
+      }
+    }, error=>{this.handleError(error)});
+  }
+  
+
   delete(){
-    this.doPost("刪除","delete","mealDishVOs", this.getCheckedDataArray());
+    var data ={mealDishVOs: this.getCheckedDataArray(), orderDateS_qry:this.orderDateS_qry, orderDateE_qry:this.orderDateE_qry};
+    this.doSeparatePost("刪除","delete","mealDishVOs",data);
   }
 
   checkAll(){
