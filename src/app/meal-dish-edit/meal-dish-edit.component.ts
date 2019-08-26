@@ -75,7 +75,7 @@ export class MealDishEditComponent implements OnInit {
       
       if (window.navigator && window.navigator.msSaveOrOpenBlob) {
           //IE
-          window.navigator.msSaveOrOpenBlob(objContent, "菜單匯入檔.xlsx");
+          window.navigator.msSaveOrOpenBlob(objContent, "菜單匯入檔.xls");
       }else{
           var objUrl = URL.createObjectURL(objContent);
           window.open(objUrl);
