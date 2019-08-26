@@ -24,15 +24,12 @@ export class MealOrderReportComponent implements OnInit {
   orderDetailReport(){
       var data = {"orderDateS_qry":this.orderDateS_qry, "orderDateE_qry":this.orderDateE_qry};   
       this.dataService.postJsonSeperateParam(this.ctrlUrl + "orderDetailReport", data).subscribe((carrier:Carrier)=>{
-        
-         window.open("http://" + window.location.hostname + "/erp/public/dx/oa/" + carrier.attributeMap["fileName"]);
-         this.msg = carrier.attributeMap["msg"];
+        this.msg = carrier.attributeMap["msg"];
+         var fileName = carrier.attributeMap["fileName"];
+         if(fileName!=null&&fileName!=undefined&&fileName!=""){
+              window.open("http://" + window.location.hostname + "/erp/public/dx/oa/" + carrier.attributeMap["fileName"]);
+         }
       }, error=>{this.handleError(error)});
-  }
-
-  //產生便當扣款明細報表
-  deductionDetailReport(){
-      
   }
 
   handleError(error){

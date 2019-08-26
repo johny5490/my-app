@@ -42,6 +42,9 @@ import {CalendarModule} from 'primeng/calendar';
 import { MealOrderComponent } from './meal-order/meal-order.component';
 import {DatePipe} from "@angular/common";
 import { MealOrderReportComponent } from './meal-order-report/meal-order-report.component';
+import { MealDishEditComponent } from './meal-dish-edit/meal-dish-edit.component';
+import { MealOrderPickerComponent } from './meal-order-picker/meal-order-picker.component';
+import {DynamicDialogModule} from 'primeng/dynamicdialog';
 
 @NgModule({
   declarations: [
@@ -63,6 +66,8 @@ import { MealOrderReportComponent } from './meal-order-report/meal-order-report.
     VendorScheduleComponent,
     MealOrderComponent,
     MealOrderReportComponent,
+    MealDishEditComponent,
+    MealOrderPickerComponent,
    
   ],
   imports: [
@@ -84,6 +89,7 @@ import { MealOrderReportComponent } from './meal-order-report/meal-order-report.
     PaginatorModule,
     DialogModule,
     CalendarModule,
+    DynamicDialogModule,
     AppRoutingModule,
   ],
   providers:[AuthGuard,
@@ -93,7 +99,7 @@ import { MealOrderReportComponent } from './meal-order-report/meal-order-report.
               },
               DatePipe
     ],
-  entryComponents:[],
+  entryComponents:[MealOrderPickerComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

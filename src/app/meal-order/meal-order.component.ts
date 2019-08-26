@@ -5,12 +5,15 @@ import { Util } from '../util/Util';
 import { Carrier} from '../dataExchange/Carrier';
 import { MealOrderVO } from '../vo/MealOrderVO';
 import { VendorScheduleVO } from '../vo/vendorScheduleVO';
-import { MealVO } from '../vo/MealVO';
+import { MealDishVO } from '../vo/MealDishVO';
+import {DialogService} from 'primeng/api';
+import {MealOrderPickerComponent} from '../meal-order-picker/meal-order-picker.component';
 
 @Component({
   selector: 'app-meal-order',
   templateUrl: './meal-order.component.html',
-  styleUrls: ['./meal-order.component.css']
+  styleUrls: ['./meal-order.component.css'],
+  providers:[DialogService]
 })
 export class MealOrderComponent implements OnInit {
   ctrlUrl = "oajcMealOrderCtrl/";
@@ -29,10 +32,10 @@ export class MealOrderComponent implements OnInit {
   mealOrderMap={};
 
   VendorScheduleVOs:Array<VendorScheduleVO>=new Array();
-  //所有安排廠商的便當資料
-  mealVOs:Array<MealVO>=new Array();
+  //所有安排廠商的菜單資料
+  mealDishVOs:Array<MealDishVO>=new Array();
 
-  constructor(private dataService:DataService, private datePipe:DatePipe) {    
+  constructor(private dataService:DataService, private datePipe:DatePipe, public dialogService: DialogService) {    
     
   }
 
@@ -58,7 +61,7 @@ export class MealOrderComponent implements OnInit {
     this.orderIntervalArray = carrier.attributeMap["orderIntervalArray"];
     this.orderDateArray = carrier.attributeMap["orderDateArray"];
     this.mealOrderMap = carrier.attributeMap["mealOrderMap"];
-    this.mealVOs = carrier.attributeMap["mealVOs"];
+    this.mealDishVOs = carrier.attributeMap["mealDishVOs"];
     this.VendorScheduleVOs = carrier.attributeMap["VendorScheduleVOs"];
     //this.orderDate_qry = carrier.attributeMap["orderDate_qry"];
     this.orderDate_qry = Util.toSlashDate(carrier.attributeMap["orderDate_qry"]);
@@ -126,6 +129,7 @@ export class MealOrderComponent implements OnInit {
      
   }
 
+  /*
   changeOrderCost(trIdx:string, tdIdx:string, mealOrderVO:MealOrderVO){
     var mealIdSelectObj:any = document.getElementById("mealId" + trIdx + tdIdx);
     var mealSelectedOption = mealIdSelectObj.options[mealIdSelectObj.selectedIndex];
@@ -134,38 +138,93 @@ export class MealOrderComponent implements OnInit {
           //預設訂購數量
           mealOrderVO.orderAmount=1;
     }
+    //已經沒有cost attribute了,底下寫法會失效
     mealOrderVO.orderCost = mealOrderVO.orderAmount*mealSelectedOption.getAttribute("cost");
   }
+  */
 
   calculateCost(trIdx:string, tdIdx:string, mealOrderVO:MealOrderVO){
     if(isNaN(mealOrderVO.orderAmount)){
           alert("數量請輸入正整數");
           return false;
     }
+
+    this.calculateCostInVO(mealOrderVO);
     /*
-    var mealIdSelectObj:any = document.getElementById("mealId" + trIdx + tdIdx);
-    var mealSelectedOption = mealIdSelectObj.options[mealIdSelectObj.selectedIndex];
-    mealOrderVO.orderCost = mealOrderVO.orderAmount*mealSelectedOption.getAttribute("cost");
-    */
-    
-    for(var i=0;i<this.mealVOs.length;i++){
-      var mealVO = this.mealVOs[i];
-      if(mealVO.vendorId==mealOrderVO.vendorId && mealVO.mealId==mealOrderVO.mealId){
-        mealOrderVO.orderCost = mealOrderVO.orderAmount*mealVO.cost;
+    for(var i=0;i<this.mealDishVOs.length;i++){
+      var mealDishVO = this.mealDishVOs[i];
+      if(mealDishVO.vendorId==mealOrderVO.vendorId && mealDishVO.mealId==mealOrderVO.mealId){
+        mealOrderVO.orderCost = mealOrderVO.orderAmount*mealDishVO.cost;
       }
     }
-    
+    */
+  }
+  
+  calculateCostInVO(mealOrderVO:MealOrderVO){
+    for(var i=0;i<this.mealDishVOs.length;i++){
+      var mealDishVO = this.mealDishVOs[i];
+      if(mealOrderVO.mealId==""){
+        //取消訂購時
+        mealOrderVO.orderCost=0;
+      }else if(mealDishVO.vendorId==mealOrderVO.vendorId && mealDishVO.mealId==mealOrderVO.mealId){
+        mealOrderVO.orderCost = mealOrderVO.orderAmount*mealDishVO.cost;
+      }
+    }
   }
 
-  getMealVO(vendorId:string){
-      //某間廠商的所有便當Array
-      var mealVOsOfVendor = new Array();
-      for(var i=0;i<this.mealVOs.length;i++){
-          if(this.mealVOs[i].vendorId==vendorId){
-            mealVOsOfVendor.push(this.mealVOs[i]);
+  getMealDishVO(mealOrderVO:MealOrderVO){
+      //某間廠商的所有菜單Array
+      var mealDishVOsOfVendor = new Array();
+      for(var i=0;i<this.mealDishVOs.length;i++){
+          var mealDishVO = this.mealDishVOs[i];
+          if(mealDishVO.vendorId==mealOrderVO.vendorId && 
+                mealDishVO.orderDate==mealOrderVO.orderDate && mealDishVO.orderInterval==mealOrderVO.orderInterval){
+            mealDishVOsOfVendor.push(this.mealDishVOs[i]);
           }
       }
-      return mealVOsOfVendor;
+      return mealDishVOsOfVendor;
+  }
+
+  //開啟訂餐挑選畫面
+  openMealOrderPicker(orderDate:string, orderIntervalId:string){
+
+      var vendorScheduleVOs = this.getVendorSchedules(orderDate, orderIntervalId);
+      const ref = this.dialogService.open(MealOrderPickerComponent, {
+          data:{ vendorScheduleVOs:vendorScheduleVOs, mealDishVOs:this.mealDishVOs},
+          header: '挑選廠商和餐點',
+          width: '40%'
+      });
+
+      
+      ref.onClose.subscribe((returnData: any) => {
+        if(returnData!=null && returnData!=undefined){
+          var mealOrderArray = this.mealOrderMap[orderIntervalId];
+          for(var i=0;i<mealOrderArray.length;i++){
+              var mealOrderVO = mealOrderArray[i];
+              if(mealOrderVO.orderDate==orderDate && mealOrderVO.orderInterval==orderIntervalId){
+                  mealOrderVO.vendorId=returnData["vendorId"];
+                  mealOrderVO.mealId=returnData["mealId"];
+                  if(returnData["mealId"]==""){
+                    //沒有餐點代碼為取消訂購，將訂購數量歸零
+                    mealOrderVO.orderAmount=0;                    
+                  }else if(mealOrderVO.orderAmount==0){
+                    mealOrderVO.orderAmount=1;
+                  }
+                  this.calculateCostInVO(mealOrderVO);
+                  break;
+              }
+          }
+          /*
+          console.log("resp.vendorId=" + returnData["vendorId"]);
+          console.log("resp.mealId=" + returnData["mealId"]);
+          */
+        }
+        
+    });
+  }
+
+  setVOaddRice(mealOrderVO:MealOrderVO, event){
+    mealOrderVO.addRice = event?"1":"";
   }
 }
 

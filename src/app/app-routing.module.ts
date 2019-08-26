@@ -14,6 +14,7 @@ import {VendorMealEditComponent} from './vendor-meal-edit/vendor-meal-edit.compo
 import {VendorScheduleComponent} from './vendor-schedule/vendor-schedule.component';
 import {MealOrderComponent} from './meal-order/meal-order.component';
 import { MealOrderReportComponent } from './meal-order-report/meal-order-report.component';
+import { MealDishEditComponent } from './meal-dish-edit/meal-dish-edit.component';
 
 const routes: Routes = [
   //{ path: 'login', component:LoginComponent },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'picker', loadChildren:'./module/shared-module/shared-module.module#SharedModule' },
   { path: 'vendor-meal-edit', component:VendorMealEditComponent, canActivate: [AuthGuard]},
   { path: 'vendor-schedule', component:VendorScheduleComponent, canActivate: [AuthGuard]},
+  { path: 'meal-dish-edit',component:MealDishEditComponent, canActivate: [AuthGuard]},
   { path: 'meal-order', component:MealOrderComponent, canActivate: [AuthGuard]},
   { path: 'meal-order-report',component:MealOrderReportComponent, canActivate: [AuthGuard]},
   //{ path: 'sample/body', component: SampleBodyComponent },

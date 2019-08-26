@@ -1,0 +1,22 @@
+export class MealDishVO{
+    vendorId?:string;
+    mealId?:string;
+    orderDate?:string;
+    orderInterval?:string;
+    meatOrNot?:string;
+    calorie?:string;
+    mainDish?:string;
+    sideDish?:string;
+    sideDish2?:string;
+    sideDish3?:string;
+    sideDish4?:string;
+    sideDish5?:string;
+    sideDish6?:string;
+    checkBox?:string;
+    mealName?:string;
+    cost?:number;
+    createUser?:string;
+    createDate?:string;
+    updateUser?:string;
+    updateDate?:string;
+}

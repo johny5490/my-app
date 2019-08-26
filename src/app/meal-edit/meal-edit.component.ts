@@ -52,31 +52,34 @@ export class MealEditComponent implements OnInit {
     if(!Util.showConfirmMsg("新增")){
       return; 
     }
-    this.doPost("create","mealVO", this.mealVO);
+    this.doPost("create","mealVO", this.mealVO,true);
   }
 
   update(){
     if(!Util.showConfirmMsg("修改")){
       return; 
     }
-    this.doPost("update","mealVO", this.mealVO);
+    this.doPost("update","mealVO", this.mealVO,true);
   }
 
   delete(){
     if(!Util.showConfirmMsg("刪除")){
       return; 
     }
-    this.doPost("delete","mealVO", this.mealVO);
+    this.doPost("delete","mealVO", this.mealVO,true);
   }
 
-  doPost(ctrlMethod:string, respVOkey:string, data:any){
+  doPost(ctrlMethod:string, respVOkey:string, data:any, refleshMeal:boolean){
     
+    var vendorId = this.mealVO.vendorId;
     this.dataService.postJsonDefaultParam(this.ctrlUrl + ctrlMethod, data).subscribe((carrier:Carrier)=>{
       this.msg = carrier.attributeMap["msg"];
       if(carrier.attributeMap[respVOkey] != undefined && carrier.attributeMap[respVOkey]!=null){
         this.mealVO = carrier.attributeMap[respVOkey];
-        //重查餐點分頁清單
-        this.paginator.doQuery(this.mealVO.vendorId);
+        if(refleshMeal && vendorId!=null && vendorId!=""){
+           //重查餐點分頁清單
+            this.paginator.doQuery(vendorId);
+        } 
       }
     }, error=>{this.handleError(error)});
   }
@@ -87,7 +90,7 @@ export class MealEditComponent implements OnInit {
   }
 
   query(mealMap){
-    this.doPost("query","mealVO", mealMap);
+    this.doPost("query","mealVO", mealMap, false);
   }
 
   onAfterQuery(event){

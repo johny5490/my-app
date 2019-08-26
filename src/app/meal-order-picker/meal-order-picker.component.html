@@ -1,0 +1,14 @@
+選擇廠商：<select [(ngModel)]="vendorId"  class="mySelect"   style="overflow: hidden">
+              <option value="">請選擇</option>
+              <option *ngFor="let vendorScheduleVO of vendorScheduleVOs" [value]="vendorScheduleVO.vendorId">{{vendorScheduleVO.vendorName}}</option>
+        </select>
+選擇餐點：
+        <select [(ngModel)]="mealId" class="mySelect">
+                  <option value="">取消訂購</option>
+                  <option *ngFor="let mealDishVO of getMealDishVO(mealOrderVO)" [value]="mealDishVO.mealId">
+                    {{mealDishVO.mealName}}({{mealDishVO.cost}}元)|{{mealDishVO.meatOrNot}}|{{mealDishVO.calorie}}|{{mealDishVO.mainDish}}|{{mealDishVO.sideDish}}|{{mealDishVO.sideDish2}}|{{mealDishVO.sideDish3}}|{{mealDishVO.sideDish4}}|{{mealDishVO.sideDish5}}|{{mealDishVO.sideDish6}}
+                  </option>                                  
+        </select>
+<br><br>               
+<button type="button" (click)="pickConfirm()" pButton icon="pi pi-shopping-cart" label="確定" ></button>&nbsp;&nbsp;&nbsp;
+<button type="button" (click)="cancel()" pButton icon="pi pi-shopping-cart" label="取消" ></button>

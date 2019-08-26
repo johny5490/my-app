@@ -3,7 +3,7 @@
       <table width="100%"  cellpadding="1" cellspacing="1">
            <tr>
               <td class="myLabel" width="15%">訂購日期 </td>
-              <td><p-calendar [(ngModel)]="orderDateS_qry"  [locale]="twLocale" showIcon="true" dateFormat="yy/mm/dd"  selectOtherMonths="true" dataType="string"></p-calendar>~<p-calendar [(ngModel)]="orderDateE_qry" showIcon="true"  [locale]="twLocale" dateFormat="yy/mm/dd" selectOtherMonths="true" dataType="string"></p-calendar>&nbsp;&nbsp;
+              <td><p-calendar [(ngModel)]="orderDateS_qry"  [locale]="twLocale" showIcon="true" dateFormat="yy/mm/dd"  selectOtherMonths="true" dataType="string"></p-calendar><font style="color: red">*</font>~<p-calendar [(ngModel)]="orderDateE_qry" showIcon="true"  [locale]="twLocale" dateFormat="yy/mm/dd" selectOtherMonths="true" dataType="string"></p-calendar><font style="color: red">*</font>&nbsp;&nbsp;
                   <button  pButton label="產生便當訂購明細報表" (click)="orderDetailReport()" ></button>&nbsp;
             </td>
             <td class="myLabel" width="10%">訊息</td>

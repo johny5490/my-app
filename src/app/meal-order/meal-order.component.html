@@ -12,7 +12,7 @@
         </tr>
         <tr>
           <td >
-            <button  pButton label="確認訂購" (click)="confirmOrder()" ></button>&nbsp;          
+            <button  pButton label="確認訂購" (click)="confirmOrder()" ></button>        
           </td>
           <td class="myLabel"><font style="color: white">訊息</font></td>
           <td ><font style="color: red">{{msg}}</font></td>
@@ -30,16 +30,26 @@
         <tr *ngFor="let orderInterval of orderIntervalArray;let trIdx = index"  class="myTr">
             <td class="myLabel">{{orderInterval.name}}</td>
             <td *ngFor="let mealOrderVO of getMealOrderArray(orderInterval);let tdIdx = index">
+                <button type="button" (click)="openMealOrderPicker(mealOrderVO.orderDate, orderInterval.id)" pButton icon="pi pi-shopping-cart" label="挑選餐點" [disabled]="mealOrderVO.disabled" ></button>
+                <br>
+                廠商：{{mealOrderVO.vendorId}}
+                餐點：{{mealOrderVO.mealId}}
+                <br>
+                加飯&nbsp;<p-checkbox [ngModel]="mealOrderVO.addRice=='1'" (ngModelChange)="setVOaddRice(mealOrderVO, $event)" [disabled]="mealOrderVO.disabled" binary="true"></p-checkbox>
+                <!--
                 選擇廠商：<select [(ngModel)]="mealOrderVO.vendorId"  class="mySelect"  id="vendorId{{trIdx}}{{tdIdx}}" [disabled]="mealOrderVO.disabled"  style="overflow: hidden">
                                       <option value="">請選擇</option>
                                       <option *ngFor="let vendorScheduleVO of getVendorSchedules(mealOrderVO.orderDate, orderInterval.id)" [value]="vendorScheduleVO.vendorId">{{vendorScheduleVO.vendorName}}</option>
                         </select>
                 <br><br>
-                選擇便當：
+                選擇餐點：
                         <select [(ngModel)]="mealOrderVO.mealId" class="mySelect" id="mealId{{trIdx}}{{tdIdx}}" (change)="changeOrderCost(trIdx,tdIdx, mealOrderVO)" [disabled]="mealOrderVO.disabled">
                                   <option value="">取消訂購</option>
-                                  <option *ngFor="let mealVO of getMealVO(mealOrderVO.vendorId)" [value]="mealVO.mealId">{{mealVO.mealName}}({{mealVO.cost}}元)</option>                                  
+                                  <option *ngFor="let mealDishVO of getMealDishVO(mealOrderVO)" [value]="mealDishVO.mealId">
+                                    {{mealDishVO.mealName}}({{mealDishVO.cost}}元)|{{mealDishVO.meatOrNot}}|{{mealDishVO.calorie}}|{{mealDishVO.mainDish}}|{{mealDishVO.sideDish}}|{{mealDishVO.sideDish2}}|{{mealDishVO.sideDish3}}|{{mealDishVO.sideDish4}}|{{mealDishVO.sideDish5}}|{{mealDishVO.sideDish6}}
+                                  </option>                                  
                         </select>
+                -->
                 <br><br>
                 訂購數量：<input type="text" pInputText [(ngModel)]="mealOrderVO.orderAmount" style="width: 15%" maxlength="2" (blur)="calculateCost(trIdx, tdIdx, mealOrderVO)" [disabled]="mealOrderVO.disabled">
                 <br><br>

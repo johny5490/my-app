@@ -1,0 +1,67 @@
+<p-panel>
+  <p-header >
+      <table width="100%" cellpadding="1" cellspacing="1">
+          <tr>
+            <td class="myLabel" width="15%">訂購日期 </td>
+            <td><p-calendar [(ngModel)]="orderDateS_qry"  [locale]="twLocale" showIcon="true" dateFormat="yy/mm/dd"  selectOtherMonths="true" dataType="string"></p-calendar>~<p-calendar [(ngModel)]="orderDateE_qry" showIcon="true"  [locale]="twLocale" dateFormat="yy/mm/dd" selectOtherMonths="true" dataType="string"></p-calendar>&nbsp;&nbsp;
+            <button  pButton label="查詢" (click)="query()" ></button>
+            </td>
+          </tr>
+       </table>
+      <table width="100%" cellpadding="1" cellspacing="1">
+          <tr>
+              <td>
+                <button  pButton label="下載匯入模板檔" (click)="downloadFile()" ></button>                
+              </td>
+              <td class="myLabel">挑選匯入檔</td>
+              <td><input type="file" (change)="uploadFile($event)" ></td>
+              <td><button  pButton label="刪除" (click)="delete()" ></button></td>
+              <td class="myLabel" width="10%"><font style="color: white">訊息</font></td>
+              <td width="40%"><font style="color: red">{{msg}}</font></td>
+          </tr>
+        </table>
+  </p-header>
+  <table width="100%" cellpadding="1" cellspacing="1">
+      <tr>
+          <td class="myLabel"><p-checkbox value="1" (onChange)="checkAll()" [(ngModel)]="checkAllValue"></p-checkbox></td>
+          <td class="myLabel">廠商</td>
+          <td class="myLabel">餐點</td>
+          <td class="myLabel">訂購日期</td>
+          <td class="myLabel">訂購時段</td>
+          <td class="myLabel">葷/素食</td>
+          <td class="myLabel">熱量</td>
+          <td class="myLabel">主菜</td>
+          <td class="myLabel">副菜</td>
+          <td class="myLabel">副菜2</td>
+          <td class="myLabel">副菜3</td>
+          <td class="myLabel">副菜4</td>
+          <td class="myLabel">副菜5</td>
+          <td class="myLabel">副菜6</td>
+          <td class="myLabel">新增人員</td>
+          <td class="myLabel">新增日期</td>
+          <td class="myLabel">更新人員</td>
+          <td class="myLabel">更新日期</td>
+      </tr>
+      <tr *ngFor="let mealDishVO of mealDishVOs"  class="myTr">
+        <td style="text-align: center"><p-checkbox value="1" [(ngModel)]="mealDishVO.checkBox" ></p-checkbox></td>
+        <td>{{mealDishVO.vendorId}}</td>
+        <td>{{mealDishVO.mealId}}</td>
+        <td>{{mealDishVO.orderDate}}</td>
+        <td>{{mealDishVO.orderInterval}}</td>
+        <td>{{mealDishVO.meatOrNot}}</td>
+        <td>{{mealDishVO.calorie}}</td>
+        <td>{{mealDishVO.mainDish}}</td>
+        <td>{{mealDishVO.sideDish}}</td>
+        <td>{{mealDishVO.sideDish2}}</td>
+        <td>{{mealDishVO.sideDish3}}</td>
+        <td>{{mealDishVO.sideDish4}}</td>
+        <td>{{mealDishVO.sideDish5}}</td>
+        <td>{{mealDishVO.sideDish6}}</td>
+        <td>{{mealDishVO.createUser}}</td>
+        <td>{{mealDishVO.createDate}}</td>
+        <td>{{mealDishVO.updateUser}}</td>
+        <td>{{mealDishVO.updateDate}}</td>        
+      </tr>
+    </table>
+ </p-panel>
+ 

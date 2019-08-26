@@ -6,7 +6,8 @@ export class MealOrderVO{
     orderInterval?:string;
     orderAmount?:number;
     orderCost?:number;
-    disabled?:boolean;
+    addRice?:string;
+    disabled?:boolean;    
     createUser?:string;
     createDate?:string;
     updateUser?:string;

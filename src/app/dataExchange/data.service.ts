@@ -124,7 +124,20 @@ export class DataService {
 
   postNoHeader(url:string, data?:any){
     //上傳檔案不能指定header
-    return this.http.post(this.getUrl() + url, data);
+    //return this.http.post(this.getUrl() + url, data);
+    return this.http.post(this.getUrl() + url, data, {
+      //headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
+      observe: 'response',
+      withCredentials:true,
+      
+      }).pipe(
+        filter( resp=>{
+          return this.verifyLogin(resp);
+        }),
+        map( resp =>{
+            return resp.body;
+        })
+     );
   }
 
   

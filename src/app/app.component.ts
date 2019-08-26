@@ -128,8 +128,15 @@ export class AppComponent implements OnInit{
          {label: '廠商和餐點基本資料維護', icon: 'pi pi-fw pi-pencil', command:(event) => {    
              Util.routerLinkReload(this.router, '/vendor-meal-edit');
             } }, 
-         {label: '廠商安排作業', icon: 'pi pi-fw pi-pencil', routerLink: ['/vendor-schedule'] }, 
-         {label: '訂餐作業', icon: 'pi pi-fw pi-pencil', routerLink: ['/meal-order'] }, 
+         {label: '廠商安排作業', icon: 'pi pi-fw pi-pencil', command:(event) => {    
+            Util.routerLinkReload(this.router, '/vendor-schedule');
+            } }, 
+         {label: '菜色匯入作業', icon: 'pi pi-fw pi-pencil',  command:(event) => {    
+             Util.routerLinkReload(this.router, '/meal-dish-edit');
+           } }, 
+         {label: '訂餐作業', icon: 'pi pi-fw pi-pencil', command:(event) => {    
+             Util.routerLinkReload(this.router, '/meal-order');
+           } }, 
          {label: '報表', icon: 'pi pi-fw pi-search', routerLink: ['/meal-order-report'] },
       ]};
     return mealNode;
